@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+    <h:head>
+        <title>Origem</title> 
+    </h:head>
+    <h:body>
+        
+        <p:dialog header="Cadastro de Origem" widgetVar="dlgori" width="300" height="100"  maximizable="false" minimizable="true" resizable="false">
+
+            <h:form id="formcadori" prependId="false">
+                <h:panelGrid columns="2" cellpadding="3" id="grid-origens" >
+                    <h:outputLabel />
+                    <h:inputHidden value="#{mbOrigem.origem.idOrigem}"/>
+
+                    <h:outputLabel value="Origem*" for="campo-norigem"/>
+                    <p:inputText id="campo-norigem" size="30" value="#{mbOrigem.origem.origem}" required="true"
+                                 requiredMessage="O campo [Origem] é obrigatório" onkeyup="this.value = this.value.toUpperCase()"/>
+
+                    <p:commandButton value="Salvar" actionListener="#{mbOrigem.addOrigem}" update="@form :formtablesetOri" 
+                                     oncomplete="Osucesso(xhr, status, args)" icon="ui-icon-check"/>
+                    <p:commandButton value="Cancelar" actionListener="#{mbOrigem.limpOrigem}" onclick="PF('dlgori').hide();" 
+                                     icon="ui-icon-close"/>
+                </h:panelGrid>
+            </h:form>
+
+            <script type="text/javascript">
+                function Osucesso(xhr, status, args) {
+                    if (args.sucesso) {
+                         PF('dlgori').hide();
+                        
+                    }else{
+                          PF('dlgse').jq.effect("shake", { times:5 }, 100);  
+                    }
+                }
+            </script>  
+
+        </p:dialog>
+        
+    </h:body>
+</html>
+

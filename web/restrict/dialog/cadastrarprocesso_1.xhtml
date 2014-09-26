@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head> 
+        <title>Cadastro de Procesos</title> 
+    </h:head>
+    <h:body>
+        <p:dialog header="Cadastro de Processo" widgetVar="dlgpro" width="300" height="100"  maximizable="false" minimizable="false" resizable="false">
+
+            <h:form id="formcadpro1">
+                <p:growl id="growlprocess1"/>
+                <h:panelGrid columns="2" cellpadding="3" id="grid-process1" >
+                    <h:outputLabel />
+                    <h:inputHidden value="#{mbProcesso.processo.idProcesso}"/>
+
+                    <h:outputLabel value="Processo*" for="campo-nprocesso1"/>
+                    <p:inputText id="campo-nprocesso1" size="30" value="#{mbProcesso.processo.processo}" required="true"
+                                 requiredMessage="O campo [Processo] é obrigatório" onkeyup="this.value = this.value.toUpperCase()"/>
+
+                    <p:commandButton value="Salvar" actionListener="#{mbProcesso.addProcesso}" update="@form :frmnc:campo-processo" 
+                                     oncomplete="Psucesso(xhr, status, args)" icon="ui-icon-check"/>
+                    <p:commandButton value="Cancelar" actionListener="#{mbProcesso.limpProcesso}" onclick="PF('dlgpro').hide();" 
+                                     icon="ui-icon-close"/>
+                </h:panelGrid>
+            </h:form>
+
+            <script type="text/javascript">
+                function Psucesso(xhr, status, args) {
+                    if (args.sucesso) {
+                        PF('dlgpro').hide();
+
+                    } else {
+                        PF('dlgpro').jq.effect("shake", {times: 5}, 100);
+                    }
+                }
+            </script>  
+
+        </p:dialog>
+
+
+    </h:body>
+</html>
+

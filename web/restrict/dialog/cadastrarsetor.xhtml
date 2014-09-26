@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+    <h:head>
+        <title>Setor</title>
+    </h:head>
+    <h:body> 
+        <p:dialog header="Cadastro de Setor" widgetVar="dlgse" width="300" height="100"  maximizable="false" minimizable="true" resizable="false" id="dlgdoido">
+
+            <h:form id="formcadse" prependId="false">
+                <h:panelGrid columns="2" cellpadding="3" id="grid-setors" >
+                    <h:outputLabel />
+                    <h:inputHidden value="#{mbSetor.setor.idSetor}"/>
+
+                    <h:outputLabel value="Setor*" for="campo-nsetor"/>
+                    <p:inputText id="campo-nsetor" size="30" value="#{mbSetor.setor.setor}" required="true"
+                                 requiredMessage="O campo [Setor] é obrigatório" onkeyup="this.value = this.value.toUpperCase()"/>
+
+                    <p:commandButton value="Salvar" actionListener="#{mbSetor.addSetor}" id="btdoido" update="@form :formtablesetse" 
+                                     oncomplete="sucesso(xhr, status, args)" icon="ui-icon-check"/>
+                    <p:commandButton value="Cancelar" actionListener="#{mbSetor.limpSetor}" onclick="PF('dlgse').hide();" 
+                                     icon="ui-icon-close"/>
+                </h:panelGrid>
+            </h:form>
+
+            <script type="text/javascript">
+                function sucesso(xhr, status, args) {
+                    if (args.sucesso) {
+                        PF('dlgse').hide();
+
+                    } else {
+                        PF('dlgse').jq.effect("shake", {times: 5}, 100);
+                    }
+                }
+            </script>  
+
+        </p:dialog>
+    </h:body>
+</html>
+

@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"> 
+    <h:head>
+        <title>Cadastro de Pessoa</title> 
+        <style>
+            .ui-selectonemenu{width: 335px !important;}
+
+            .obrigatorio{
+                color: red;
+            }
+
+        </style>
+    </h:head>
+    <h:body>
+        <p:dialog header="Cadastro de Pessoa" widgetVar="dlgPes" width="600" height="370"  maximizable="false" minimizable="true" resizable="false" id="dlgPessoa">
+            <h:form id="formtablesetPes" prependId="false">
+
+                <p:panel style="background: #FCFCFC;">
+                    <h:panelGrid columns="2" cellpadding="3" id="grid-pessoas" >
+                        <p:column/>
+                        <h:inputHidden id="id-pessoa" value="#{mbPessoa.pessoa.idPessoa}"/>
+
+                        <h:outputLabel for="campo-nome" value="Nome*"/>
+                        <p:inputText id="campo-nome" size="60" value="#{mbPessoa.pessoa.nome}" />
+
+                        <h:outputLabel for="campo-time" value="Time da Qualidade*"/>
+                        <p:selectOneMenu id="campo-time" effect="fade" value="#{mbPessoa.pessoa.timeQualidade}">
+                            <f:selectItem itemLabel="Pertence ao time da Qualidade ?" noSelectionOption="true"/>
+                            <f:selectItem itemLabel="Sim" itemValue="S"/>
+                            <f:selectItem itemLabel="Não" itemValue="N"/>
+                        </p:selectOneMenu>
+
+                        <h:outputLabel for="campo-responsavel" value="Responsável de Setor*"/>
+                        <p:selectOneMenu id="campo-responsavel" effect="fade" value="#{mbPessoa.pessoa.responsavelSetor}">
+                            <f:selectItem itemLabel="É Responsável de Setor ?" noSelectionOption="true"/>
+                            <f:selectItem itemLabel="Sim" itemValue="S"/>
+                            <f:selectItem itemLabel="Não" itemValue="N"/>
+                        </p:selectOneMenu>
+
+                        <h:outputLabel for="c-setor" value="Setor*"/>
+                        <p:selectOneMenu id="c-setor" effect="fade" value="#{mbPessoa.pessoa.setor.idSetor}">
+                            <f:selectItem itemLabel="Selecione o Setor." noSelectionOption="true"/>
+                            <f:selectItems value="#{bbSetor.setores}" var="setor" itemLabel="#{setor.setor}" itemValue="#{setor.idSetor}"/>
+                        </p:selectOneMenu>
+
+                        <h:outputLabel for="campo-permissao" value="Permissão*"/>
+                        <p:selectOneMenu id="campo-perimissao" effect="fade" value="#{mbPessoa.pessoa.permissao}">
+                            <f:selectItem itemLabel="Usuário" itemValue="ROLE_USER" />
+                            <f:selectItem itemLabel="Gerente" itemValue="ROLE_GER" />
+                            <f:selectItem itemLabel="Administrador" itemValue="ROLE_ADMIN" />
+                        </p:selectOneMenu>
+
+                        <h:outputLabel for="campo-email" value="E-Mail*"/>
+                        <p:column>
+                            <p:inputText id="campo-email" size="60" value="#{mbPessoa.pessoa.email}" validatorMessage="E-Mail Inválido!" >
+                                <f:validateRegex
+                                    pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                            </p:inputText>
+                            <p:growl for="campo-email"/>
+                        </p:column>
+
+                        <h:outputLabel for="usuario" value="Nome de Usuário*"/>
+                        <p:inputText id="usuario" size="30" value="#{mbPessoa.pessoa.usuario}" autocomplete="off" onkeyup="this.value = this.value.toUpperCase()"/>
+
+                        <h:outputLabel for="campo-senha" value="Senha*" />
+                        <p:password id="campo-senha" size="30" maxlength="22" promptLabel="Digite sua Senha" autocomplete="off"
+                                    weakLabel="Senha Fraca" goodLabel="Senha Boa" strongLabel="Senha Forte" feedback="true"
+                                    value="#{mbPessoa.confereSenha}"/> 
+
+                        <h:outputLabel for="campo-senhaconf" value="Confirmar Senha*"/>
+                        <p:password id="campo-senhaconf" size="30" maxlength="22"   
+                                    promptLabel="Confirme sua Senha" weakLabel="Senha Fraca"
+                                    goodLabel="Senha Boa" strongLabel="Senha Forte" feedback="true" converter="converterSHA1"
+                                    value="#{mbPessoa.pessoa.senha}">
+                        </p:password>  
+
+                    </h:panelGrid>
+                </p:panel>
+
+                <p:toolbar>
+                    <p:toolbarGroup align="left">
+                        <p:commandButton value="Salvar" icon="ui-icon-disk" update="@form :formtablepessoa" actionListener="#{mbPessoa.addPessoa}" 
+                                         oncomplete="sucessoPES(xhr, status, args)"/>
+                    </p:toolbarGroup>     
+
+                    <p:toolbarGroup align="right">
+                        <p:separator /> 
+                        <p:commandButton value="Fechar"  icon="ui-icon-closethick" onclick="PF('dlgPes').hide();"/>
+                    </p:toolbarGroup>
+
+                </p:toolbar>
+
+            </h:form>
+
+
+            <script type="text/javascript">
+                function sucessoPES(xhr, status, args) {
+                    if (args.sucesso) {
+                        PF('dlgPes').hide();
+
+                    } else {
+                        PF('dlgnc').jq.effect("shake", {times: 5}, 100);
+                    }
+                }
+            </script>
+
+        </p:dialog>
+    </h:body>
+</html>
+

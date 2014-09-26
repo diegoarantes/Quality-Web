@@ -1,0 +1,219 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="../resources/main.xhtml"
+                xmlns:p="http://primefaces.org/ui"                    
+                xmlns:h="http://java.sun.com/jsf/html"    
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    <ui:define name="tarefas">
+        <ui:include src="dialog/cadastrarprocesso_1.xhtml"/> 
+        <ui:include src="dialog/cadastrarorigem_1.xhtml"/> 
+
+
+        <h:form id="frmnc">
+            <p:growl id="grownc"/>
+
+            <p:panel header="Edição ocorrência">
+                <p:toolbar>
+                    <p:toolbarGroup align="left">
+                        <p:splitButton value="Salvar" icon="ui-icon-disk" actionListener="#{mbOcorrencia.addOcorrencia}" update="@form">
+                            <p:menuitem value="Salvar e Fechar" action="#{mbOcorrencia.addOcorrencia}" update="@form" ajax="false"/>
+
+                        </p:splitButton>
+
+                        <p:separator /> 
+                        <p:button href="ocorrencias.jsf" value="Cancelar" icon="ui-icon-closethick"/>
+
+                    </p:toolbarGroup>     
+
+
+
+                </p:toolbar>
+
+                <p:scrollPanel style="width:100%; border: 0px; height:46%; padding-bottom: 18%;" mode="native">
+                    <p:panel style="background: #FCFCFC;">
+
+                        <h:panelGrid columns="3" cellpadding="3" id="grid-nc" >
+                            <p:column/>
+                            <p:column>
+                                <p:calendar value="#{mbOcorrencia.ocorrencia.dataCadastro}" pattern="dd/MM/yyyy" id="campo-dtcadastro" style="display: none;"/>
+                                <h:inputHidden value="#{mbOcorrencia.ocorrencia.idOcorrencia}" />
+                                <h:inputHidden value="#{mbOcorrencia.ocorrencia.revisao}" />
+                                <h:inputHidden value="#{mbOcorrencia.ocorrencia.usuario}" />
+                            </p:column>
+                            <p:column/>
+
+                            <p:column><h:outputLabel value="Tipo*" for="campo-tipo"/><h:outputLabel value="*" styleClass="obrigatorio"/></p:column>
+                            <p:selectOneRadio id="campo-tipo" value="#{mbOcorrencia.ocorrencia.tipo}" required="true" requiredMessage="O campo [Tipo] é obrigatório">
+                                <f:selectItem itemLabel="Não-Conformidade" itemValue="N"/> 
+                                <f:selectItem itemLabel="Ação Preventiva" itemValue="A" />
+                                <f:selectItem itemLabel="Nota de Melhoria" itemValue="M" />  
+                            </p:selectOneRadio>
+
+                            <p:column/>
+
+                            <h:outputLabel value="Titulo*" for="campo-titulo"/>
+                            <p:inputText id="campo-titulo" size="73" value="#{mbOcorrencia.ocorrencia.titulo}" required="true" requiredMessage="O campo [Título] é obrigatório"/>
+
+                            <p:column/>
+
+                            <h:outputLabel value="Descrição*" for="campo-descricao"/>
+                            <p:column>
+                                <p:inputTextarea id="campo-descricao" rows="9" cols="75" counter="counter" maxlength="1000"       
+                                                 counterTemplate="Restam {0} caracteres." autoResize="false" value="#{mbOcorrencia.ocorrencia.descricao}"
+                                                 required="true" requiredMessage="O campo [Descrição] é obrigatório"/> <br />                                
+                                <h:outputText id="counter" /> 
+                            </p:column>
+
+                            <p:column/>
+
+                            <h:outputLabel value="Data Abertura*" for="campo-data"/> 
+                            <p:calendar id="campo-data" size="15" pattern="dd/MM/yyyy" value="#{mbOcorrencia.ocorrencia.dataAbertura}"
+                                        required="true" requiredMessage="O campo [Data Abertura] é obrigatório"/>
+
+                            <p:column/>
+
+                            <h:outputLabel value="Unidade*" for="campo-unidade"/> 
+                            <p:selectOneMenu id="campo-unidade" filter="true" filterMatchMode="startsWith" effect="fade"  value="#{mbOcorrencia.ocorrencia.empresa.idEmpresa}"
+                                             required="true" requiredMessage="O campo [Unidade] é obrigatório">
+                                <f:selectItem itemLabel="Selecione a Unidade." noSelectionOption="true"/>
+                                <f:selectItems value="#{bbEmpresa.empresas}" var="empresa" itemValue="#{empresa.idEmpresa}" itemLabel="#{empresa.nomeFantasia}"/>
+                            </p:selectOneMenu>
+
+                            <p:column/>
+
+                            <h:outputLabel value="Processo*" for="campo-processo"/> 
+                            <p:selectOneMenu id="campo-processo" filter="true" filterMatchMode="startsWith" effect="fade" value="#{mbOcorrencia.ocorrencia.processo.idProcesso}" 
+                                             required="true" requiredMessage="O campo [Processo] é obrigatório">
+                                <f:selectItem itemLabel="Selecione o Processo." noSelectionOption="true"/>
+                                <f:selectItems value="#{bbProcesso.processos}" var="processo" itemValue="#{processo.idProcesso}" itemLabel="#{processo.processo}"/>
+                            </p:selectOneMenu>
+
+                            <p:commandButton  icon="ui-icon-plus" title="Adicionar" style="border: 0px;" onclick="PF('dlgpro').show();" update=":formcadpro1" process="@none"/> 
+
+                            <h:outputLabel value="Origem*" for="campo-origem"/>
+                            <p:selectOneMenu id="campo-origem" effect="fade"  value="#{mbOcorrencia.ocorrencia.origem.idOrigem}"
+                                             required="true" requiredMessage="O campo [Origem] é obrigatório">
+                                <f:selectItem itemLabel="Selecione a Origem." noSelectionOption="true"/>
+                                <f:selectItems value="#{bbOrigem.origens}" var="origem" itemValue="#{origem.idOrigem}" itemLabel="#{origem.origem}"/>
+                            </p:selectOneMenu>
+
+                            <p:commandButton  icon="ui-icon-plus" title="Adicionar" style="border: 0px;" onclick="PF('dlgori1').show();" update=":formcadori1" process="@none" />
+
+                            <h:outputLabel value="Aprovador*" for="campo-apontador"/> 
+                            <p:selectOneMenu id="campo-apontador" filter="true" filterMatchMode="startsWith" effect="fade" value="#{mbOcorrencia.ocorrencia.pessoa.idPessoa}"
+                                             required="true" requiredMessage="O campo [Aprovador] é obrigatório">
+                                <f:selectItem itemLabel="Selecione o Aprovador." noSelectionOption="true"/>
+                                <f:selectItems value="#{bbPessoa.pessoas}" var="pessoa" itemValue="#{pessoa.idPessoa}" itemLabel="#{pessoa.nome}"/>
+                            </p:selectOneMenu> 
+
+                            <p:column/>
+
+                            <h:outputLabel value="Setor destinado*" for="campo-setor"/> 
+                            <p:selectOneMenu id="campo-setor" filter="true" filterMatchMode="startsWith" effect="fade" value="#{mbOcorrencia.ocorrencia.setor.idSetor}"
+                                             required="true" requiredMessage="O campo [Setor] é obrigatório">
+                                <f:selectItem itemLabel="Selecione o Setor destinado." noSelectionOption="true"/>
+                                <f:selectItems value="#{bbSetor.setores}" var="setor" itemValue="#{setor.idSetor}" itemLabel="#{setor.setor}"/>
+                            </p:selectOneMenu> 
+
+                            <p:column/>
+
+                            <h:outputLabel value="Código:" for="campo-codigo"/>
+                            <p:inputText id="campo-codigo" size="10" readonly="true" disabled="true" value="#{mbOcorrencia.ocorrencia.idOcorrencia}" style="color: #0064B1"/>
+
+                            <p:column/>
+
+                            <h:outputLabel value="Revisão" for="campo-revisao"/>
+                            <p:inputText id="campo-revisao" size="2" disabled="true" value="#{mbOcorrencia.ocorrencia.revisao}"/>
+
+                            <p:column/>
+
+                            <h:outputLabel value="Usuário:" for="campo-usuario" /> 
+                            <p:inputText id="campo-usuario" size="15" disabled="true" value="#{bbUsuarioLogado.procuraPessoa().usuario}"/>
+
+                            <p:column/>
+
+                            <h:outputLabel value="Prazo*" for="campo-prazo"/>
+                            <p:calendar id="campo-prazo" navigator="true" effect="explode" pattern="dd/MM/yyyy" locale="pt_BR" value="#{mbOcorrencia.ocorrencia.prazo}"
+                                        required="true" requiredMessage="O campo [Prazo] é obrigatório"/>
+
+                        </h:panelGrid>
+
+                    </p:panel>
+                    <p:panel header="Ação Imediata" toggleable="true" collapsed="true" toggleTitle="Adicionar Ação Imediata">
+                        <h:panelGrid columns="2" cellpadding="3" id="grid-ai" >
+
+                            <h:outputLabel value="Descrição" for="campo-imediata"/>
+                            <p:column>
+                                <p:inputTextarea id="campo-imediata" rows="6" cols="75" counter="counter2" maxlength="500"       
+                                                 counterTemplate="Restam {0} caracteres." autoResize="false" value="#{mbOcorrencia.ocorrencia.acaoImediata}"/> <br />                                
+                                <h:outputText id="counter2" /> 
+                            </p:column>
+
+
+                        </h:panelGrid>
+                    </p:panel>
+
+                    <p:panel header="Relacionar ocorrências" toggleable="true" collapsed="true" toggleTitle="Relacionar ocorrências">
+                        <h:panelGrid columns="3" cellpadding="6" id="rel-nc" >
+                            <h:outputLabel value="Ocorrência" for="campo-ocorrencia"/> 
+                            <p:selectOneMenu id="campo-ocorrencia" filter="true" filterMatchMode="startsWith" effect="fade" 
+                                             value="#{mbOcorrenciaFilha.ocorrencia.ocorrenciaFilha.idOcorrencia}">
+                                <f:selectItem itemLabel="Selecione um Ocorrência." noSelectionOption="true"/>
+                                <f:selectItems value="#{bbOcorrencia.ocorrencias}" var="ocorrencia" itemValue="#{ocorrencia.idOcorrencia}" itemLabel="#{ocorrencia.idOcorrencia} - #{ocorrencia.titulo}"/>
+                            </p:selectOneMenu>
+
+                            <p:commandButton icon="ui-icon-plus" title="Adicionar" style="border: 0px;" 
+                                             action="#{mbOcorrenciaFilha.insertOcorrencia}" update="OcorrenciasF grownc">
+
+                                <f:setPropertyActionListener value="#{mbOcorrencia.ocorrencia}" 
+                                                             target="#{mbOcorrenciaFilha.ocorrencia.ocorrencia}" />
+                            </p:commandButton>  
+
+                        </h:panelGrid>  
+
+                        <p:dataTable id="OcorrenciasF" var="ocorrenciaFilha" value="#{mbOcorrenciaFilha.ocorrencias}" 
+                                     rows="5" emptyMessage="Nenhuma ocorrência selecionada.">
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="ID"/>
+                                </f:facet>
+                                <h:outputText value="#{ocorrenciaFilha.ocorrenciaFilha.idOcorrencia}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nome"/>
+                                </f:facet>
+                                <h:outputText value="#{ocorrenciaFilha.ocorrenciaFilha.titulo}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Ações"/>  
+                                </f:facet>
+                                <p:commandButton action="#{mbOcorrenciaFilha.deleteOcorrencia}" value="Desvincular" icon="ui-icon-minus" update="OcorrenciasF">
+                                    <f:setPropertyActionListener target="#{mbOcorrenciaFilha.ocorrencia}" value="#{ocorrenciaFilha}"/>
+                                    <p:confirm header="Confirmação" message="Deseja realmente desvincular esta ocorrência ?" icon="ui-icon-alert" />
+                                </p:commandButton>
+
+                            </p:column>
+                        </p:dataTable>
+                    </p:panel>
+
+                </p:scrollPanel>
+                
+            </p:panel>
+            
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">  
+                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+            </p:confirmDialog>  
+
+        </h:form> 
+
+    </ui:define>
+
+</ui:composition>

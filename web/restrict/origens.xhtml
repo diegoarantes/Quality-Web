@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../resources/main.xhtml"
+                xmlns:p="http://primefaces.org/ui"  
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="tarefas">
+<ui:include src="dialog/cadastrarorigem.xhtml"/>
+          <p:fieldset legend="Cadastrar Origem" id="fildOrigem">
+
+
+            <h:form id="formtablesetOri" prependId="false">
+                <p:growl id="growOrigem"/>
+                <p:commandButton onclick="PF('dlgori').show()" value="Nova Origem" update=":formcadori" icon="ui-icon-plus"/>
+
+                <p:dataTable id="idTabelaOri" var="origem" value="#{mbOrigem.origens}"
+                             paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                             {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="Página: {currentPage} de {totalPages}"
+                             rowsPerPageTemplate="5,10,15">
+
+                    <f:facet name="header">Lista de Origens</f:facet>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Origem"/>
+                        </f:facet>
+                        <h:outputText value="#{origem.origem}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Ações"/>
+                        </f:facet>
+                        <p:commandButton value="Editar" icon="ui-icon-pencil"
+                                         process="@this" onclick="PF('dlgori').show();" update=":formcadori">
+                            <f:setPropertyActionListener target="#{mbOrigem.origem}"
+                                                         value="#{origem}"/>
+                        </p:commandButton>
+                        <p:commandButton value="Remover" action="#{mbOrigem.deleteOrigem}"
+                                         icon="ui-icon-close" update="@form">
+                            <f:setPropertyActionListener target="#{mbOrigem.origem}"
+                                                         value="#{origem}"/>
+                            <p:confirm header="Confirmação" message="Deseja realmente apagar este registro ?" icon="ui-icon-alert" /> 
+                        </p:commandButton>
+
+                    </p:column>
+
+                </p:dataTable>
+
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">  
+                    <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+                    <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+                </p:confirmDialog>  
+            </h:form>
+
+
+
+        </p:fieldset>
+
+        
+    </ui:define>
+
+</ui:composition>

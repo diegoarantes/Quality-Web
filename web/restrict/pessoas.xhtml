@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../resources/main.xhtml"
+                xmlns:p="http://primefaces.org/ui" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core">
+    
+    <ui:define name="tarefas">
+           <ui:include src="dialog/cadastrarpessoa.xhtml"/>
+
+        <p:fieldset legend="Cadastrar Usuários" id="fieldpessoas">
+
+            <h:form id="formtablepessoa" prependId="false"> 
+                <p:growl id="growPessoas" />
+                <p:commandButton value="Nova Pessoa" onclick="PF('dlgPes').show();" icon="ui-icon-plus" update=":formtablesetPes"/>
+
+                <p:dataTable id="idTabelaPessoa" var="pessoa" value="#{mbPessoa.pessoas}"
+                             paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                             {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="Página: {currentPage} de {totalPages}"
+                             rowsPerPageTemplate="5,10,15">
+
+                    <f:facet name="header">Lista de Pessoas</f:facet>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="ID"/>
+                        </f:facet>
+                        <h:outputText value="#{pessoa.idPessoa}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Usuário"/>
+                        </f:facet>
+                        <h:outputText value="#{pessoa.usuario}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nome"/>
+                        </f:facet>
+                        <h:outputText value="#{pessoa.nome}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Status"/>
+                        </f:facet>
+                        <h:outputText value="#{pessoa.status}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="E-Mail"/>
+                        </f:facet>
+                        <h:outputText value="#{pessoa.email}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Setor"/>
+                        </f:facet>
+                        <h:outputText value="#{pessoa.setor.setor}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Permissão"/>
+                        </f:facet>
+                        <h:outputText value="#{pessoa.permissao}"/>
+                    </p:column>
+
+
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Ações"/>
+                        </f:facet>
+                        <p:commandButton process="@this" onclick="PF('dlgPes').show();" value="Editar" icon="ui-icon-pencil" update=":formtablesetPes">
+                            <f:setPropertyActionListener target="#{mbPessoa.pessoa}" value="#{pessoa}"/>
+                        </p:commandButton>
+
+                        <p:commandButton value="Inativar"  icon="ui-icon-closethick" onclick="PF('dlgPes').hide();">
+
+                        </p:commandButton>
+
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+
+        </p:fieldset>
+
+    </ui:define>
+
+</ui:composition>

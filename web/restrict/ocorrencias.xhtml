@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="./../resources/main.xhtml"> 
+
+    <ui:define name="tarefas">
+
+
+        <p:panel header="Ocorrências">
+
+            <h:form id="formtablesetoco" prependId="false"> 
+                <p:growl id="growOcorrencia" />
+
+                <p:toolbar>
+                    <p:toolbarGroup align="left">
+                        <p:commandButton value="Nova Ocorrência" icon="ui-icon-plus" action="#{mbOcorrencia.limpOcorrencia}" actionListener="#{mbOcorrenciaFilha.limpOcorrencia}" ajax="false"/>
+
+                        <p:commandButton id="btEdit" process="formtablesetoco" value="Editar" icon="ui-icon-pencil" action="#{mbOcorrencia.editOcorrencia}" update="growOcorrencia" ajax="false">
+                            <f:setPropertyActionListener value="#{mbOcorrencia.ocorrencia}" target="#{mbOcorrenciaFilha.ocorrencia.ocorrencia}" />
+                        </p:commandButton>
+
+                        <p:commandButton process="formtablesetoco" value="Tratar" icon="ui-icon-clipboard">
+                        </p:commandButton>
+
+                    </p:toolbarGroup>
+                </p:toolbar>
+
+                <p:dataTable id="idTabelaOcorrencia" var="ocorrencia" value="#{mbOcorrencia.ocorrencias}"
+                             paginator="true" rows="10" emptyMessage="Nenhum registro encontrado" scrollable="true" scrollHeight="393"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                             {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="Página: {currentPage} de {totalPages}"
+                             rowsPerPageTemplate="10,15,30" paginatorPosition="bottom" 
+                             rowKey="#{ocorrencia.idOcorrencia}"
+                             selectionMode="single" selection="#{mbOcorrencia.ocorrencia}">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="ID"/>
+                        </f:facet>
+                        <h:outputText value="#{ocorrencia.idOcorrencia}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tipo"/>
+                        </f:facet>
+                        <h:outputText value="#{ocorrencia.tipo}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Titulo"/>
+                        </f:facet>
+                        <h:outputText value="#{ocorrencia.titulo}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Setor"/>
+                        </f:facet>
+                        <h:outputText value="#{ocorrencia.setor.setor}"/>
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+
+        </p:panel>
+
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,220 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:p="http://primefaces.org/ui"
+      ><!-- xmlns:sec="http://www.springframework.org/security/facelets/tags" -->
+
+    <h:head>
+        <title>ABSoft - Quality</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <style type="text/css">     
+
+            /*deixa o cabeçalho sempre visível*/
+            .ui-layout-north {
+                z-index:20 !important;
+                overflow:visible !important;
+            }
+
+            .ui-layout-north .ui-layout-unit-content {
+                overflow:visible !important;
+            }
+
+
+            /*Tira a borda */
+            .ui-layout-north{
+                border: 0px;
+            }
+            .ui-layout-south{
+                border: 0px;
+            }
+
+            .ui-layout-west{
+                border: 0px;
+            }
+
+            /* Define o tamanho do titulo dos diálogos */
+            .ui-widget-content.ui-dialog .ui-dialog-titlebar {
+                padding: 3px 15px !important;
+                border-bottom: 1px solid #eee !important;
+                background-color: #ffffff !important;
+            }
+            /*corrige a margem do botão fechar */
+            .ui-widget-content.ui-dialog .ui-dialog-titlebar-close {
+                margin-top: 0px !important;
+            }
+
+            .ui-menu .ui-widget-header h1, 
+            .ui-menu .ui-widget-header h2, 
+            .ui-menu .ui-widget-header h3, 
+            .ui-menu .ui-widget-header h4, 
+            .ui-menu .ui-widget-header h5,
+            .ui-menu .ui-widget-header h6 {
+                font-size: 12px !important;
+                color: #0088CC !important;
+            }
+
+            /* Tamanho do Selection Menu*/
+            .ui-selectonemenu{width: 400px !important;}
+
+            .obrigatorio{
+                color: red;
+            }
+
+
+        </style>
+        <!-- jS para tradução do calendário  -->
+        <script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/js/calendar.js"></script>
+
+    </h:head>
+
+    <h:body>
+
+
+        <p:layout fullPage="true">
+
+            <p:layoutUnit position="north" size="45" resizable="false" closable="false" collapsible="false" style="border: 0px">
+                <h:form id="formMenu" prependId="false">
+
+
+                    <p:megaMenu style="border-bottom-color: #0088CC; border-bottom-width: 2px; border-top-width: 0px" autoDisplay="false"> 
+                        <p:menuitem value="Início" action="home" icon="ui-icon-home" ajax="false"/> 
+
+                        <p:submenu label="Cadastros" icon="ui-icon-document">  
+                            <p:column>
+                                <p:submenu label="Cadastros">  
+                                    <p:menuitem value="Ocorrências" action="ocorrencias" ajax="false"/>
+                                    <p:menuitem value="Auditorias"/> 
+                                </p:submenu> 
+
+                                <p:submenu label="Documento">  
+                                    <p:menuitem value="Documento"/>                
+                                </p:submenu>     
+
+                                <p:submenu label="Agenda">  
+                                    <p:menuitem value="Agenda de compromissos"/>                
+                                </p:submenu> 
+
+                            </p:column>
+
+                            <p:column>
+                                <p:submenu label="Tabelas">  
+                                    <p:menuitem value="Setor" action="setores" ajax="false"/> 
+                                    <p:menuitem value="Processo" action="processos" ajax="false" /> 
+                                    <p:menuitem value="Origem" action="origens" ajax="false"/> 
+                                    <p:menuitem value="Auditor" ajax="false"/> 
+                                    <p:menuitem value="Órgão certificador" ajax="false"/> 
+                                </p:submenu>  
+
+                            </p:column>
+
+
+                        </p:submenu>  
+
+                        <p:submenu label="Relatórios" icon="ui-icon-clipboard">
+
+                            <p:column>
+                                <p:submenu label="Ocorrências">
+                                    <p:menuitem value="Não-Conformidades" url="#" /> 
+                                    <p:menuitem value="Notas de Melhoria" url="#" /> 
+                                    <p:menuitem value="Ações Preventiva" url="#" /> 
+                                    <p:separator/>
+                                    <p:menuitem value="Relatório Geral" url="#" /> 
+                                </p:submenu> 
+
+                                <p:submenu label="Documentos">
+                                    <p:menuitem value="Documentos obsoletos" url="#" /> 
+                                </p:submenu>
+
+                            </p:column>
+
+                        </p:submenu> 
+
+                        <p:submenu label="Configurações" icon="ui-icon-gear"> 
+
+                            <p:column> 
+                                <p:submenu label="Configurações">
+                                    <p:menuitem value="Usuários" action="pessoas" ajax="false"/>
+                                    <p:menuitem value="Empresas" url="#" />
+                                </p:submenu> 
+                                <p:submenu label="Sistema">  
+                                    <p:menuitem value="Parâmetros" url="#" />  
+                                </p:submenu>                                  
+                            </p:column>
+
+                        </p:submenu>  
+
+                        <p:submenu label="Ajuda" icon="ui-icon-help">  
+
+                            <p:column>
+                                <p:submenu label="Ajuda">
+                                    <p:menuitem value="Sobre o Sistema" onclick="PF('dlgsobre').show();" /> 
+                                </p:submenu>
+                            </p:column>
+
+                        </p:submenu>  
+
+                        <f:facet name="options"> 
+                       <h:outputText value="SEJA BEM VINDO(A) #{bbUsuarioLogado.procuraPessoa().getNome()} !   "/>
+                            <p:commandButton type="button" value="Sair" icon="ui-icon-extlink" onclick="location.href = '#{facesContext.externalContext.requestContextPath}/j_spring_security_logout'"/>  
+                        </f:facet>  
+
+
+                    </p:megaMenu> 
+
+
+                </h:form>  
+
+                <p:dialog header="Sobre o sistema" 
+                          widgetVar="dlgsobre" 
+                          height="200" width="350"
+                          maximizable="false" 
+                          resizable="false">
+
+                    <img src="#{facesContext.externalContext.requestContextPath}/resources/images/logo.png"/>
+                    <br />
+                    <h:panelGrid columns="2" cellpadding="1" styleClass="panelSobre" id="grid0"  width="320">
+
+                        <h:outputText value="Desenvolvedor: " style="font-weight: bold " />  
+                        <h:outputText value="Diego Arantes" />  
+                        <h:outputText value="E-Mail: " style="font-weight: bold " /> 
+                        <h:outputText value="suporte@absoft.com.br" /> 
+                        <h:outputText value="Telefone: " style="font-weight: bold " /> 
+                        <h:outputText value="(44) 9914-1495" />   
+                    </h:panelGrid>
+
+                </p:dialog> 
+
+
+
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" size="30" header="ABSoft - Tecnologia" style="text-align: right;" resizable="false" closable="false" collapsible="false">
+
+            </p:layoutUnit>
+
+            <p:layoutUnit position="west" size="200" header="Esquerda" resizable="true" closable="false" collapsible="true"  gutter="2">
+
+            </p:layoutUnit>
+
+
+            <p:layoutUnit position="center">
+                <ui:insert name="tarefas"></ui:insert>
+
+            </p:layoutUnit>
+
+        </p:layout>
+
+
+        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+
+        <p:dialog widgetVar="statusDialog" modal="false" draggable="false" closable="false" resizable="false" showHeader="false">
+            <h:outputText value="Aguarde..." style="font-size: 12px" />
+            <br/>
+            <p:graphicImage url="/resources/images/carregando.gif" />
+        </p:dialog>
+    </h:body>
+
+</html>

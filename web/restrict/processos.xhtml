@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../resources/main.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core">
+ 
+    <ui:define name="tarefas">
+         <ui:include src="dialog/cadastrarprocesso.xhtml"/> 
+        <p:fieldset legend="Cadastrar Processos" id="fildpro">
+
+
+            <h:form id="formtablesetpro" prependId="false">
+                <p:commandButton onclick="PF('dlgpro').show();" value="Novo Processo" update=":formcadpro" icon="ui-icon-plus"/>
+
+                <p:dataTable id="idTabelapro" var="processo" value="#{mbProcesso.processos}"
+                             paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                             {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="Página: {currentPage} de {totalPages}"
+                             rowsPerPageTemplate="5,10,15">
+
+                    <f:facet name="header">Lista de Processos</f:facet>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Processo"/>
+                        </f:facet>
+                        <h:outputText value="#{processo.processo}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Ações"/>
+                        </f:facet>
+                        <p:commandButton value="Editar" icon="ui-icon-pencil"
+                                         process="@this" onclick="PF('dlgpro').show();" update="@form :formcadpro">
+                            <f:setPropertyActionListener target="#{mbProcesso.processo}"
+                                                         value="#{processo}"/>
+                        </p:commandButton>
+                        <p:commandButton value="Remover" action="#{mbProcesso.deleteProcesso}"
+                                         icon="ui-icon-close" update="@form">
+                            <f:setPropertyActionListener target="#{mbProcesso.processo}"
+                                                         value="#{processo}"/>
+                            <p:confirm header="Confirmação" message="Deseja realmente apagar este registro ?" icon="ui-icon-alert" /> 
+                        </p:commandButton>
+
+                    </p:column>
+
+                </p:dataTable>
+
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">  
+                    <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+                    <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+                </p:confirmDialog>  
+            </h:form>
+
+
+
+        </p:fieldset>
+
+
+
+
+    </ui:define>
+
+</ui:composition>
