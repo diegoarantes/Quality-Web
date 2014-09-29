@@ -19,7 +19,7 @@
                     <p:toolbarGroup align="left">
                         <p:commandButton value="Nova Ocorrência" icon="ui-icon-plus" action="#{mbOcorrencia.limpOcorrencia}" actionListener="#{mbOcorrenciaFilha.limpOcorrencia}" ajax="false"/>
 
-                        <p:commandButton id="btEdit" process="formtablesetoco" value="Editar" icon="ui-icon-pencil" action="#{mbOcorrencia.editOcorrencia}" update="growOcorrencia" ajax="false">
+                        <p:commandButton id="btEdit" process="formtablesetoco" value="Revisar" icon="ui-icon-pencil" action="#{mbOcorrencia.editOcorrencia}" update="growOcorrencia" ajax="false">
                             <f:setPropertyActionListener value="#{mbOcorrencia.ocorrencia}" target="#{mbOcorrenciaFilha.ocorrencia.ocorrencia}" />
                         </p:commandButton>
 
@@ -29,12 +29,12 @@
                     </p:toolbarGroup>
                 </p:toolbar>
 
-                <p:dataTable id="idTabelaOcorrencia" var="ocorrencia" value="#{mbOcorrencia.ocorrencias}"
-                             paginator="true" rows="10" emptyMessage="Nenhum registro encontrado" scrollable="true" scrollHeight="393"
+                <p:dataTable id="idTabelaOcorrencia" var="ocorrencia" value="#{mbOcorrencia.ocorrencias}" widgetVar="tabelaOcorrencia"
+                             paginator="true" rows="20" emptyMessage="Nenhum registro encontrado" scrollable="true" scrollHeight="393"
                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
                              {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              currentPageReportTemplate="Página: {currentPage} de {totalPages}"
-                             rowsPerPageTemplate="10,15,30" paginatorPosition="bottom" 
+                             rowsPerPageTemplate="20,40,60" paginatorPosition="bottom" 
                              rowKey="#{ocorrencia.idOcorrencia}"
                              selectionMode="single" selection="#{mbOcorrencia.ocorrencia}">
                     <p:column>
@@ -51,14 +51,21 @@
                         <h:outputText value="#{ocorrencia.tipo}"/>
                     </p:column>
 
-                    <p:column>
+                    <p:column filterBy="titulo" filterMatchMode="contains">
                         <f:facet name="header">
                             <h:outputText value="Titulo"/>
                         </f:facet>
                         <h:outputText value="#{ocorrencia.titulo}"/>
                     </p:column>
 
-                    <p:column>
+                    <p:column filterBy="setor.setor" filterMatchMode="exact" width="100">
+                        <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('tabelaOcorrencia').filter()">
+                                <f:selectItem itemLabel="Todos os Setores" itemValue="#{null}" noSelectionOption="true" />
+                                <f:selectItems value="#{bbSetor.setores}"  var="setor" itemLabel="#{setor.setor}"/>
+                            </p:selectOneMenu>
+                        </f:facet>
+
                         <f:facet name="header">
                             <h:outputText value="Setor"/>
                         </f:facet>
