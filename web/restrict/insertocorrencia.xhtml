@@ -156,7 +156,7 @@
                         </h:panelGrid>
                     </p:panel>
 
-                    <p:panel header="Relacionar ocorrências" toggleable="true" collapsed="true" toggleTitle="Relacionar ocorrências">
+                    <p:panel header="Relacionar ocorrências" toggleable="true" collapsed="true" toggleTitle="Relacionar ocorrências" visible="false">
                         <h:panelGrid columns="3" cellpadding="6" id="rel-nc" >
                             <h:outputLabel value="Ocorrência" for="campo-ocorrencia"/> 
                             <p:selectOneMenu id="campo-ocorrencia" filter="true" filterMatchMode="startsWith" effect="fade" 
@@ -166,7 +166,7 @@
                             </p:selectOneMenu>
 
                             <p:commandButton icon="ui-icon-plus" title="Adicionar" style="border: 0px;" 
-                                             action="#{mbOcorrenciaFilha.insertOcorrencia}" update="OcorrenciasF grownc">
+                                             action="#{mbOcorrenciaFilha.insertOcorrencia}" update="OcorrenciasF grownc" process="rel-nc">
 
                                 <f:setPropertyActionListener value="#{mbOcorrencia.ocorrencia}" 
                                                              target="#{mbOcorrenciaFilha.ocorrencia.ocorrencia}" />
