@@ -1,11 +1,13 @@
 package br.com.absoft.controller;
 
-
 import br.com.absoft.model.dao.DAOGenerico;
 import br.com.absoft.model.entities.Origem;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -18,7 +20,7 @@ import org.primefaces.context.RequestContext;
 public class MbOrigem implements Serializable {
 
     private static final long serialVersionUID = 1L;
-                        
+
     @EJB
     DAOGenerico dao;
 
@@ -63,7 +65,8 @@ public class MbOrigem implements Serializable {
         try {
             dao.excluir(origem);
         } catch (Exception ex) {
-           
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Há uma ocorrência vinculada á esta origem! - ["+ex.getMessage()+"]", ""));
         }
     }
 

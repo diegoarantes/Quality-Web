@@ -61,8 +61,8 @@ public class MbSetor implements Serializable {
         try {
           dao.excluir(setor);
         } catch (Exception ex) {
-             FacesContext.getCurrentInstance().addMessage(null,
-                new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage(), ""));
+                 FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Há uma ocorrência vinculada á este setor! - ["+ex.getMessage()+"]", ""));
         }
     }
 

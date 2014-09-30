@@ -35,6 +35,9 @@ public class MbOcorrenciaFilha implements Serializable {
                     new FacesMessage(FacesMessage.SEVERITY_WARN, "É necessário efetuar a gravação da nova ocorrência antes de vincula-la a outra ocorrência!", ""));
         } else {
             try {
+                System.out.println("------------------------------------------");
+                System.err.println(ocorrencia.getOcorrencia().getDescricao());
+                System.err.println(ocorrencia.getOcorrenciaFilha().getDescricao());
                 dao.inserir(ocorrencia);
 
             } catch (NonUniqueObjectException ex) {

@@ -53,9 +53,8 @@ public class MbOcorrencia implements Serializable {
     public void insertOcorrencia() {
         ocorrencia.setDataCadastro(new Date()); //Pega a Data Atual
         ocorrencia.setRevisao(0); //Seta {0} como Sem Revisão
-        
-        ocorrencia.setUsuario(BbUsuarioLogado.user.getUsuario()); //Pega o Usuario logado
 
+        ocorrencia.setUsuario(BbUsuarioLogado.user.getUsuario()); //Pega o Usuario logado
 
         //Grava a Ocorrencia 
         dao.inserir(ocorrencia);
@@ -91,7 +90,8 @@ public class MbOcorrencia implements Serializable {
         try {
             dao.excluir(ocorrencia);
         } catch (Exception ex) {
-
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage(), ""));
         }
     }
 

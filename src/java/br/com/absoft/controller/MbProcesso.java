@@ -63,7 +63,8 @@ public class MbProcesso implements Serializable {
         try {
             dao.excluir(processo);
         } catch (Exception ex) {
-            
+                FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Há uma ocorrência vinculada á este processo! - ["+ex.getMessage()+"]", ""));
         }
     }
 
