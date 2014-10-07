@@ -2,8 +2,10 @@ package br.com.absoft.controller;
 
 import br.com.absoft.model.dao.DAOGenerico;
 import br.com.absoft.model.entities.AnaliseDaCausa;
+import br.com.absoft.model.entities.Ocorrencia;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -45,6 +47,9 @@ public class MbAnaliseDaCausa implements Serializable {
     }
 
     private void insertAnaliseDaCausa() {
+        analiseDaCausa.setDataCadastro(new Date());
+        analiseDaCausa.setCausaRaiz('N');
+
         dao.inserir(analiseDaCausa);
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso", ""));
@@ -65,6 +70,9 @@ public class MbAnaliseDaCausa implements Serializable {
     }
 
     public MbAnaliseDaCausa() {
+        Ocorrencia ocorrencia = new Ocorrencia();
+        ocorrencia.setIdOcorrencia(0);
+        analiseDaCausa.setOcorrencia(ocorrencia);
     }
 
     public AnaliseDaCausa getAnaliseDaCausa() {
@@ -76,7 +84,8 @@ public class MbAnaliseDaCausa implements Serializable {
     }
 
     public List<AnaliseDaCausa> getAnalisesDaCausa() {
-        analisesDaCausa = dao.lista(AnaliseDaCausa.class);
+
+        analisesDaCausa = dao.listaCondicao(AnaliseDaCausa.class, "ocorrencia.idOcorrencia = " + analiseDaCausa.getOcorrencia().getIdOcorrencia());
         return analisesDaCausa;
     }
 

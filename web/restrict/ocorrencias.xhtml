@@ -19,16 +19,6 @@
                 <p:toolbar>
                     <p:toolbarGroup align="left">
                         <p:commandButton value="Nova Ocorrência" icon="ui-icon-plus" action="#{mbOcorrencia.limpOcorrencia}" actionListener="#{mbOcorrenciaFilha.limpOcorrencia}" ajax="false"/>
-
-                        <p:commandButton id="btEdit" process="formtablesetoco" value="Revisar" icon="ui-icon-pencil" action="#{mbOcorrencia.editOcorrencia}"  ajax="false">
-                            <f:setPropertyActionListener value="#{mbOcorrencia.ocorrencia}" target="#{mbOcorrenciaFilha.ocorrencia.ocorrencia}" />
-                        </p:commandButton>
-
-                        <p:commandButton process="formtablesetoco" value="Tratar" icon="ui-icon-clipboard" onclick="PF('dlgtr').show()" 
-                                         disabled="#{mbOcorrencia.opcoes}" update=":formtr">
-<!--                            <f:setPropertyActionListener value="#{mbOcorrencia.ocorrencia}" target="#{mbOcorrencia.ocorrencia}" />-->
-                        </p:commandButton>
-
                     </p:toolbarGroup>
                 </p:toolbar>
 
@@ -73,7 +63,20 @@
                         <h:outputText value="#{ocorrencia.titulo}"/>
                     </p:column>
 
+                    <p:column headerText="ações">
+                        <p:commandButton icon="ui-icon-print" title="Imprimir" disabled="true"/>
+                        
+                        <p:commandButton id="btEdit" icon="ui-icon-pencil" action="#{mbOcorrencia.editOcorrencia}" title="Revisar" ajax="false">
+                            <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrencia.ocorrencia}" /> 
+                            <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrenciaFilha.ocorrencia.ocorrencia}" />
+                        </p:commandButton>
 
+                        <p:commandButton icon="ui-icon-clipboard" onclick="PF('dlgtr').show()" update=":formtr" title="Tratar">
+                            <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrencia.ocorrencia}" />
+                            <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbAnaliseDaCausa.analiseDaCausa.ocorrencia}" />
+                        </p:commandButton>
+
+                    </p:column>
 
                 </p:dataTable>
             </h:form>

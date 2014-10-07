@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"> 
     <h:head> 
         <title>Facelet Title</title>
     </h:head>
@@ -77,17 +78,38 @@
                     </h:panelGrid>
                 </p:fieldset>
 
-                <p:tabView id="tabtr" dynamic="true" cache="true" >
-
-                    <p:tab id="tba1" title="Análise da causa">    
+                <!--                <p:tabView id="tabtr" dynamic="true" cache="true" >-->
+                <p:wizard nextLabel="Próximo" backLabel="Anterior" step="tba1" style="padding-top: 3px;"> <!--Aqui eu seto em qual Step parou -->
+                    <p:tab id="tba1" title="Análise da causa" >    
                         <p:panel header="Realizar análise da Causa" >
+                            <h:inputHidden value="#{mbAnaliseDaCausa.analiseDaCausa.idAnaliseDaCausa}"/>
+                            <h:panelGrid columns="3">
+                                <h:outputLabel value="Porque?" />
+                                <h:column>
+                                    <p:inputTextarea cols="45" rows="5" value="#{mbAnaliseDaCausa.analiseDaCausa.porque}"/>
+                                    <p:commandButton value="Adicionar" icon="ui-icon-plus" action="#{mbAnaliseDaCausa.addAnaliseDaCausa}" update="@form"/>
+                                </h:column>
 
+                                <p:dataTable id="radioDT" var="analCausa" value="#{mbAnaliseDaCausa.analisesDaCausa}" selection="#{mbAnaliseDaCausa.analiseDaCausa}" rowKey="#{analCausa.idAnaliseDaCausa}" disabledSelection="true">
+                                    <f:facet name="header">
+                                        Causa Raíz
+                                    </f:facet>
+                                    <p:column selectionMode="single" style="width:16px;text-align:center"/>
+
+                                    <p:column headerText="Porque ?">
+                                        <h:outputText value="#{analCausa.porque}"/>
+                                    </p:column>
+                                </p:dataTable>
+
+                                <h:column/>
+
+                            </h:panelGrid>
                         </p:panel>
 
                     </p:tab>
 
                     <p:tab id="tba2" title="Plano de ação">  
-                        TESTE 2
+                        TESTE 2 
                     </p:tab>
 
                     <p:tab id="tba3" title="Validação">
@@ -103,7 +125,8 @@
                         TESTE 5
                     </p:tab>
 
-                </p:tabView>
+                </p:wizard>
+                <!--                    </p:tabView>-->
             </h:form>
 
         </p:dialog>
