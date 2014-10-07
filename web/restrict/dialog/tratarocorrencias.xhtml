@@ -11,6 +11,72 @@
         <p:dialog header="Tratar ocorrência" widgetVar="dlgtr" width="990" height="475"  maximizable="true" minimizable="true" resizable="true">
 
             <h:form id="formtr">
+                <p:fieldset legend="Detalhes Ocorrência" toggleable="true" toggleSpeed="500" collapsed="true">
+                    <h:outputText value="#{mbOcorrencia.ocorrencia.idOcorrencia} - #{mbOcorrencia.ocorrencia.titulo}" style="font-size: 18px; font-weight: bold;"/>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Descrição:" style="font-weight: bold;"/>
+                        <h:outputText value="#{mbOcorrencia.ocorrencia.descricao}"/>
+                    </h:panelGrid>
+                    <hr />
+                    <h:panelGrid columns="3" cellspacing="10">     
+                        <h:column>
+                            <h:outputLabel value="Tipo: " style="font-weight: bold;"/>
+                            <h:outputText value="#{mbOcorrencia.ocorrencia.tipo}"/>
+                        </h:column>
+
+                        <h:column>
+                            <h:outputLabel value="Data de Abertura: " style="font-weight: bold;"/>
+                            <h:outputText value="#{mbOcorrencia.ocorrencia.dataAbertura}" converter="javax.faces.DateTime"/>
+                        </h:column>
+
+                        <h:column>
+                            <h:outputLabel value="Unidade: " style="font-weight: bold;"/>
+                            <h:outputText value="#{mbOcorrencia.ocorrencia.empresa.nomeFantasia}"/>
+                        </h:column>
+
+                        <h:column>
+                            <h:outputLabel value="Processo: " style="font-weight: bold;"/>
+                            <h:outputText value="#{mbOcorrencia.ocorrencia.processo.processo}"/>
+                        </h:column>
+
+                        <h:column>
+                            <h:outputLabel value="Origem: " style="font-weight: bold;"/>
+                            <h:outputText value="#{mbOcorrencia.ocorrencia.origem.origem}"/>
+                        </h:column>
+
+                        <h:column>
+                            <h:outputLabel value="Aprovador: " style="font-weight: bold;"/>
+                            <h:outputText value="#{mbOcorrencia.ocorrencia.pessoa.nome}"/>
+                        </h:column>
+
+                        <h:column>
+                            <h:outputLabel value="Setor destino: " style="font-weight: bold;"/>
+                            <h:outputText value="#{mbOcorrencia.ocorrencia.setor.setor}"/>
+                        </h:column>
+
+                        <h:column>
+                            <h:outputLabel value="Revisão: " style="font-weight: bold;"/>
+                            <h:outputText value="#{mbOcorrencia.ocorrencia.revisao}"/>
+                        </h:column>
+
+                        <h:column>
+                            <h:outputLabel value="Usuário: " style="font-weight: bold;"/>
+                            <h:outputText value="#{mbOcorrencia.ocorrencia.usuario}"/>
+                        </h:column>
+
+                        <h:column>
+                            <h:outputLabel value="Prazo: " style="font-weight: bold;"/>
+                            <h:outputText value="#{mbOcorrencia.ocorrencia.prazo}" converter="javax.faces.DateTime"/>
+                        </h:column>
+
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Ação Imediata: " style="font-weight: bold;"/>
+                        <h:outputText value="#{mbOcorrencia.ocorrencia.acaoImediata}"/>
+                    </h:panelGrid>
+                </p:fieldset>
+
                 <p:tabView id="tabtr" dynamic="true" cache="true" >
 
                     <p:tab id="tba1" title="Análise da causa">    

@@ -27,6 +27,8 @@ public class MbOcorrencia implements Serializable {
 
     private List<Ocorrencia> ocorrencias;
 
+    private boolean opcoes;
+
     public String limpOcorrencia() {
         ocorrencia = new Ocorrencia();
         return "insertocorrencia";//editOcorrencia();
@@ -95,7 +97,12 @@ public class MbOcorrencia implements Serializable {
         }
     }
 
+    public void habilitaBotao(){
+        this.opcoes = false;
+    }
+    
     public MbOcorrencia() {
+        this.opcoes = true;
     }
 
     public Ocorrencia getOcorrencia() {
@@ -113,6 +120,14 @@ public class MbOcorrencia implements Serializable {
 
     public void setOcorrencias(List<Ocorrencia> ocorrencias) {
         this.ocorrencias = ocorrencias;
+    }
+
+    public boolean isOpcoes() {
+        return opcoes;
+    }
+
+    public void setOpcoes(boolean opcoes) {
+        this.opcoes = opcoes;
     }
 
 }

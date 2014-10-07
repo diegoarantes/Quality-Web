@@ -61,7 +61,7 @@ public class Ocorrencia implements Serializable {
     @Column(name = "Revisao", nullable = false)
     private Integer revisao;
 
-    @Column(name = "AcaoImediata", nullable = true)
+    @Column(name = "AcaoImediata", nullable = true, length = 500)
     private String acaoImediata;
 
     //Relacionamentos

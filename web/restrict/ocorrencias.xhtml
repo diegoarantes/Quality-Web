@@ -8,6 +8,7 @@
                 template="./../resources/main.xhtml"> 
 
     <ui:define name="tarefas">
+        <ui:include src="dialog/tratarocorrencias.xhtml"/> 
 
 
         <p:panel header="Ocorrências">
@@ -19,11 +20,13 @@
                     <p:toolbarGroup align="left">
                         <p:commandButton value="Nova Ocorrência" icon="ui-icon-plus" action="#{mbOcorrencia.limpOcorrencia}" actionListener="#{mbOcorrenciaFilha.limpOcorrencia}" ajax="false"/>
 
-                        <p:commandButton id="btEdit" process="formtablesetoco" value="Revisar" icon="ui-icon-pencil" action="#{mbOcorrencia.editOcorrencia}" update="growOcorrencia" ajax="false">
+                        <p:commandButton id="btEdit" process="formtablesetoco" value="Revisar" icon="ui-icon-pencil" action="#{mbOcorrencia.editOcorrencia}"  ajax="false">
                             <f:setPropertyActionListener value="#{mbOcorrencia.ocorrencia}" target="#{mbOcorrenciaFilha.ocorrencia.ocorrencia}" />
                         </p:commandButton>
 
-                        <p:commandButton process="formtablesetoco" value="Tratar" icon="ui-icon-clipboard">
+                        <p:commandButton process="formtablesetoco" value="Tratar" icon="ui-icon-clipboard" onclick="PF('dlgtr').show()" 
+                                         disabled="#{mbOcorrencia.opcoes}" update=":formtr">
+<!--                            <f:setPropertyActionListener value="#{mbOcorrencia.ocorrencia}" target="#{mbOcorrencia.ocorrencia}" />-->
                         </p:commandButton>
 
                     </p:toolbarGroup>
@@ -37,18 +40,30 @@
                              rowsPerPageTemplate="20,40,60" paginatorPosition="bottom" 
                              rowKey="#{ocorrencia.idOcorrencia}"
                              selectionMode="single" selection="#{mbOcorrencia.ocorrencia}">
-                    <p:column>
+
+                    <p:ajax event="rowSelect" listener="#{mbOcorrencia.habilitaBotao}" update="@form" />
+
+
+
+                    <p:column width="90">
                         <f:facet name="header">
                             <h:outputText value="ID"/>
                         </f:facet>
                         <h:outputText value="#{ocorrencia.idOcorrencia}"/>
                     </p:column>
 
-                    <p:column>
+                    <p:column width="50">
                         <f:facet name="header">
                             <h:outputText value="Tipo"/>
                         </f:facet>
                         <h:outputText value="#{ocorrencia.tipo}"/>
+                    </p:column>
+
+                    <p:column filterBy="setor.setor" filterMatchMode="contains" width="150">
+                        <f:facet name="header">
+                            <h:outputText value="Setor"/>
+                        </f:facet>
+                        <h:outputText value="#{ocorrencia.setor.setor}"/>
                     </p:column>
 
                     <p:column filterBy="titulo" filterMatchMode="contains">
@@ -58,19 +73,7 @@
                         <h:outputText value="#{ocorrencia.titulo}"/>
                     </p:column>
 
-                    <p:column filterBy="setor.setor" filterMatchMode="exact" width="100">
-                        <f:facet name="filter">
-                            <p:selectOneMenu onchange="PF('tabelaOcorrencia').filter()">
-                                <f:selectItem itemLabel="Todos os Setores" itemValue="#{null}" noSelectionOption="true" />
-                                <f:selectItems value="#{bbSetor.setores}"  var="setor" itemLabel="#{setor.setor}"/>
-                            </p:selectOneMenu>
-                        </f:facet>
 
-                        <f:facet name="header">
-                            <h:outputText value="Setor"/>
-                        </f:facet>
-                        <h:outputText value="#{ocorrencia.setor.setor}"/>
-                    </p:column>
 
                 </p:dataTable>
             </h:form>
