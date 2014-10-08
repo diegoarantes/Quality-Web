@@ -3,6 +3,7 @@ package br.com.absoft.controller;
 import br.com.absoft.model.dao.DAOGenerico;
 import br.com.absoft.model.entities.AnaliseDaCausa;
 import br.com.absoft.model.entities.Ocorrencia;
+import br.com.absoft.suport.BbUsuarioLogado;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -24,17 +25,20 @@ public class MbAnaliseDaCausa implements Serializable {
     private Ocorrencia ocorrencia = new Ocorrencia();
     private AnaliseDaCausa analise = new AnaliseDaCausa();
 
+    private AnaliseDaCausa causaRaiz;
+
     private List<AnaliseDaCausa> analisesDaCausa;
 
     public String addAnaliseDaCausa() {
 
         if (analise.getIdAnaliseDaCausa() == null || analise.getIdAnaliseDaCausa() == 0) {
             analise.setOcorrencia(ocorrencia);
+            analise.setPessoa(BbUsuarioLogado.user);
             insertAnaliseDaCausa();
         } else {
             updateAnaliseDaCausa();
         }
-
+        analise = new AnaliseDaCausa();
         return null;
     }
 
@@ -42,7 +46,6 @@ public class MbAnaliseDaCausa implements Serializable {
         analise.setDataCadastro(new Date());
         analise.setCausaRaiz('N');
         dao.inserir(analise);
-        analise = new AnaliseDaCausa();
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso", ""));
     }
@@ -61,12 +64,30 @@ public class MbAnaliseDaCausa implements Serializable {
         }
     }
 
+    public void definirRaiz() {
+        for (AnaliseDaCausa anali : analisesDaCausa) {
+            if (anali.getCausaRaiz() == 'S') {
+                anali.setCausaRaiz('N');
+                dao.atualizar(anali);
+            }
+        }
+        analise.setCausaRaiz('S');
+        dao.atualizar(analise);
+
+        analise = new AnaliseDaCausa();
+    }
+
     public MbAnaliseDaCausa() {
     }
 
     public List<AnaliseDaCausa> getAnalisesDaCausa() {
         if (ocorrencia != null) {
             analisesDaCausa = dao.listaCondicao(AnaliseDaCausa.class, "ocorrencia.idOcorrencia = " + ocorrencia.getIdOcorrencia());
+            for (AnaliseDaCausa causa : analisesDaCausa) {
+                if (causa.getCausaRaiz() == 'S') {
+                    causaRaiz = causa;
+                }
+            }
         }
         return analisesDaCausa;
     }
@@ -92,6 +113,14 @@ public class MbAnaliseDaCausa implements Serializable {
 
     public void setAnalise(AnaliseDaCausa analise) {
         this.analise = analise;
+    }
+
+    public AnaliseDaCausa getCausaRaiz() {
+        return causaRaiz;
+    }
+
+    public void setCausaRaiz(AnaliseDaCausa causaRaiz) {
+        this.causaRaiz = causaRaiz;
     }
 
 }

@@ -63,7 +63,7 @@
                         <h:outputText value="#{ocorrencia.titulo}"/>
                     </p:column>
 
-                    <p:column headerText="ações">
+                    <p:column headerText="Ações" width="95">
                         <p:commandButton icon="ui-icon-print" title="Imprimir" disabled="true"/>
 
                         <p:commandButton id="btEdit" icon="ui-icon-pencil" action="#{mbOcorrencia.editOcorrencia}" title="Revisar" ajax="false">
@@ -79,7 +79,7 @@
                     </p:column>
 
                 </p:dataTable>
-                <p:remoteCommand name="rmt" oncomplete="PF('dlgtr').show()"/>
+                <p:remoteCommand name="rmt" oncomplete="PF('dlgtr').show()" update=":formtr:tbCausas"/>
             </h:form>
 
         </p:panel>

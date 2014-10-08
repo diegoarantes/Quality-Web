@@ -78,32 +78,39 @@
                     </h:panelGrid>
                 </p:fieldset>
 
-                <!--                <p:tabView id="tabtr" dynamic="true" cache="true" >-->
                 <p:wizard nextLabel="Próximo" backLabel="Anterior" step="tba1" style="padding-top: 3px;"> <!--Aqui eu seto em qual Step parou -->
                     <p:tab id="tba1" title="Análise da causa" >    
                         <p:panel header="Realizar análise da Causa" >
                             <h:inputHidden value="#{mbAnaliseDaCausa.analise.idAnaliseDaCausa}"/>
-                            <h:panelGrid columns="3">
+                            <h:panelGrid columns="2">
                                 <h:outputLabel value="Porque?" />
-                                <h:column>
-                                    <p:inputTextarea cols="45" rows="5" value="#{mbAnaliseDaCausa.analise.porque}"/>
-                                    <p:commandButton value="Adicionar" icon="ui-icon-plus" actionListener="#{mbAnaliseDaCausa.addAnaliseDaCausa()}" update="@form"/>
-                                </h:column>
-
-                                <p:dataTable id="radioDT" var="analCausa" value="#{mbAnaliseDaCausa.analisesDaCausa}" rowKey="#{analCausa.idAnaliseDaCausa}" disabledSelection="true">
-                                    <f:facet name="header">
-                                        Causa Raíz
-                                    </f:facet>
-                                    <p:column selectionMode="single" style="width:16px;text-align:center"/>
-
-                                    <p:column headerText="Porque ?">
-                                        <h:outputText value="#{analCausa.porque}"/>
-                                    </p:column>
-                                </p:dataTable>
-
-                                <h:column/>
+                                <p:inputTextarea cols="45" rows="3" value="#{mbAnaliseDaCausa.analise.porque}" id="cPorque"/>
+                                <h:column />
+                                <p:commandButton value="Adicionar" icon="ui-icon-plus" actionListener="#{mbAnaliseDaCausa.addAnaliseDaCausa()}" update="@form"/>
 
                             </h:panelGrid>
+                            <p:dataTable id="tbCausas" var="analCausa" value="#{mbAnaliseDaCausa.analisesDaCausa}" rowKey="#{analCausa.idAnaliseDaCausa}" disabledSelection="true" selection="#{mbAnaliseDaCausa.causaRaiz}" >
+                                <p:column selectionMode="single" style="width:16px;text-align:center" headerText="Causa Raíz" width="30"/>
+
+                                <p:column headerText="Porque ?">
+                                    <h:outputText value="#{analCausa.porque}"/>
+                                </p:column>
+
+                                <p:column width="60">
+                                    <p:commandButton icon="ui-icon-pencil" title="Alterar" update="@form">
+                                        <f:setPropertyActionListener value="#{analCausa}" target="#{mbAnaliseDaCausa.analise}" />
+                                    </p:commandButton>
+
+                                    <p:commandButton icon=" ui-icon-flag" title="Definir como causa Raíz" update="@form, tbCausas" oncomplete="rmt1()">
+                                        <f:setPropertyActionListener value="#{analCausa}" target="#{mbAnaliseDaCausa.analise}" />
+                                        <p:confirm header="Confirmação" message="Deseja definir como causa raíz ?" icon="ui-icon-alert" /> 
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>
+
+                            <h:column/>
+
+                            <p:remoteCommand name="rmt1" update="tbCausas, cPorque" actionListener="#{mbAnaliseDaCausa.definirRaiz()}" />
                         </p:panel>
 
                     </p:tab>
@@ -126,11 +133,15 @@
                     </p:tab>
 
                 </p:wizard>
-                <!--                    </p:tabView>-->
+
+
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">  
+                    <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+                    <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+                </p:confirmDialog>  
             </h:form>
 
         </p:dialog>
-
 
 
     </h:body>
