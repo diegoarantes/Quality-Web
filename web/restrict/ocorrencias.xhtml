@@ -29,7 +29,7 @@
                              currentPageReportTemplate="Página: {currentPage} de {totalPages}"
                              rowsPerPageTemplate="20,40,60" paginatorPosition="bottom" 
                              rowKey="#{ocorrencia.idOcorrencia}"
-                             selectionMode="single" selection="#{mbOcorrencia.ocorrencia}">
+                             selectionMode="single">
 
                     <p:ajax event="rowSelect" listener="#{mbOcorrencia.habilitaBotao}" update="@form" />
 
@@ -65,20 +65,21 @@
 
                     <p:column headerText="ações">
                         <p:commandButton icon="ui-icon-print" title="Imprimir" disabled="true"/>
-                        
+
                         <p:commandButton id="btEdit" icon="ui-icon-pencil" action="#{mbOcorrencia.editOcorrencia}" title="Revisar" ajax="false">
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrencia.ocorrencia}" /> 
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrenciaFilha.ocorrencia.ocorrencia}" />
                         </p:commandButton>
 
-                        <p:commandButton icon="ui-icon-clipboard" onclick="PF('dlgtr').show()" update=":formtr" title="Tratar">
+                        <p:commandButton icon="ui-icon-clipboard"  oncomplete="rmt()" title="Tratar" update=":formtr">
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrencia.ocorrencia}" />
-                            <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbAnaliseDaCausa.analiseDaCausa.ocorrencia}" />
+                            <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbAnaliseDaCausa.ocorrencia}" />
                         </p:commandButton>
 
                     </p:column>
 
                 </p:dataTable>
+                <p:remoteCommand name="rmt" oncomplete="PF('dlgtr').show()"/>
             </h:form>
 
         </p:panel>

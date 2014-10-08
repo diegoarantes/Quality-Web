@@ -35,7 +35,7 @@ public class AnaliseDaCausa implements Serializable {
     private char causaRaiz;
 
     //Relacionamentos
-    @ManyToOne(optional = false) //Muitos para 1
+    @ManyToOne(optional = true) //Muitos para 1
     @ForeignKey(name = "AnaliseDaCausaPessoa")
     @JoinColumn(name = "IdPessoa", referencedColumnName = "IdPessoa")
     private Pessoa pessoa;
@@ -47,8 +47,8 @@ public class AnaliseDaCausa implements Serializable {
 
     //Construtor
     public AnaliseDaCausa() {
-        pessoa = new Pessoa();
-        ocorrencia = new Ocorrencia();
+//        pessoa = new Pessoa();
+//        ocorrencia = new Ocorrencia();
     }
 
     //Getters e Setters
