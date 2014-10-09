@@ -50,7 +50,7 @@ public class PlanoAcao implements Serializable {
     @Column(name = "QuantoCusta", nullable = true, length = 45)
     private String quantoCusta;
 
-    @OneToOne // 1 para 1
+    @OneToOne(optional = true) // 1 para 1
     @ForeignKey(name = "PlanoAcaoPessoaPA")
     @JoinColumn(name = "IdPessoaPA", referencedColumnName = "IdPessoaPA")
     private PessoaPA pessoaPA;
@@ -63,7 +63,6 @@ public class PlanoAcao implements Serializable {
     //Construtor
     public PlanoAcao() {
         ocorrencia = new Ocorrencia();
-//        implementacao = new Implementacao();
         pessoaPA = new PessoaPA();
     }
 

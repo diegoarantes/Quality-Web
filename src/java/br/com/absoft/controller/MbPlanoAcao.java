@@ -1,29 +1,29 @@
 package br.com.absoft.controller;
 
 import br.com.absoft.model.dao.DAOGenerico;
+import br.com.absoft.model.entities.Ocorrencia;
 import br.com.absoft.model.entities.PlanoAcao;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class MbPlanoAcao implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
-    
+
     @EJB
     DAOGenerico dao;
 
+    private Ocorrencia ocorrencia = new Ocorrencia();
     PlanoAcao planoAcao = new PlanoAcao();
 
     private List<PlanoAcao> planosAcao;
-
 
     public String limpPlanoAcao() {
         return editPlanoAcao();
@@ -59,7 +59,7 @@ public class MbPlanoAcao implements Serializable {
         try {
             dao.excluir(planoAcao);
         } catch (Exception ex) {
-           
+
         }
     }
 
@@ -75,12 +75,21 @@ public class MbPlanoAcao implements Serializable {
     }
 
     public List<PlanoAcao> getPlanosAcao() {
-        planosAcao = dao.lista(PlanoAcao.class);
+        System.out.println("STARTADOOOOOOOOOOOOOOOOOOOOOOOo");
+        planosAcao = dao.listaCondicao(PlanoAcao.class, "ocorrencia.idOcorrencia = " + ocorrencia.getIdOcorrencia());
         return planosAcao;
     }
 
     public void setPlanosAcao(List<PlanoAcao> planosAcao) {
         this.planosAcao = planosAcao;
+    }
+
+    public Ocorrencia getOcorrencia() {
+        return ocorrencia;
+    }
+
+    public void setOcorrencia(Ocorrencia ocorrencia) {
+        this.ocorrencia = ocorrencia;
     }
 
 }

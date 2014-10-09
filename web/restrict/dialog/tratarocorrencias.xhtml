@@ -12,6 +12,7 @@
         <p:dialog header="Tratar ocorrência" widgetVar="dlgtr" width="990" height="475"  maximizable="true" minimizable="true" resizable="true">
 
             <h:form id="formtr">
+                <p:growl/>
                 <p:fieldset legend="Detalhes Ocorrência" toggleable="true" toggleSpeed="500" collapsed="true">
                     <h:outputText value="#{mbOcorrencia.ocorrencia.idOcorrencia} - #{mbOcorrencia.ocorrencia.titulo}" style="font-size: 18px; font-weight: bold;"/>
                     <h:panelGrid columns="2">
@@ -81,14 +82,14 @@
                 <p:wizard nextLabel="Próximo" backLabel="Anterior" step="tba1" style="padding-top: 3px;"> <!--Aqui eu seto em qual Step parou -->
                     <p:tab id="tba1" title="Análise da causa" >    
                         <p:panel header="Realizar análise da Causa" >
-                            <h:inputHidden value="#{mbAnaliseDaCausa.analise.idAnaliseDaCausa}"/>
-                            <h:panelGrid columns="2">
-                                <h:outputLabel value="Porque?" />
-                                <p:inputTextarea cols="45" rows="3" value="#{mbAnaliseDaCausa.analise.porque}" id="cPorque"/>
-                                <h:column />
-                                <p:commandButton value="Adicionar" icon="ui-icon-plus" actionListener="#{mbAnaliseDaCausa.addAnaliseDaCausa()}" update="@form"/>
+                                <h:inputHidden value="#{mbAnaliseDaCausa.analise.idAnaliseDaCausa}"/>
+                                <h:panelGrid columns="2">
+                                    <h:outputLabel value="Porque?" />
+                                    <p:inputTextarea cols="45" rows="3" value="#{mbAnaliseDaCausa.analise.porque}" id="cPorque"/>
+                                    <h:column />
+                                    <p:commandButton value="Adicionar" icon="ui-icon-plus" actionListener="#{mbAnaliseDaCausa.addAnaliseDaCausa()}" update="@form"/>
 
-                            </h:panelGrid>
+                                </h:panelGrid>
                             <p:dataTable id="tbCausas" var="analCausa" value="#{mbAnaliseDaCausa.analisesDaCausa}" rowKey="#{analCausa.idAnaliseDaCausa}" disabledSelection="true" selection="#{mbAnaliseDaCausa.causaRaiz}" >
                                 <p:column selectionMode="single" style="width:16px;text-align:center" headerText="Causa Raíz" width="30"/>
 
@@ -116,20 +117,53 @@
                     </p:tab>
 
                     <p:tab id="tba2" title="Plano de ação">  
-                        TESTE 2 
+                        <p:panel header="Montar Plano de Ação" >
+
+                            <p:dataTable id="tbPlanos" var="planoAcao" value="#{mbPlanoAcao.planosAcao}" rowKey="#{planoAcao.idPlanoAcao}" disabledSelection="true">
+                                <p:column headerText="O que fazer ?">
+                                    <h:outputText value="#{planoAcao.oqFazer}"/>
+                                </p:column>
+
+                                <p:column headerText="Como fazer ?">
+                                    <h:outputText value="#{planoAcao.comoFazer}"/>
+                                </p:column>
+
+                                <p:column headerText="Onde fazer ?">
+                                    <h:outputText value="#{planoAcao.ondeFazer}"/>
+                                </p:column>
+
+                                <p:column headerText="Quem vai fazer ?">
+                                    <h:outputText value="#{planoAcao.quemFazer}"/>
+                                </p:column>
+
+                                <p:column headerText="Até Quando ?">
+                                    <h:outputText value="#{planoAcao.quandoFazer}"/>
+                                </p:column>
+
+                                <p:column headerText="Quanto ?">
+                                    <h:outputText value="#{planoAcao.quantoCusta}"/>
+                                </p:column>
+                            </p:dataTable>
+
+                        </p:panel>
                     </p:tab>
 
                     <p:tab id="tba3" title="Validação">
-                        TESTE 3    
+                        <p:panel header="Realizar Validação" >
+
+                        </p:panel>   
                     </p:tab>
 
                     <p:tab id="tba4" title="Implementação">
-                        TESTE 4 
+                        <p:panel header="Realizar Implementação" >
+
+                        </p:panel>
                     </p:tab>
 
                     <p:tab id="tba5" title="Análise de Eficácia">
+                        <p:panel header="Analizar a Eficácia" >
 
-                        TESTE 5
+                        </p:panel>
                     </p:tab>
 
                 </p:wizard>
@@ -138,10 +172,13 @@
                 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">  
                     <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
                     <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
-                </p:confirmDialog>  
+                </p:confirmDialog>
             </h:form>
 
         </p:dialog>
+
+
+
 
 
     </h:body>

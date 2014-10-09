@@ -28,7 +28,7 @@ public class MbAnaliseDaCausa implements Serializable {
     private AnaliseDaCausa causaRaiz;
 
     private List<AnaliseDaCausa> analisesDaCausa;
-
+    
     public String addAnaliseDaCausa() {
 
         if (analise.getIdAnaliseDaCausa() == null || analise.getIdAnaliseDaCausa() == 0) {
@@ -123,4 +123,4 @@ public class MbAnaliseDaCausa implements Serializable {
         this.causaRaiz = causaRaiz;
     }
 
-}
+    }
