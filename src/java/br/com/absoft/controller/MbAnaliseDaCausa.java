@@ -65,13 +65,16 @@ public class MbAnaliseDaCausa implements Serializable {
     }
 
     public void definirRaiz() {
+        /**
+         * Seta verifica se tem causa raíz e marca com 'N'
+         */
         for (AnaliseDaCausa anali : analisesDaCausa) {
             if (anali.getCausaRaiz() == 'S') {
                 anali.setCausaRaiz('N');
                 dao.atualizar(anali);
             }
         }
-        analise.setCausaRaiz('S');
+        analise.setCausaRaiz('S');  //Seta como causa raíz
         dao.atualizar(analise);
 
         analise = new AnaliseDaCausa();
@@ -83,6 +86,10 @@ public class MbAnaliseDaCausa implements Serializable {
     public List<AnaliseDaCausa> getAnalisesDaCausa() {
         if (ocorrencia != null) {
             analisesDaCausa = dao.listaCondicao(AnaliseDaCausa.class, "ocorrencia.idOcorrencia = " + ocorrencia.getIdOcorrencia());
+           
+            /**
+             * Se for encontrado a analise com a causa raíz marcada com 'S' seta na váriavel causa raíz
+             */
             for (AnaliseDaCausa causa : analisesDaCausa) {
                 if (causa.getCausaRaiz() == 'S') {
                     causaRaiz = causa;
