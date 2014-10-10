@@ -156,11 +156,11 @@
                         </h:panelGrid>
                     </p:panel>
 
-                    <p:panel header="Relacionar ocorrências" toggleable="true" collapsed="true" toggleTitle="Relacionar ocorrências" visible="false">
+                    <p:panel header="Relacionar ocorrências" toggleable="true" collapsed="true" toggleTitle="Relacionar ocorrências" visible="true">
                         <h:panelGrid columns="3" cellpadding="6" id="rel-nc" >
                             <h:outputLabel value="Ocorrência" for="campo-ocorrencia"/> 
                             <p:selectOneMenu id="campo-ocorrencia" filter="true" filterMatchMode="startsWith" effect="fade" 
-                                             value="#{mbOcorrenciaFilha.ocorrencia.ocorrenciaFilha.idOcorrencia}">
+                                             value="#{mbOcorrenciaFilha.ocorrenciaFilha.idOcorrencia}">
                                 <f:selectItem itemLabel="Selecione um Ocorrência." noSelectionOption="true"/>
                                 <f:selectItems value="#{bbOcorrencia.ocorrencias}" var="ocorrencia" itemValue="#{ocorrencia.idOcorrencia}" itemLabel="#{ocorrencia.idOcorrencia} - #{ocorrencia.titulo}"/>
                             </p:selectOneMenu>
@@ -169,7 +169,7 @@
                                              action="#{mbOcorrenciaFilha.insertOcorrencia}" update="OcorrenciasF grownc" process="rel-nc">
 
                                 <f:setPropertyActionListener value="#{mbOcorrencia.ocorrencia}" 
-                                                             target="#{mbOcorrenciaFilha.ocorrencia.ocorrencia}" />
+                                                             target="#{mbOcorrenciaFilha.ocorrenciaPai}" />
                             </p:commandButton>  
 
                         </h:panelGrid>  
@@ -204,9 +204,9 @@
                     </p:panel>
 
                 </p:scrollPanel>
-                
+
             </p:panel>
-            
+
             <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">  
                 <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
                 <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       

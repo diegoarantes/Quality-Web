@@ -68,7 +68,7 @@
 
                         <p:commandButton id="btEdit" icon="ui-icon-pencil" action="#{mbOcorrencia.editOcorrencia}" title="Revisar" ajax="false">
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrencia.ocorrencia}" /> 
-                            <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrenciaFilha.ocorrencia.ocorrencia}" />
+                            <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrenciaFilha.ocorrenciaPai}" />
                         </p:commandButton>
 
                         <p:commandButton icon="ui-icon-clipboard"  oncomplete="rmt()" title="Tratar" update=":formtr">

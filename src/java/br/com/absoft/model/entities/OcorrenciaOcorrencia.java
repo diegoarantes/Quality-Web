@@ -2,26 +2,34 @@ package br.com.absoft.model.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.ForeignKey;
 
 @Entity
-@Table(name = "ocorrencia_ocorrencia")
+@Table(name = "ocorrencia_ocorrencia", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"IdOcorrencia", "IdOcorrenciaFilha"}, name = "vinculosOcorrencia")}
+//Define que o valor das colunas juntas devem ser único ex: 1 e 1 nao podera repetir 1 e 1 em outro registro
+)
 public class OcorrenciaOcorrencia implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @ManyToOne(optional = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+
+    @ManyToOne(optional = true)
     @ForeignKey(name = "OcorrenciaOcorrencia")
     @JoinColumn(name = "IdOcorrencia", referencedColumnName = "IdOcorrencia")
     private Ocorrencia ocorrencia;
 
-    @Id
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     @ForeignKey(name = "OcorrenciaOcorrenciaFilha")
     @JoinColumn(name = "IdOcorrenciaFilha", referencedColumnName = "IdOcorrencia")
     private Ocorrencia ocorrenciaFilha;
@@ -47,12 +55,19 @@ public class OcorrenciaOcorrencia implements Serializable {
         this.ocorrenciaFilha = ocorrenciaFilha;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     //Equals e HashCode
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 71 * hash + (this.ocorrencia != null ? this.ocorrencia.hashCode() : 0);
-        hash = 71 * hash + (this.ocorrenciaFilha != null ? this.ocorrenciaFilha.hashCode() : 0);
+        int hash = 7;
+        hash = 47 * hash + (this.id != null ? this.id.hashCode() : 0);
         return hash;
     }
 
@@ -65,10 +80,7 @@ public class OcorrenciaOcorrencia implements Serializable {
             return false;
         }
         final OcorrenciaOcorrencia other = (OcorrenciaOcorrencia) obj;
-        if (this.ocorrencia != other.ocorrencia && (this.ocorrencia == null || !this.ocorrencia.equals(other.ocorrencia))) {
-            return false;
-        }
-        if (this.ocorrenciaFilha != other.ocorrenciaFilha && (this.ocorrenciaFilha == null || !this.ocorrenciaFilha.equals(other.ocorrenciaFilha))) {
+        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }
         return true;
