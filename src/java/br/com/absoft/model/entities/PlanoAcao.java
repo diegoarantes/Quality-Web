@@ -62,8 +62,8 @@ public class PlanoAcao implements Serializable {
 
     //Construtor
     public PlanoAcao() {
-        ocorrencia = new Ocorrencia();
-        pessoaPA = new PessoaPA();
+//        ocorrencia = new Ocorrencia();
+//        pessoaPA = new PessoaPA();
     }
 
     //Getters e Setters

@@ -4,6 +4,7 @@ import br.com.absoft.model.dao.DAOGenerico;
 import br.com.absoft.model.entities.Ocorrencia;
 import br.com.absoft.model.entities.PlanoAcao;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -34,8 +35,10 @@ public class MbPlanoAcao implements Serializable {
         return "planosdeacao";
     }
 
-    private String addPlanoAcao() {
+    public String addPlanoAcao() {
         if (planoAcao.getIdPlanoAcao() == null || planoAcao.getIdPlanoAcao() == 0) {
+            planoAcao.setDataCadastro(new Date());
+            planoAcao.setOcorrencia(ocorrencia);
             insertPlanoAcao();
         } else {
             updatePlanoAcao();
@@ -45,12 +48,14 @@ public class MbPlanoAcao implements Serializable {
 
     private void insertPlanoAcao() {
         dao.inserir(planoAcao);
+        planoAcao = new PlanoAcao();
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso", ""));
     }
 
     private void updatePlanoAcao() {
         dao.atualizar(planoAcao);
+        planoAcao = new PlanoAcao();
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualização efetuada com sucesso", ""));
     }
