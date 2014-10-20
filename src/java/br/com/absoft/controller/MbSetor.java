@@ -59,10 +59,10 @@ public class MbSetor implements Serializable {
 
     public void deleteSetor() {
         try {
-          dao.excluir(setor);
+            dao.excluir(setor);
         } catch (Exception ex) {
-                 FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Há uma ocorrência vinculada á este setor! - ["+ex.getMessage()+"]", ""));
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Há uma ocorrência vinculada á este setor! - [" + ex.getMessage() + "]", ""));
         }
     }
 

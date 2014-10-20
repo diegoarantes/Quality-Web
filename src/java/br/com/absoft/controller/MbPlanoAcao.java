@@ -80,7 +80,6 @@ public class MbPlanoAcao implements Serializable {
     }
 
     public List<PlanoAcao> getPlanosAcao() {
-        System.out.println("STARTADOOOOOOOOOOOOOOOOOOOOOOOo");
         planosAcao = dao.listaCondicao(PlanoAcao.class, "ocorrencia.idOcorrencia = " + ocorrencia.getIdOcorrencia());
         return planosAcao;
     }
