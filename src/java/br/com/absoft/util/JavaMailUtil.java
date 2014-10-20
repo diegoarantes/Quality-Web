@@ -17,9 +17,11 @@ public class JavaMailUtil {
     /**
      * Configurações de conexão
      */
-    private String smtp = "absoft.com.br";
-    private String email = "quality@absoft.com.br";
-    private String senha = "system.1231";
+    private String smtp = "smtp.gmail.com";//"absoft.com.br";
+    private String porta = "465";
+    private boolean seguro = true;
+    private String email = "absoft.quality@gmail.com";//"quality@absoft.com.br";
+    private String senha = "system.1231";//"system.1231";
 
     /**
      *
@@ -56,13 +58,18 @@ public class JavaMailUtil {
          */
         props.put("mail.transport.protocol", "smtp");
         props.put("mail.smtp.host", smtp);
-        props.put("mail.smtp.socketFactory.port", "25");
+        props.put("mail.smtp.socketFactory.port", porta); //25
         props.put("mail.smtp.socketFactory.fallback", "false");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.port", "25");
+        props.put("mail.smtp.port", porta); //25
 
-        session = Session.getDefaultInstance(props,
+        if (seguro) {
+            props.put("mail.smtp.socketFactory.class",
+                    "javax.net.ssl.SSLSocketFactory"); //SSL Factory Class   
+        }
+
+        session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
                     @Override
                     protected PasswordAuthentication getPasswordAuthentication() {
