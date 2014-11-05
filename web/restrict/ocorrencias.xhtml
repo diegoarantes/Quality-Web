@@ -28,8 +28,7 @@
                              {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              currentPageReportTemplate="Página: {currentPage} de {totalPages}"
                              rowsPerPageTemplate="20,40,60" paginatorPosition="bottom" 
-                             rowKey="#{ocorrencia.idOcorrencia}"
-                             selectionMode="single">
+                             rowKey="#{ocorrencia.idOcorrencia}">
 
                     <p:ajax event="rowSelect" listener="#{mbOcorrencia.habilitaBotao}" update="@form" />
 
@@ -75,6 +74,8 @@
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrencia.ocorrencia}" />
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbAnaliseDaCausa.ocorrencia}" />
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbPlanoAcao.ocorrencia}" />
+
+                            <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbAnaliseEficacia.ocorrencia}" />
                         </p:commandButton>
 
                     </p:column>

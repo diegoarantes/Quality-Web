@@ -2,7 +2,9 @@ package br.com.absoft.controller;
 
 import br.com.absoft.model.dao.DAOGenerico;
 import br.com.absoft.model.entities.AnaliseEficacia;
+import br.com.absoft.model.entities.Ocorrencia;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -19,6 +21,7 @@ public class MbAnaliseEficacia implements Serializable {
     @EJB
     DAOGenerico dao;
 
+    private Ocorrencia ocorrencia = new Ocorrencia();
     AnaliseEficacia analiseEficacia = new AnaliseEficacia();
 
     private List<AnaliseEficacia> analisesDaEficacia;
@@ -42,6 +45,8 @@ public class MbAnaliseEficacia implements Serializable {
     }
 
     private void insertAnaliseEficacia() {
+        analiseEficacia.setDataCadastro(new Date());
+        analiseEficacia.setOcorrencia(ocorrencia);
         dao.inserir(analiseEficacia);
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso", ""));
@@ -79,6 +84,14 @@ public class MbAnaliseEficacia implements Serializable {
 
     public void setAnalisesDaEficacia(List<AnaliseEficacia> analisesDaEficacia) {
         this.analisesDaEficacia = analisesDaEficacia;
+    }
+
+    public Ocorrencia getOcorrencia() {
+        return ocorrencia;
+    }
+
+    public void setOcorrencia(Ocorrencia ocorrencia) {
+        this.ocorrencia = ocorrencia;
     }
 
 }

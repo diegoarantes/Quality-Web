@@ -9,11 +9,11 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class MbPlanoAcao implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,6 +39,7 @@ public class MbPlanoAcao implements Serializable {
         if (planoAcao.getIdPlanoAcao() == null || planoAcao.getIdPlanoAcao() == 0) {
             planoAcao.setDataCadastro(new Date());
             planoAcao.setOcorrencia(ocorrencia);
+            planoAcao.setImplementado(false);
             insertPlanoAcao();
         } else {
             updatePlanoAcao();
@@ -65,6 +66,23 @@ public class MbPlanoAcao implements Serializable {
             dao.excluir(planoAcao);
         } catch (Exception ex) {
 
+        }
+    }
+    
+    public void aprovar(){
+        planoAcao.setImplementado(true);
+        dao.atualizar(planoAcao);
+           FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Validação realizada com sucesso!", ""));
+        
+    }
+    
+    public void retornaPlanoAprovado(){
+       List<PlanoAcao> planos = dao.listaCondicao(PlanoAcao.class, "ocorrencia.idOcorrencia = " + ocorrencia.getIdOcorrencia() 
+                + " and " +
+                "implementado = 1");
+        for(PlanoAcao plano : planos ){
+            planoAcao = plano;
         }
     }
 

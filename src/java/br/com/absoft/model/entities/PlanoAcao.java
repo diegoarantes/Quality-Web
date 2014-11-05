@@ -50,6 +50,9 @@ public class PlanoAcao implements Serializable {
     @Column(name = "QuantoCusta", nullable = true, length = 45)
     private String quantoCusta;
 
+    @Column(name = "Implementado", nullable = true)
+    private boolean implementado;
+
     @OneToOne(optional = true) // 1 para 1
     @ForeignKey(name = "PlanoAcaoPessoaPA")
     @JoinColumn(name = "IdPessoaPA", referencedColumnName = "IdPessoaPA")
@@ -137,6 +140,14 @@ public class PlanoAcao implements Serializable {
 
     public void setQuantoCusta(String quantoCusta) {
         this.quantoCusta = quantoCusta;
+    }
+
+    public boolean isImplementado() {
+        return implementado;
+    }
+
+    public void setImplementado(boolean implementado) {
+        this.implementado = implementado;
     }
 
     //Getters e Setters dos Relacionamentos

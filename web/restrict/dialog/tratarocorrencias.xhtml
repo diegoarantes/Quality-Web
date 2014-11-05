@@ -18,7 +18,7 @@
         <p:dialog header="Tratar ocorrência" widgetVar="dlgtr" width="990" height="475"  maximizable="true" minimizable="true" resizable="true">
 
             <h:form id="formtr">
-                <p:growl/>
+                <p:growl id="gMensagem"/>
                 <p:fieldset legend="Detalhes Ocorrência" toggleable="true" toggleSpeed="500" collapsed="true">
                     <h:outputText value="#{mbOcorrencia.ocorrencia.idOcorrencia} - #{mbOcorrencia.ocorrencia.titulo}" style="font-size: 18px; font-weight: bold;"/>
                     <h:panelGrid columns="2">
@@ -89,6 +89,7 @@
                     <p:tab id="tba1" title="Análise da causa" >    
                         <p:panel header="Realizar análise da Causa" >
                             <p:commandButton value="Nova causa" icon="ui-icon-plus" onclick="PF('dlgCausa').show()" update="@form:dialogoCausa:cPorque, @form:dialogoCausa:cIdCausa"/>
+
                             <p:dataTable id="tbCausas" var="analCausa" value="#{mbAnaliseDaCausa.analisesDaCausa}" rowKey="#{analCausa.idAnaliseDaCausa}" disabledSelection="true" selection="#{mbAnaliseDaCausa.causaRaiz}" >
                                 <p:column selectionMode="single" style="width:16px;text-align:center" headerText="Causa Raíz" width="30"/>
 
@@ -132,6 +133,10 @@
                                     <h:outputText value="#{planoAcao.ondeFazer}"/>
                                 </p:column>
 
+                                <p:column headerText="Por que fazer ?">
+                                    <h:outputText value="#{planoAcao.pqFazer}"/>
+                                </p:column>
+
                                 <p:column headerText="Quem vai fazer ?">
                                     <h:outputText value="#{planoAcao.quemFazer}"/>
                                 </p:column>
@@ -172,8 +177,8 @@
 
 
 
-                                <p:dataTable id="tbPlanosimp" var="planoAcao" value="#{mbPlanoAcao.planosAcao}" rowKey="#{planoAcao.idPlanoAcao}" disabledSelection="true">
-                                    <p:column headerText="ID">
+                                <p:dataTable id="tbPlanosimp" var="planoAcao" value="#{mbPlanoAcao.planosAcao}" rowKey="#{planoAcao.idPlanoAcao}" selection="#{mbPlanoAcao.planoAcao}" selectionMode="single">
+                                    <p:column headerText="ID"  width="30">
                                         <h:outputText value="#{planoAcao.idPlanoAcao}"/>
                                     </p:column>
 
@@ -184,7 +189,7 @@
 
                                 <h:column/>
                                 <h:column>
-                                    <p:commandButton value="Aprovar" icon="ui-icon-check"/>  
+                                    <p:commandButton value="Aprovar" icon="ui-icon-check" actionListener="#{mbPlanoAcao.aprovar}" update="gMensagem"/>  
                                     <p:commandButton value="Reprovar" icon="ui-icon-close"/> 
                                 </h:column>
 
@@ -196,11 +201,18 @@
                     <p:tab id="tba4" title="Implementação" rendered="true"> <!--terei de não renderizar os passos que não estão na fase-->
                         <p:panel header="Realizar Implementação" >
                             <p:fieldset legend="Detalhes da ação" toggleable="true" toggleSpeed="500" collapsed="true">
-
+                                <h:panelGrid columns="6">
+                                    <h:outputLabel value="O que fazer ?: " style="font-weight: bold;"/>
+                                    <h:outputText />
+                                    <p:commandButton value="teste" actionListener="#{mbPlanoAcao.retornaPlanoAprovado}" update="@form"/>
+                                </h:panelGrid>
                             </p:fieldset>
                             <h:panelGrid columns="2">
                                 <h:outputLabel value="Evidêcias:"/>
                                 <p:inputTextarea cols="50" rows="5" value="#{mbImplementacao.implementacao.evidencia}"/>
+
+                                <h:column/>
+                                <p:commandButton value="Gravar" actionListener="#{mbImplementacao.addImplementacao}" />
                             </h:panelGrid>
 
                         </p:panel>
@@ -224,7 +236,7 @@
                                 <p:inputTextarea cols="50" rows="5" value="#{mbAnaliseEficacia.analiseEficacia.justificativa}"/>
 
                                 <h:column/>
-                                <p:commandButton value="Concluir"/>
+                                <p:commandButton value="Concluir" action="#{mbAnaliseEficacia.addAnaliseEficacia}" update="gMensagem" ajax="false"/>
                             </h:panelGrid>
                         </p:panel>
                     </p:tab>
@@ -270,6 +282,11 @@
                         <p:tab>
                             <h:outputLabel value="Onde fazer ?"/> <br/>
                             <p:inputTextarea cols="40" rows="4" value="#{mbPlanoAcao.planoAcao.ondeFazer}" autoResize="false"/>
+                        </p:tab>
+
+                        <p:tab>
+                            <h:outputLabel value="Por que fazer ?"/> <br/>
+                            <p:inputTextarea cols="40" rows="4" value="#{mbPlanoAcao.planoAcao.pqFazer}" autoResize="false"/>
                         </p:tab>
 
                         <p:tab>
