@@ -49,6 +49,12 @@
                     </p:column>
 
                     <p:column filterBy="setor.setor" filterMatchMode="contains" width="150">
+                        <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('tabelaOcorrencia').filter()" >
+                                <f:selectItem itemLabel="Selecione o setor" itemValue="#{null}" noSelectionOption="true" />
+                                <f:selectItems value="#{bbSetor.setores}" var="setor" itemValue="#{setor.setor}" itemLabel="#{setor.setor}"/>
+                            </p:selectOneMenu>
+                        </f:facet>
                         <f:facet name="header">
                             <h:outputText value="Setor"/>
                         </f:facet>
@@ -60,6 +66,28 @@
                             <h:outputText value="Titulo"/>
                         </f:facet>
                         <h:outputText value="#{ocorrencia.titulo}"/>
+                    </p:column>
+
+                    <p:column filterBy="status" filterMatchMode="exact" width="250">
+                        <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('tabelaOcorrencia').filter()" >
+                                <f:selectItem itemLabel="Selecione o status" itemValue="#{null}" noSelectionOption="true" />
+                                <f:selectItem itemLabel="Aguardando aprovação" itemValue="A" />
+                                <f:selectItem itemLabel="Aguardando análise da causa" itemValue="C" />
+                                <f:selectItem itemLabel="Aguardando plano de ação" itemValue="P" />
+                                <f:selectItem itemLabel="Aguardando validação" itemValue="V" />
+                                <f:selectItem itemLabel="Aguardando implementação" itemValue="I" />
+                                <f:selectItem itemLabel="Aguardando analise da eficácia" itemValue="E" />
+                                <f:selectItem itemLabel="Fechada" itemValue="F" />
+                                <f:selectItem itemLabel="Reprovada" itemValue="R" />
+
+                            </p:selectOneMenu>
+                        </f:facet>
+
+                        <f:facet name="header">
+                            <h:outputText value="Status"/>
+                        </f:facet>
+                        <h:outputText value="#{ocorrencia.status}" converter="converterStatus"/>
                     </p:column>
 
                     <p:column headerText="Ações" width="95">
@@ -74,7 +102,8 @@
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrencia.ocorrencia}" />
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbAnaliseDaCausa.ocorrencia}" />
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbPlanoAcao.ocorrencia}" />
-
+                            <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbPlanoAcao.ocorrencia}" />
+                            <!--COLOCAR PARA IMPLEMENTAÇÃO -->
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbAnaliseEficacia.ocorrencia}" />
                         </p:commandButton>
 

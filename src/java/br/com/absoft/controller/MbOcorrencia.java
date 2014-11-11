@@ -55,6 +55,7 @@ public class MbOcorrencia implements Serializable {
     public void insertOcorrencia() {
         ocorrencia.setDataCadastro(new Date()); //Pega a Data Atual
         ocorrencia.setRevisao(0); //Seta {0} como Sem Revisão
+        ocorrencia.setStatus('A'); // Seta o Status como A - Aguardando aprovação
 
         ocorrencia.setUsuario(BbUsuarioLogado.user.getUsuario()); //Pega o Usuario logado
 

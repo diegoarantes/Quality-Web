@@ -69,12 +69,18 @@
 
                         <h:column>
                             <h:outputLabel value="Usuário: " style="font-weight: bold;"/>
-                            <h:outputText value="#{mbOcorrencia.ocorrencia.usuario}"/>
+                            <h:outputText value="#{mbOcorrencia.ocorrencia.usuario.toUpperCase()}"/>
                         </h:column>
 
                         <h:column>
                             <h:outputLabel value="Prazo: " style="font-weight: bold;"/>
                             <h:outputText value="#{mbOcorrencia.ocorrencia.prazo}" converter="javax.faces.DateTime"/>
+                        </h:column>
+                        
+                        
+                        <h:column>
+                            <h:outputLabel value="Status: " style="font-weight: bold;"/>
+                            <h:outputText value="#{mbOcorrencia.ocorrencia.status}" converter="converterStatus"/>
                         </h:column>
 
                     </h:panelGrid>

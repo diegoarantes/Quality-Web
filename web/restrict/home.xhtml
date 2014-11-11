@@ -3,15 +3,72 @@
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"                
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:p="http://primefaces.org/ui"
-                template="./../resources/main.xhtml">
+                template="./../resources/main.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html">
 
     <ui:define name="tarefas">
         <p:growl id="msghome" life="300000"/> 
 
         <p:scrollPanel style="width:99%; height:100%; border: 0px">
-            
 
-            <p:panel header="Minhas pendências" footer="LOUCOOOOO!">
+
+            <p:panel header="Minhas pendências" toggleable="true" collapsed="false">
+                <p:dataTable emptyMessage="Não há aprovaçãoes pendentes." rendered="true" value="#{mbPendencias.aAprovacao}" var="oco">
+                    <f:facet name="header">
+                        Aprovações
+                    </f:facet>
+
+                    <p:column headerText="ID" width="90">
+                        <h:outputText value="#{oco.idOcorrencia}"/>
+                    </p:column>
+
+                    <p:column headerText="Tipo" width="50">
+                        <h:outputText value="#{oco.tipo}"/>
+                    </p:column>
+
+                    <p:column headerText="Data de abertura" width="100">
+                        <h:outputText value="#{oco.dataAbertura}" converter="javax.faces.DateTime"/>
+                    </p:column>
+
+                    <p:column headerText="Título">
+                        <h:outputText value="#{oco.titulo}"/>
+                    </p:column>
+                    <p:column width="100">
+                        <p:commandLink value="Aprovar"/>
+                    </p:column>
+
+                </p:dataTable>
+
+                <p:dataTable emptyMessage="Não há análises da causa pendentes." rendered="true">
+                    <f:facet name="header">
+                        Análise da causa
+                    </f:facet>
+                </p:dataTable>
+
+                <p:dataTable emptyMessage="Não há planos de ação pendentes." rendered="true">
+                    <f:facet name="header">
+                        Plano de Ação
+                    </f:facet>
+                </p:dataTable>
+
+                <p:dataTable emptyMessage="Não há validações pendentes." rendered="true">
+                    <f:facet name="header">
+                        Validação
+                    </f:facet>
+                </p:dataTable>
+
+                <p:dataTable emptyMessage="Não há implementações pendentes." rendered="true">
+                    <f:facet name="header">
+                        Implementação
+                    </f:facet>
+                </p:dataTable>
+
+                <p:dataTable emptyMessage="Não há análises da eficácia pendentes." rendered="true">
+                    <f:facet name="header">
+                        Análise da Eficácia
+                    </f:facet>
+                </p:dataTable>
 
             </p:panel>  
 

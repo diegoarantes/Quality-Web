@@ -43,8 +43,8 @@ public class MbAnaliseDaCausa implements Serializable {
     }
 
     private void insertAnaliseDaCausa() {
-        analise.setDataCadastro(new Date());
-        analise.setCausaRaiz('N');
+        analise.setDataCadastro(new Date()); //Pega a data atual
+        analise.setCausaRaiz('N'); //Seta que ainda não é a causa raíz
         dao.inserir(analise);
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso", ""));
@@ -78,6 +78,9 @@ public class MbAnaliseDaCausa implements Serializable {
         dao.atualizar(analise);
 
         analise = new AnaliseDaCausa();
+        
+        ocorrencia.setStatus('P'); //Seta o status da ocorrência como Aguardando Plano de Acao
+        dao.atualizar(ocorrencia); //Atualiza a ocorrência
     }
 
     public MbAnaliseDaCausa() {

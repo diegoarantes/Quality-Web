@@ -49,6 +49,10 @@ public class MbPlanoAcao implements Serializable {
 
     private void insertPlanoAcao() {
         dao.inserir(planoAcao);
+
+        ocorrencia.setStatus('V'); //Seta o status da ocorrência como Aguardando Validação
+        dao.atualizar(ocorrencia); //Atualiza a ocorrência
+
         planoAcao = new PlanoAcao();
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso", ""));
@@ -68,20 +72,24 @@ public class MbPlanoAcao implements Serializable {
 
         }
     }
-    
-    public void aprovar(){
+
+    public void aprovar() {
         planoAcao.setImplementado(true);
         dao.atualizar(planoAcao);
-           FacesContext.getCurrentInstance().addMessage(null,
-                new FacesMessage(FacesMessage.SEVERITY_INFO, "Validação realizada com sucesso!", ""));
         
+        ocorrencia.setStatus('I'); //Seta o status da ocorrência como Aguardando Implementação
+        dao.atualizar(ocorrencia); //Atualiza a ocorrência
+
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Validação realizada com sucesso!", ""));
+
     }
-    
-    public void retornaPlanoAprovado(){
-       List<PlanoAcao> planos = dao.listaCondicao(PlanoAcao.class, "ocorrencia.idOcorrencia = " + ocorrencia.getIdOcorrencia() 
-                + " and " +
-                "implementado = 1");
-        for(PlanoAcao plano : planos ){
+
+    public void retornaPlanoAprovado() {
+        List<PlanoAcao> planos = dao.listaCondicao(PlanoAcao.class, "ocorrencia.idOcorrencia = " + ocorrencia.getIdOcorrencia()
+                + " and "
+                + "implementado = 1");
+        for (PlanoAcao plano : planos) {
             planoAcao = plano;
         }
     }
