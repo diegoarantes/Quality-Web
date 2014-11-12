@@ -36,7 +36,7 @@ public class MbPlanoAcao implements Serializable {
     }
 
     public String addPlanoAcao() {
-        if (planoAcao.getIdPlanoAcao() == null || planoAcao.getIdPlanoAcao() == 0) {
+        if (planoAcao.getIdPlanoAcao() == null) {
             planoAcao.setDataCadastro(new Date());
             planoAcao.setOcorrencia(ocorrencia);
             planoAcao.setImplementado(false);
@@ -44,6 +44,7 @@ public class MbPlanoAcao implements Serializable {
         } else {
             updatePlanoAcao();
         }
+        planoAcao = new PlanoAcao();
         return null;
     }
 

@@ -11,9 +11,6 @@
 
             <h:form id="formcadse" prependId="false">
                 <h:panelGrid columns="2" cellpadding="3" id="grid-setors" >
-                    <h:outputLabel />
-                    <h:inputHidden value="#{mbSetor.setor.idSetor}"/>
-
                     <h:outputLabel value="Setor*" for="campo-nsetor"/>
                     <p:inputText id="campo-nsetor" size="30" value="#{mbSetor.setor.setor}" required="true"
                                  requiredMessage="O campo [Setor] é obrigatório" onkeyup="this.value = this.value.toUpperCase()"/>

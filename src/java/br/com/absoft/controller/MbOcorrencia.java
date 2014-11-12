@@ -35,7 +35,7 @@ public class MbOcorrencia implements Serializable {
     }
 
     public String editOcorrencia() {
-        if (ocorrencia.getIdOcorrencia() == null || ocorrencia.getIdOcorrencia() == 0) {
+        if (ocorrencia.getIdOcorrencia() == null) {
             return null;
         } else {
             return "insertocorrencia";
@@ -44,11 +44,12 @@ public class MbOcorrencia implements Serializable {
     }
 
     public String addOcorrencia() {
-        if (ocorrencia.getIdOcorrencia() == null || ocorrencia.getIdOcorrencia() == 0) {
+        if (ocorrencia.getIdOcorrencia() == null) {
             insertOcorrencia();
         } else {
             updateOcorrencia();
         }
+        ocorrencia = new Ocorrencia();
         return "ocorrencias";
     }
 
@@ -98,10 +99,10 @@ public class MbOcorrencia implements Serializable {
         }
     }
 
-    public void habilitaBotao(){
+    public void habilitaBotao() {
         this.opcoes = false;
     }
-    
+
     public MbOcorrencia() {
         this.opcoes = true;
     }

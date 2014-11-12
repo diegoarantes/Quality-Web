@@ -9,11 +9,11 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class MbAnaliseEficacia implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -36,11 +36,12 @@ public class MbAnaliseEficacia implements Serializable {
     }
 
     public String addAnaliseEficacia() {
-        if (analiseEficacia.getIdAnaliseEficacia() == null || analiseEficacia.getIdAnaliseEficacia() == 0) {
+        if (analiseEficacia.getIdAnaliseEficacia() == null) {
             insertAnaliseEficacia();
         } else {
             updateAnaliseEficacia();
         }
+        analiseEficacia = new AnaliseEficacia();
         return null;
     }
 

@@ -12,9 +12,6 @@
 
             <h:form id="formcadori1" prependId="false">
                 <h:panelGrid columns="2" cellpadding="3" id="grid-origens1" >
-                    <h:outputLabel />
-                    <h:inputHidden value="#{mbOrigem.origem.idOrigem}"/>
-
                     <h:outputLabel value="Origem*" for="campo-norigem1"/>
                     <p:inputText id="campo-norigem1" size="30" value="#{mbOrigem.origem.origem}" required="true"
                                  requiredMessage="O campo [Origem] é obrigatório" onkeyup="this.value = this.value.toUpperCase()"/>

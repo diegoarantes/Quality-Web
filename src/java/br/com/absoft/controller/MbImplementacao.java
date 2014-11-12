@@ -33,11 +33,12 @@ public class MbImplementacao implements Serializable {
     }
 
     public String addImplementacao() {
-        if (implementacao.getIdImplementacao() == null || implementacao.getIdImplementacao() == 0) {
+        if (implementacao.getIdImplementacao() == null) {
             insertImplementacao();
         } else {
             updateImplementacao();
         }
+        implementacao = new Implementacao();
         return null;
     }
 

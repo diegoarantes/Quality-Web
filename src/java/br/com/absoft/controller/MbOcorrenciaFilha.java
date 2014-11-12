@@ -35,7 +35,7 @@ public class MbOcorrenciaFilha implements Serializable {
         ocorrencia.setOcorrencia(ocorrenciaPai);
         ocorrencia.setOcorrenciaFilha(ocorrenciaFilha);
 
-        if (ocorrencia.getOcorrencia().getIdOcorrencia() == null || ocorrencia.getOcorrencia().getIdOcorrencia() == 0) {
+        if (ocorrencia.getOcorrencia().getIdOcorrencia() == null) {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN, "É necessário efetuar a gravação da nova ocorrência antes de vincula-la a outra ocorrência!", ""));
         } else if (ocorrenciaPai.equals(ocorrenciaFilha)) {

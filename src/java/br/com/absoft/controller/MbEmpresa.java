@@ -7,11 +7,11 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class MbEmpresa implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -34,11 +34,12 @@ public class MbEmpresa implements Serializable {
     }
 
     public String addEmpresa() {
-        if (empresa.getIdEmpresa() == null || empresa.getIdEmpresa() == 0) {
+        if (empresa.getIdEmpresa() == null) {
             insertEmpresa();
         } else {
             updateEmpresa();
         }
+        empresa = new Empresa();
         return null;
     }
 

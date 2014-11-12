@@ -12,9 +12,6 @@
             <h:form id="formcadpro1">
                 <p:growl id="growlprocess1"/>
                 <h:panelGrid columns="2" cellpadding="3" id="grid-process1" >
-                    <h:outputLabel />
-                    <h:inputHidden value="#{mbProcesso.processo.idProcesso}"/>
-
                     <h:outputLabel value="Processo*" for="campo-nprocesso1"/>
                     <p:inputText id="campo-nprocesso1" size="30" value="#{mbProcesso.processo.processo}" required="true"
                                  requiredMessage="O campo [Processo] é obrigatório" onkeyup="this.value = this.value.toUpperCase()"/>

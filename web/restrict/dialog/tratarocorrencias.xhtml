@@ -94,7 +94,7 @@
                 <p:wizard nextLabel="Próximo" backLabel="Anterior" step="tba1" style="padding-top: 3px;"> <!--Aqui eu seto em qual Step parou -->
                     <p:tab id="tba1" title="Análise da causa" >    
                         <p:panel header="Realizar análise da Causa" >
-                            <p:commandButton value="Nova causa" icon="ui-icon-plus" onclick="PF('dlgCausa').show()" update="@form:dialogoCausa:cPorque, @form:dialogoCausa:cIdCausa"/>
+                            <p:commandButton value="Nova causa" icon="ui-icon-plus" onclick="PF('dlgCausa').show()" update="@form:dialogoCausa:cPorque, @form:dialogoCausa:cPorque"/>
 
                             <p:dataTable id="tbCausas" var="analCausa" value="#{mbAnaliseDaCausa.analisesDaCausa}" rowKey="#{analCausa.idAnaliseDaCausa}" disabledSelection="true" selection="#{mbAnaliseDaCausa.causaRaiz}" >
                                 <p:column selectionMode="single" style="width:16px;text-align:center" headerText="Causa Raíz" width="30"/>
@@ -104,7 +104,7 @@
                                 </p:column>
 
                                 <p:column width="60">
-                                    <p:commandButton icon="ui-icon-pencil" title="Alterar" update="@form:dialogoCausa:cPorque, @form:dialogoCausa:cIdCausa" onclick="PF('dlgCausa').show()">
+                                    <p:commandButton icon="ui-icon-pencil" title="Alterar" update="@form:dialogoCausa:cPorque, @form:dialogoCausa:cPorque" onclick="PF('dlgCausa').show()">
                                         <f:setPropertyActionListener value="#{analCausa}" target="#{mbAnaliseDaCausa.analise}" />
                                     </p:commandButton>
 
@@ -260,7 +260,6 @@
                 <!--DIÁLOGOS -->
 
                 <p:dialog header="Inserir causa" widgetVar="dlgCausa" width="300" height="130" id="dialogoCausa">
-                    <h:inputHidden value="#{mbAnaliseDaCausa.analise.idAnaliseDaCausa}" id="cIdCausa"/>
                     <h:panelGrid columns="1">
                         <h:outputLabel value="Porque?" />
                         <p:inputTextarea cols="40" rows="3" value="#{mbAnaliseDaCausa.analise.porque}" id="cPorque"/>
@@ -274,7 +273,6 @@
                 <p:dialog header="Inserir Plano de Ação" widgetVar="dlgPlano" width="300" height="130" id="dialogoPlano">
 
                     <p:wizard nextLabel="Próximo" backLabel="Anterior" style="padding-top: 3px;" showStepStatus="false" step="f1" id="wPlano">
-                        <h:inputHidden value="#{mbPlanoAcao.planoAcao.idPlanoAcao}"/>
                         <p:tab id="f1">
                             <h:outputLabel value="O que fazer ?"/> <br/>
                             <p:inputTextarea cols="40" rows="4" value="#{mbPlanoAcao.planoAcao.oqFazer}" autoResize="false"/>

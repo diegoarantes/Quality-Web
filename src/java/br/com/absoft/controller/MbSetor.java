@@ -7,12 +7,12 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class MbSetor implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -34,11 +34,12 @@ public class MbSetor implements Serializable {
     }
 
     public String addSetor() {
-        if (setor.getIdSetor() == null || setor.getIdSetor() == 0) {
+        if (setor.getIdSetor() == null) {
             insertSetor();
         } else {
             updateSetor();
         }
+        setor = new Setor();
         RequestContext requestContext = RequestContext.getCurrentInstance();
         requestContext.addCallbackParam("sucesso", true);
         return null;

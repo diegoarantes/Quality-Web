@@ -8,12 +8,12 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.RequestContext;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class MbOrigem implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -35,11 +35,12 @@ public class MbOrigem implements Serializable {
     }
 
     public String addOrigem() {
-        if (origem.getIdOrigem() == null || origem.getIdOrigem() == 0) {
+        if (origem.getIdOrigem() == null) {
             insertOrigem();
         } else {
             updateOrigem();
         }
+        origem = new Origem();
 
         RequestContext requestContext = RequestContext.getCurrentInstance();
         requestContext.addCallbackParam("sucesso", true);
@@ -63,7 +64,7 @@ public class MbOrigem implements Serializable {
             dao.excluir(origem);
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Há uma ocorrência vinculada á esta origem! - ["+ex.getMessage()+"]", ""));
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Há uma ocorrência vinculada á esta origem! - [" + ex.getMessage() + "]", ""));
         }
     }
 

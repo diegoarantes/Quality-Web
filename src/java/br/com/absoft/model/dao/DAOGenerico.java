@@ -37,9 +37,6 @@ public class DAOGenerico {
     }
 
     public void inserir(Object objeto) {
-        if (!em.contains(objeto)) {
-            objeto = em.merge(objeto);
-        }
         em.persist(objeto);
     }
 

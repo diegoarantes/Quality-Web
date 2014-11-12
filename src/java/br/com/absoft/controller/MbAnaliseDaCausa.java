@@ -31,7 +31,7 @@ public class MbAnaliseDaCausa implements Serializable {
     
     public String addAnaliseDaCausa() {
 
-        if (analise.getIdAnaliseDaCausa() == null || analise.getIdAnaliseDaCausa() == 0) {
+        if (analise.getIdAnaliseDaCausa() == null) {
             analise.setOcorrencia(ocorrencia);
             analise.setPessoa(BbUsuarioLogado.user);
             insertAnaliseDaCausa();
