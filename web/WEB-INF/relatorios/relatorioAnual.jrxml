@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioGeral" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a565f380-ea37-4a1e-bd3d-c195f34942ea">
+	<property name="ireport.zoom" value="1.0000000000000007"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 3_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 4_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 5_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="ano" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tipo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT * FROM
+
+(SELECT COUNT(IdOcorrencia) AS janeiro FROM ocorrencia
+WHERE MONTH(DataAbertura) = 01 AND YEAR(DataAbertura) = $P{ano} AND Tipo = $P{tipo})janeiro,
+
+(SELECT COUNT(IdOcorrencia) AS fevereiro FROM ocorrencia
+WHERE MONTH(DataAbertura) = 02 AND YEAR(DataAbertura) = $P{ano} AND Tipo = $P{tipo})fevereiro,
+
+(SELECT COUNT(IdOcorrencia) AS marco FROM ocorrencia
+WHERE MONTH(DataAbertura) = 03 AND YEAR(DataAbertura) = $P{ano} AND Tipo = $P{tipo})marco,
+
+(SELECT COUNT(IdOcorrencia) AS abril FROM ocorrencia
+WHERE MONTH(DataAbertura) = 04 AND YEAR(DataAbertura) = $P{ano} AND Tipo = $P{tipo})abril,
+
+(SELECT COUNT(IdOcorrencia) AS maio FROM ocorrencia
+WHERE MONTH(DataAbertura) = 05 AND YEAR(DataAbertura) = $P{ano} AND Tipo = $P{tipo})maio,
+
+(SELECT COUNT(IdOcorrencia) AS junho FROM ocorrencia
+WHERE MONTH(DataAbertura) = 06 AND YEAR(DataAbertura) = $P{ano} AND Tipo = $P{tipo})junho,
+
+(SELECT COUNT(IdOcorrencia) AS julho FROM ocorrencia
+WHERE MONTH(DataAbertura) = 07 AND YEAR(DataAbertura) = $P{ano} AND Tipo = $P{tipo})julho,
+
+(SELECT COUNT(IdOcorrencia) AS agosto FROM ocorrencia
+WHERE MONTH(DataAbertura) = 08 AND YEAR(DataAbertura) = $P{ano} AND Tipo = $P{tipo})agosto,
+
+(SELECT COUNT(IdOcorrencia) AS setembro FROM ocorrencia
+WHERE MONTH(DataAbertura) = 09 AND YEAR(DataAbertura) = $P{ano} AND Tipo = $P{tipo})setembro,
+
+(SELECT COUNT(IdOcorrencia) AS outubro FROM ocorrencia
+WHERE MONTH(DataAbertura) = 10 AND YEAR(DataAbertura) = $P{ano} AND Tipo = $P{tipo})outubro,
+
+(SELECT COUNT(IdOcorrencia) AS novembro FROM ocorrencia
+WHERE MONTH(DataAbertura) = 11 AND YEAR(DataAbertura) = $P{ano} AND Tipo = $P{tipo})novembro,
+
+(SELECT COUNT(IdOcorrencia) AS dezembro FROM ocorrencia
+WHERE MONTH(DataAbertura) = 12 AND YEAR(DataAbertura) = $P{ano} AND Tipo = $P{tipo})dezembro
+
+;]]>
+	</queryString>
+	<field name="janeiro" class="java.lang.Long"/>
+	<field name="fevereiro" class="java.lang.Long"/>
+	<field name="marco" class="java.lang.Long"/>
+	<field name="abril" class="java.lang.Long"/>
+	<field name="maio" class="java.lang.Long"/>
+	<field name="junho" class="java.lang.Long"/>
+	<field name="julho" class="java.lang.Long"/>
+	<field name="agosto" class="java.lang.Long"/>
+	<field name="setembro" class="java.lang.Long"/>
+	<field name="outubro" class="java.lang.Long"/>
+	<field name="novembro" class="java.lang.Long"/>
+	<field name="dezembro" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="44" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="30" width="555" height="14" uuid="65839501-3a27-4e2a-83fb-8e9097731b1f"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="30" uuid="e2172884-c5ec-4527-932e-b2db2bbd7754"/>
+				<textElement textAlignment="Center">
+					<font size="24"/>
+				</textElement>
+				<textFieldExpression><![CDATA[( $P{tipo} == "N" ? "Relatório Anual de Não-Conformidades" :
+    $P{tipo} == "M" ? "Relatório Anual de Melhorias" :
+    "Relatório Anual de Ações Preventivas")]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="701" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="17" width="38" height="20" uuid="eeac6ca2-c8b1-41c1-9448-a616325e8e98"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ano:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="38" y="17" width="100" height="20" uuid="7779f44c-37dc-4013-884b-d4c41a95b5f1"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{ano}]]></textFieldExpression>
+			</textField>
+			<stackedBarChart>
+				<chart>
+					<reportElement x="-1" y="374" width="555" height="259" uuid="d101ed89-0cda-493c-a168-70b5e3be7435"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Jan"]]></seriesExpression>
+						<categoryExpression><![CDATA["Jan"]]></categoryExpression>
+						<valueExpression><![CDATA[$F{janeiro}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Fev"]]></seriesExpression>
+						<categoryExpression><![CDATA["Fev"]]></categoryExpression>
+						<valueExpression><![CDATA[$F{fevereiro}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Mar"]]></seriesExpression>
+						<categoryExpression><![CDATA["Mar"]]></categoryExpression>
+						<valueExpression><![CDATA[$F{marco}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Abr"]]></seriesExpression>
+						<categoryExpression><![CDATA["Abr"]]></categoryExpression>
+						<valueExpression><![CDATA[$F{abril}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Mai"]]></seriesExpression>
+						<categoryExpression><![CDATA["Mai"]]></categoryExpression>
+						<valueExpression><![CDATA[$F{maio}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Jun"]]></seriesExpression>
+						<categoryExpression><![CDATA["Jun"]]></categoryExpression>
+						<valueExpression><![CDATA[$F{junho}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Jul"]]></seriesExpression>
+						<categoryExpression><![CDATA["Jul"]]></categoryExpression>
+						<valueExpression><![CDATA[$F{julho}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Ago"]]></seriesExpression>
+						<categoryExpression><![CDATA["Ago"]]></categoryExpression>
+						<valueExpression><![CDATA[$F{agosto}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Set"]]></seriesExpression>
+						<categoryExpression><![CDATA["Set"]]></categoryExpression>
+						<valueExpression><![CDATA[$F{setembro}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Out"]]></seriesExpression>
+						<categoryExpression><![CDATA["Out"]]></categoryExpression>
+						<valueExpression><![CDATA[$F{outubro}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Nov"]]></seriesExpression>
+						<categoryExpression><![CDATA["Nov"]]></categoryExpression>
+						<valueExpression><![CDATA[$F{novembro}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Dez"]]></seriesExpression>
+						<categoryExpression><![CDATA["Dez"]]></categoryExpression>
+						<valueExpression><![CDATA[$F{dezembro}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</stackedBarChart>
+			<rectangle>
+				<reportElement x="16" y="75" width="100" height="20" backcolor="#EAEAEA" uuid="bda8d63c-d811-4c69-a349-aa16d9ced84c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="16" y="95" width="100" height="20" uuid="7d37d2b4-9808-4639-9fe0-f7f010d2c0e5"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="16" y="115" width="100" height="20" backcolor="#EAEAEA" uuid="72249d49-e6f1-403a-a9ca-ad4d18ef285c"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="16" y="135" width="100" height="20" uuid="48bd5712-3f1a-448e-9944-30564b1c4e03"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="16" y="155" width="100" height="20" backcolor="#EAEAEA" uuid="a2be6aeb-c127-48b8-af7f-c60da4628df7"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="16" y="175" width="100" height="20" uuid="880b30a1-c551-4b22-87e4-472169a2c468"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="16" y="195" width="100" height="20" backcolor="#EAEAEA" uuid="19981f7f-d9ca-40e8-a208-e29e286403a6"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="16" y="215" width="100" height="20" uuid="1ea4ac25-620b-4f4d-a1d9-73d2649a2bfb"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="16" y="235" width="100" height="20" backcolor="#EAEAEA" uuid="c1b83667-b114-4b7f-b320-e5429d439201"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="16" y="255" width="100" height="20" uuid="91ecba22-4685-4d68-875a-ec6be3942466"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="16" y="275" width="100" height="20" backcolor="#EAEAEA" uuid="733211c5-14ee-4218-a617-7544ed325628"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="16" y="55" width="100" height="20" uuid="0bb50dd1-e667-4a61-b963-02a4c773bb3b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="116" y="215" width="100" height="20" uuid="7f6c3e50-5220-497d-8165-9fb5bb0d4db9"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="116" y="235" width="100" height="20" backcolor="#EAEAEA" uuid="af189d21-4b28-40fc-a500-f0bcd46c894e"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="116" y="55" width="100" height="20" uuid="ef03f27d-fde9-4bad-a74f-7361b4d76f9d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="116" y="155" width="100" height="20" backcolor="#EAEAEA" uuid="4be9b97d-cfe8-4d2c-b9ee-698ab72b2e23"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="116" y="275" width="100" height="20" backcolor="#EAEAEA" uuid="80dedc7a-9f75-4224-9bd5-78a852abe66d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="116" y="195" width="100" height="20" backcolor="#EAEAEA" uuid="26a53ae2-456c-486c-8dc9-3775f6b75f2b"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="116" y="175" width="100" height="20" uuid="5e0eb7ef-b226-4e03-8bd6-d646d0674a2f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="116" y="75" width="100" height="20" backcolor="#EAEAEA" uuid="15fe1342-5321-4c4d-a29a-e736e7a795af"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="116" y="135" width="100" height="20" uuid="960e4470-4cf5-445c-813c-07d4eb1579aa"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="116" y="115" width="100" height="20" backcolor="#EAEAEA" uuid="4e612932-1c58-434b-9426-2a251548f58d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="116" y="95" width="100" height="20" uuid="052c49d5-a8a7-48ce-af8a-640901e027c7"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="116" y="255" width="100" height="20" uuid="39d34547-24d5-420d-9cfa-a3cb5a344192"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="116" y="295" width="100" height="20" uuid="41f6f48b-3f1d-4a08-8a0c-05d5a2081f0e"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="16" y="295" width="100" height="20" uuid="9f3dd98a-3657-44f5-a383-ae29d730096e"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="16" y="55" width="100" height="20" uuid="04512439-2e26-4bcf-b003-90449052a5d9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mês]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="116" y="55" width="100" height="20" uuid="4c8f5d15-18db-4473-a7ae-52919943f07a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="75" width="100" height="20" uuid="a8d4f33a-162e-48ae-80e8-1cc23492093d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Janeiro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="95" width="100" height="20" uuid="106ce07f-72bb-4836-85de-f04995856a91"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Fevereiro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="115" width="100" height="20" uuid="55ebaef1-0dcb-4c6b-b5bb-7e26b3b533f3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Março]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="135" width="100" height="20" uuid="7142ba7e-0303-491f-bff8-1bcdd2488359"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Abril]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="155" width="100" height="20" uuid="a0169366-4aa4-489d-82a2-7ca66bdbf67f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Maio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="175" width="100" height="20" uuid="06a65f6c-2b74-4bb3-8fca-9e19a29d483c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Junho]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="195" width="100" height="20" uuid="9741b80f-ecb6-4e95-9339-182d44f3c49a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Julho]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="215" width="100" height="20" uuid="8f02615d-2988-4de3-afc7-615c96835a36"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Agosto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="235" width="100" height="20" uuid="3b4e7340-01ba-4d27-9bfb-1d150bb4b591"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Setembro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="255" width="100" height="20" uuid="e18695be-2359-42df-92ed-2ac339eb5eed"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Outubro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="275" width="100" height="20" uuid="9507c0a1-e2c7-43be-905d-15e58df61026"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Novembro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="295" width="100" height="20" uuid="22d7c933-cf16-437d-a931-a1bcf947ee2e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Dezembro]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="116" y="75" width="100" height="20" uuid="07f0ab52-bd00-4da5-9a3e-c353649ad613"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{janeiro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="95" width="100" height="20" uuid="b62dae78-4f89-4b7f-baab-a7ae76317a1f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fevereiro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="115" width="100" height="20" uuid="c89d33b1-56de-4668-94a1-c80168d9079c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{marco}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="135" width="100" height="20" uuid="4e087a02-fbfd-4a2b-ac34-82c5c3a25d2c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{abril}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="155" width="100" height="20" uuid="2612054b-5c98-4dd1-a7a1-10f78a5d01c9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{maio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="175" width="100" height="20" uuid="cc630090-4ea4-47d6-bf6e-d30572956b0b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{junho}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="195" width="100" height="20" uuid="470d2458-dab4-456b-9a8b-91152fa8714e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{julho}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="215" width="100" height="20" uuid="b3113d92-4057-4e75-930d-9239b233ce32"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{agosto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="235" width="100" height="20" uuid="e9a08c53-1ddf-4085-b77a-cb0b807ddbde"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{setembro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="255" width="100" height="20" uuid="18d2e7f7-212d-4c5b-8598-0c00017eb318"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{outubro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="275" width="100" height="20" uuid="91d57b98-d5a3-44cd-a555-c0326527d231"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{novembro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="116" y="295" width="100" height="20" uuid="52b7e0c4-ecc8-4f3e-b85a-2ba97026afce"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{dezembro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="325" y="141" width="100" height="20" uuid="1ba721ed-f261-4142-9d9a-bd76724fecdb"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Geral]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="325" y="161" width="100" height="20" uuid="f0aa0509-3ad6-49a4-b971-0030762c6fbf"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{janeiro} + $F{fevereiro} + $F{marco} + $F{abril}
++ $F{maio} + $F{junho} + $F{julho} + $F{agosto} + $F{setembro}
++ $F{outubro} + $F{novembro} + $F{dezembro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="420" y="10" width="113" height="20" uuid="64ba783e-9c4d-4349-80c8-f191ec95cebb"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="533" y="10" width="22" height="20" uuid="a018fd52-c8a1-499e-8b99-24f8cef5c942"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="10" width="100" height="20" uuid="db6836b6-2c2e-41f2-ba5e-9798d4f3dd99"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ABSoft - Quality]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="10" width="99" height="20" uuid="5e85c770-48c7-4c5e-af8d-e03424e13f2c"/>
+				<text><![CDATA[www.absoft.com.br]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="3" width="554" height="1" uuid="4ac0c10f-b4b0-4220-97ee-a7858d735003"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

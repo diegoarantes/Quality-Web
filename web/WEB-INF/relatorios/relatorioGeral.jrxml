@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioGeral" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a565f380-ea37-4a1e-bd3d-c195f34942ea">
+	<property name="ireport.zoom" value="1.0000000000000007"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="data1" class="java.util.Date">
+		<defaultValueExpression><![CDATA[2001-01-01]]></defaultValueExpression>
+	</parameter>
+	<parameter name="data2" class="java.util.Date">
+		<defaultValueExpression><![CDATA[2014-01-01]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT * FROM
+
+(SELECT COUNT(IdOcorrencia) AS nc FROM ocorrencia
+WHERE DataAbertura BETWEEN $P{data1} AND $P{data2} AND Tipo = 'N' AND Status <> 'F')naoConformidade,
+
+(SELECT COUNT(IdOcorrencia) AS me FROM ocorrencia
+WHERE DataAbertura BETWEEN $P{data1} AND $P{data2} AND Tipo = 'M' AND Status <> 'F')melhorias,
+
+(SELECT COUNT(IdOcorrencia) AS ap FROM ocorrencia
+WHERE DataAbertura BETWEEN $P{data1} AND $P{data2} AND Tipo = 'A' AND Status <> 'F')acaopreventiva,
+
+(SELECT COUNT(IdOcorrencia) AS nc_f FROM ocorrencia
+WHERE DataAbertura BETWEEN $P{data1} AND $P{data2}  AND Tipo = 'N' AND Status = 'F')naoConformidade_f,
+
+(SELECT COUNT(IdOcorrencia) AS me_f FROM ocorrencia
+WHERE DataAbertura BETWEEN $P{data1} AND $P{data2}  AND Tipo = 'M' AND Status = 'F')melhorias_f,
+
+(SELECT COUNT(IdOcorrencia) AS ap_f FROM ocorrencia
+WHERE DataAbertura BETWEEN $P{data1} AND $P{data2}  AND Tipo = 'A' AND Status = 'F')acaopreventiva_f
+
+
+;]]>
+	</queryString>
+	<field name="nc" class="java.lang.Long"/>
+	<field name="me" class="java.lang.Long"/>
+	<field name="ap" class="java.lang.Long"/>
+	<field name="nc_f" class="java.lang.Long"/>
+	<field name="me_f" class="java.lang.Long"/>
+	<field name="ap_f" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="39" uuid="33d861ba-581d-4469-b2d8-1c6404855937"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório Geral]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="30" width="555" height="14" uuid="65839501-3a27-4e2a-83fb-8e9097731b1f"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="701" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="17" width="45" height="20" uuid="eeac6ca2-c8b1-41c1-9448-a616325e8e98"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Período:]]></text>
+			</staticText>
+			<barChart>
+				<chart>
+					<reportElement x="0" y="64" width="406" height="179" uuid="6f6ff532-6109-45c0-b221-49911632e6ed"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Não Conformidades"]]></seriesExpression>
+						<categoryExpression><![CDATA["Não Conformidades"]]></categoryExpression>
+						<valueExpression><![CDATA[$F{nc}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Ações Preventivas"]]></seriesExpression>
+						<categoryExpression><![CDATA["Ações Preventivas"]]></categoryExpression>
+						<valueExpression><![CDATA[$F{ap}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Melhorias"]]></seriesExpression>
+						<categoryExpression><![CDATA["Melhorias"]]></categoryExpression>
+						<valueExpression><![CDATA[$F{me}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot isShowLabels="true">
+					<plot orientation="Horizontal"/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<textField>
+				<reportElement x="45" y="17" width="64" height="20" uuid="4d5fdb6a-ad1a-4bd3-b03e-4492e7645422"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($P{data1})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="119" y="17" width="79" height="20" uuid="8a4f34e3-6ae6-4155-a64b-eabad0ac6ebf"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($P{data2})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="109" y="17" width="10" height="20" uuid="26e0b186-525e-44a4-820f-0bf70662ebe5"/>
+				<text><![CDATA[á]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="37" width="167" height="27" uuid="08ed7e18-fa8e-414f-80a9-af11c051aa33"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Em Aberto:]]></text>
+			</staticText>
+			<barChart>
+				<chart>
+					<reportElement x="0" y="286" width="406" height="179" uuid="2a933b67-81ac-4594-ae63-c6a5e4b5be0f"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Não Conformidades"]]></seriesExpression>
+						<categoryExpression><![CDATA["Não Conformidades"]]></categoryExpression>
+						<valueExpression><![CDATA[$F{nc_f}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Ações Preventivas"]]></seriesExpression>
+						<categoryExpression><![CDATA["Ações Preventivas"]]></categoryExpression>
+						<valueExpression><![CDATA[$F{ap_f}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Melhorias"]]></seriesExpression>
+						<categoryExpression><![CDATA["Melhorias"]]></categoryExpression>
+						<valueExpression><![CDATA[$F{me_f}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot isShowLabels="true">
+					<plot orientation="Horizontal"/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<staticText>
+				<reportElement x="0" y="259" width="167" height="27" uuid="d4cf59f5-a194-48e2-9d5d-7094722d5ffa"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Fechadas:]]></text>
+			</staticText>
+			<barChart>
+				<chart>
+					<reportElement x="0" y="512" width="406" height="179" uuid="3ba70f12-23e4-426a-b767-905048612b0e"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Não Conformidades"]]></seriesExpression>
+						<categoryExpression><![CDATA["Não Conformidades"]]></categoryExpression>
+						<valueExpression><![CDATA[$F{nc_f} + $F{nc}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Ações Preventivas"]]></seriesExpression>
+						<categoryExpression><![CDATA["Ações Preventivas"]]></categoryExpression>
+						<valueExpression><![CDATA[$F{ap_f} + $F{ap}]]></valueExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Melhorias"]]></seriesExpression>
+						<categoryExpression><![CDATA["Melhorias"]]></categoryExpression>
+						<valueExpression><![CDATA[$F{me_f} + $F{me}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot isShowLabels="true">
+					<plot orientation="Horizontal"/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<staticText>
+				<reportElement x="0" y="485" width="167" height="27" uuid="ac360b3f-6acf-4583-9b14-d65f9ad07804"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Totais:]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="420" y="10" width="113" height="20" uuid="64ba783e-9c4d-4349-80c8-f191ec95cebb"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="533" y="10" width="22" height="20" uuid="a018fd52-c8a1-499e-8b99-24f8cef5c942"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="10" width="100" height="20" uuid="db6836b6-2c2e-41f2-ba5e-9798d4f3dd99"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ABSoft - Quality]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="10" width="99" height="20" uuid="5e85c770-48c7-4c5e-af8d-e03424e13f2c"/>
+				<text><![CDATA[www.absoft.com.br]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="3" width="554" height="1" uuid="4ac0c10f-b4b0-4220-97ee-a7858d735003"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

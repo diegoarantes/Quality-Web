@@ -112,11 +112,9 @@
 
                             <p:column>
                                 <p:submenu label="Ocorrências">
-                                    <p:menuitem value="Não-Conformidades" url="#" /> 
-                                    <p:menuitem value="Notas de Melhoria" url="#" /> 
-                                    <p:menuitem value="Ações Preventiva" url="#" /> 
+                                    <p:menuitem value="Relatório Anual" onclick="PF('dlgRelAnual').show();" /> 
                                     <p:separator/>
-                                    <p:menuitem value="Relatório Geral" url="#" /> 
+                                    <p:menuitem value="Relatório geral por período" onclick="PF('dlgRelGeral').show();" /> 
                                 </p:submenu> 
 
                                 <p:submenu label="Documentos">
@@ -181,6 +179,9 @@
                     </h:panelGrid>
 
                 </p:dialog> 
+                
+                <ui:include src="/restrict/dialog/relatoriogeral.xhtml"/>
+                <ui:include src="/restrict/dialog/relatorioanual.xhtml"/>
 
 
 

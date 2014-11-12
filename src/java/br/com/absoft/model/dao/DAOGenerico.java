@@ -5,11 +5,16 @@
  */
 package br.com.absoft.model.dao;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import org.hibernate.Session;
+import org.hibernate.engine.spi.SessionFactoryImplementor;
+import org.hibernate.service.jdbc.connections.spi.ConnectionProvider;
 
 /**
  *
@@ -32,15 +37,13 @@ public class DAOGenerico {
     }
 
     public void inserir(Object objeto) {
-         if (!em.contains(objeto)) {
+        if (!em.contains(objeto)) {
             objeto = em.merge(objeto);
         }
         em.persist(objeto);
     }
 
     public void excluir(Object objeto) throws Exception {
-//        Method getChave = objeto.getClass().getMethod("getId", new Class[0]);
-//        objeto = em.find(objeto.getClass(), getChave.invoke(objeto, new Object[0]));
         if (!em.contains(objeto)) {
             objeto = em.merge(objeto);
         }
@@ -56,4 +59,13 @@ public class DAOGenerico {
         retornando = em.find(classe, id);
         return retornando;
     }
+
+    public Connection getConnection() throws SQLException {
+        Session session = (Session) em.getDelegate();
+        SessionFactoryImplementor sfi = (SessionFactoryImplementor) session.getSessionFactory();
+        ConnectionProvider cp = sfi.getConnectionProvider();
+        return cp.getConnection();
+
+    }
+
 }
