@@ -27,12 +27,20 @@
         </authentication-provider>
     </authentication-manager>
     
-    <b:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+
+    <!--Configuração de Conexão Banco por JNDI-->
+    <b:bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+    <b:property name="jndiName" value="java:/jboss/datasources/Quality"/>
+    </b:bean>
+    
+    <!--Configuração para conectar diretamente ao MYSQL -->
+    <!--    <b:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
         <b:property name="url" value="jdbc:mysql://localhost:3306/quality" />
         <b:property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <b:property name="username" value="root" />
         <b:property name="password" value="123jk12" />
-    </b:bean>
+    </b:bean>-->
+    
     
     <!-- MAS EXISTEM OUTRAS 2 FORMAS DE SE FAZER ISSO -->
     <!-- VOCÊ PODE CUSTOMIZAR A AUTENTICATION PROVIDER -->
