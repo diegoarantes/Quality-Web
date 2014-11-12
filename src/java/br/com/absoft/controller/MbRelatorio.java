@@ -8,6 +8,7 @@ package br.com.absoft.controller;
 import br.com.absoft.model.dao.DAOGenerico;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -32,7 +33,9 @@ import net.sf.jasperreports.engine.export.JRPdfExporter;
  */
 @ManagedBean
 @SessionScoped
-public class MbRelatorio {
+public class MbRelatorio implements Serializable {  
+  
+    private static final long serialVersionUID = 1L; 
 
     @EJB
     DAOGenerico dao;

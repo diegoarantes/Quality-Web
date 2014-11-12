@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioGeral" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a565f380-ea37-4a1e-bd3d-c195f34942ea">
-	<property name="ireport.zoom" value="2.593742460100003"/>
-	<property name="ireport.x" value="93"/>
-	<property name="ireport.y" value="161"/>
+	<property name="ireport.zoom" value="2.1435888100000042"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="3"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -84,7 +84,7 @@ WHERE DataAbertura BETWEEN $P{data1} AND $P{data2}  AND Tipo = 'A' AND Status = 
 	<detail>
 		<band height="701" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="17" width="55" height="20" uuid="eeac6ca2-c8b1-41c1-9448-a616325e8e98"/>
+				<reportElement x="0" y="17" width="49" height="20" uuid="eeac6ca2-c8b1-41c1-9448-a616325e8e98"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
@@ -126,7 +126,7 @@ WHERE DataAbertura BETWEEN $P{data1} AND $P{data2}  AND Tipo = 'A' AND Status = 
 				</barPlot>
 			</barChart>
 			<textField>
-				<reportElement x="55" y="17" width="54" height="20" uuid="4d5fdb6a-ad1a-4bd3-b03e-4492e7645422"/>
+				<reportElement x="49" y="17" width="60" height="20" uuid="4d5fdb6a-ad1a-4bd3-b03e-4492e7645422"/>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($P{data1})]]></textFieldExpression>
 			</textField>
 			<textField>
