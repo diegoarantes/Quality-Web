@@ -4,7 +4,6 @@ import br.com.absoft.model.dao.DAOGenerico;
 import br.com.absoft.model.entities.Implementacao;
 import br.com.absoft.model.entities.Ocorrencia;
 import br.com.absoft.model.entities.PlanoAcao;
-import br.com.absoft.suport.BbPessoa;
 import br.com.absoft.suport.BbUsuarioLogado;
 import java.io.Serializable;
 import java.util.Date;
@@ -57,6 +56,9 @@ public class MbImplementacao implements Serializable {
         implementacao.setDataCadastro(new Date());
         implementacao.setPessoa(BbUsuarioLogado.user);
         dao.inserir(implementacao);
+
+        ocorrencia.setStatus('E'); //Seta o status da ocorrência como Aguardando Análise da Eficácia
+        dao.atualizar(ocorrencia); //Atualiza a ocorrência
 
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso", ""));
