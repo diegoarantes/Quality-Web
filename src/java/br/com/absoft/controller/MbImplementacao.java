@@ -2,7 +2,12 @@ package br.com.absoft.controller;
 
 import br.com.absoft.model.dao.DAOGenerico;
 import br.com.absoft.model.entities.Implementacao;
+import br.com.absoft.model.entities.Ocorrencia;
+import br.com.absoft.model.entities.PlanoAcao;
+import br.com.absoft.suport.BbPessoa;
+import br.com.absoft.suport.BbUsuarioLogado;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -20,6 +25,10 @@ public class MbImplementacao implements Serializable {
     DAOGenerico dao;
 
     Implementacao implementacao = new Implementacao();
+
+    Ocorrencia ocorrencia = new Ocorrencia();
+
+    PlanoAcao acao = new PlanoAcao();
 
     private List<Implementacao> implementacoes;
 
@@ -43,8 +52,11 @@ public class MbImplementacao implements Serializable {
     }
 
     private void insertImplementacao() {
+        implementacao.setOcorrencia(ocorrencia);
+        implementacao.setPlanoAcao(acao);
+        implementacao.setDataCadastro(new Date());
+        implementacao.setPessoa(BbUsuarioLogado.user);
         dao.inserir(implementacao);
-
 
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso", ""));
@@ -82,6 +94,26 @@ public class MbImplementacao implements Serializable {
 
     public void setImplementacoes(List<Implementacao> implementacoes) {
         this.implementacoes = implementacoes;
+    }
+
+    public Ocorrencia getOcorrencia() {
+        return ocorrencia;
+    }
+
+    public void setOcorrencia(Ocorrencia ocorrencia) {
+        this.ocorrencia = ocorrencia;
+    }
+
+    public PlanoAcao getAcao() {
+        List<PlanoAcao> acoes = dao.listaCondicao(PlanoAcao.class, "ocorrencia.idOcorrencia = " + ocorrencia.getIdOcorrencia() + "and implementado = true");
+        for (PlanoAcao placao : acoes) {
+            acao = placao;
+        }
+        return acao;
+    }
+
+    public void setAcao(PlanoAcao acao) {
+        this.acao = acao;
     }
 
 }

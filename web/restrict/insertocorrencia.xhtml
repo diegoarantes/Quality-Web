@@ -52,13 +52,13 @@
                             <p:column/>
 
                             <h:outputLabel value="Titulo*" for="campo-titulo"/>
-                            <p:inputText id="campo-titulo" size="73" value="#{mbOcorrencia.ocorrencia.titulo}" required="true" requiredMessage="O campo [Título] é obrigatório"/>
+                            <p:inputText id="campo-titulo" size="71" value="#{mbOcorrencia.ocorrencia.titulo}" required="true" requiredMessage="O campo [Título] é obrigatório"/>
 
                             <p:column/>
 
                             <h:outputLabel value="Descrição*" for="campo-descricao"/>
                             <p:column>
-                                <p:inputTextarea id="campo-descricao" rows="9" cols="75" counter="counter" maxlength="1000"       
+                                <p:inputTextarea id="campo-descricao" rows="9" cols="70" counter="counter" maxlength="1000"       
                                                  counterTemplate="Restam {0} caracteres." autoResize="false" value="#{mbOcorrencia.ocorrencia.descricao}"
                                                  required="true" requiredMessage="O campo [Descrição] é obrigatório"/> <br />                                
                                 <h:outputText id="counter" /> 

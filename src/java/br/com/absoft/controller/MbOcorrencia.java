@@ -49,7 +49,7 @@ public class MbOcorrencia implements Serializable {
         } else {
             updateOcorrencia();
         }
-        ocorrencia = new Ocorrencia();
+//        ocorrencia = new Ocorrencia();
         return "ocorrencias";
     }
 

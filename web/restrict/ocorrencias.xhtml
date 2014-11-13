@@ -8,7 +8,6 @@
                 template="./../resources/main.xhtml"> 
 
     <ui:define name="tarefas">
-        <ui:include src="dialog/tratarocorrencias.xhtml"/> 
 
 
         <p:panel header="Ocorrências">
@@ -98,11 +97,11 @@
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrenciaFilha.ocorrenciaPai}" />
                         </p:commandButton>
 
-                        <p:commandButton icon="ui-icon-clipboard"  oncomplete="rmt()" title="Tratar" update=":formtr">
+                        <p:commandButton icon="ui-icon-clipboard"  action="tratarocorrencia" title="Tratar" ajax="false">
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrencia.ocorrencia}" />
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbAnaliseDaCausa.ocorrencia}" />
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbPlanoAcao.ocorrencia}" />
-                            <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbPlanoAcao.ocorrencia}" />
+                            <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbImplementacao.ocorrencia}" />
                             <!--COLOCAR PARA IMPLEMENTAÇÃO -->
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbAnaliseEficacia.ocorrencia}" />
                         </p:commandButton>
@@ -110,7 +109,6 @@
                     </p:column>
 
                 </p:dataTable>
-                <p:remoteCommand name="rmt" oncomplete="PF('dlgtr').show()" update=":formtr:tbCausas"/>
             </h:form>
 
         </p:panel>

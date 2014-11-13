@@ -28,7 +28,7 @@ public class MbAnaliseDaCausa implements Serializable {
     private AnaliseDaCausa causaRaiz;
 
     private List<AnaliseDaCausa> analisesDaCausa;
-    
+
     public String addAnaliseDaCausa() {
 
         if (analise.getIdAnaliseDaCausa() == null) {
@@ -78,7 +78,7 @@ public class MbAnaliseDaCausa implements Serializable {
         dao.atualizar(analise);
 
         analise = new AnaliseDaCausa();
-        
+
         ocorrencia.setStatus('P'); //Seta o status da ocorrência como Aguardando Plano de Acao
         dao.atualizar(ocorrencia); //Atualiza a ocorrência
     }
@@ -86,18 +86,13 @@ public class MbAnaliseDaCausa implements Serializable {
     public MbAnaliseDaCausa() {
     }
 
+    public boolean tick(char causa) {
+        return causa == 'S';
+    }
+
     public List<AnaliseDaCausa> getAnalisesDaCausa() {
         if (ocorrencia != null) {
             analisesDaCausa = dao.listaCondicao(AnaliseDaCausa.class, "ocorrencia.idOcorrencia = " + ocorrencia.getIdOcorrencia());
-           
-            /**
-             * Se for encontrado a analise com a causa raíz marcada com 'S' seta na váriavel causa raíz
-             */
-            for (AnaliseDaCausa causa : analisesDaCausa) {
-                if (causa.getCausaRaiz() == 'S') {
-                    causaRaiz = causa;
-                }
-            }
         }
         return analisesDaCausa;
     }
@@ -126,6 +121,13 @@ public class MbAnaliseDaCausa implements Serializable {
     }
 
     public AnaliseDaCausa getCausaRaiz() {
+        List<AnaliseDaCausa> causas = null;
+        if (ocorrencia != null) {
+            causas = dao.listaCondicao(AnaliseDaCausa.class, "ocorrencia.idOcorrencia = " + ocorrencia.getIdOcorrencia() + " and causaRaiz = 'S'");
+        }
+        for(AnaliseDaCausa causa : causas){
+            causaRaiz = causa;
+        }
         return causaRaiz;
     }
 
@@ -133,4 +135,4 @@ public class MbAnaliseDaCausa implements Serializable {
         this.causaRaiz = causaRaiz;
     }
 
-    }
+}
