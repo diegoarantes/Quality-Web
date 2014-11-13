@@ -52,7 +52,7 @@ public class DAOGenerico {
     }
 
     public Object recupera(Class classe, int id) { //Era do tipo Long
-        Object retornando = null;
+        Object retornando;
         retornando = em.find(classe, id);
         return retornando;
     }
