@@ -90,7 +90,10 @@
                     </p:column>
 
                     <p:column headerText="Ações" width="95">
-                        <p:commandButton icon="ui-icon-print" title="Imprimir" disabled="true"/>
+                        <p:commandButton icon="ui-icon-print" title="Imprimir" onclick="form.target = '_blank'" ajax="false">
+                            <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbRelatorio.ocorrencia}" />
+                            <f:actionListener binding="#{mbRelatorio.relatoriOcorrencia()}"/>
+                        </p:commandButton>
 
                         <p:commandButton id="btEdit" icon="ui-icon-pencil" action="#{mbOcorrencia.editOcorrencia}" title="Revisar" ajax="false">
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrencia.ocorrencia}" /> 
@@ -102,7 +105,6 @@
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbAnaliseDaCausa.ocorrencia}" />
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbPlanoAcao.ocorrencia}" />
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbImplementacao.ocorrencia}" />
-                            <!--COLOCAR PARA IMPLEMENTAÇÃO -->
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbAnaliseEficacia.ocorrencia}" />
                         </p:commandButton>
 

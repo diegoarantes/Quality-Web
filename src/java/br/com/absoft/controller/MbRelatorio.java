@@ -6,6 +6,7 @@
 package br.com.absoft.controller;
 
 import br.com.absoft.model.dao.DAOGenerico;
+import br.com.absoft.model.entities.Ocorrencia;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
@@ -16,7 +17,7 @@ import java.util.Date;
 import java.util.HashMap;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
@@ -32,10 +33,10 @@ import net.sf.jasperreports.engine.export.JRPdfExporter;
  * @author diego
  */
 @ManagedBean
-@SessionScoped
-public class MbRelatorio implements Serializable {  
-  
-    private static final long serialVersionUID = 1L; 
+@RequestScoped
+public class MbRelatorio implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @EJB
     DAOGenerico dao;
@@ -45,6 +46,7 @@ public class MbRelatorio implements Serializable {
     SimpleDateFormat formatador = new SimpleDateFormat("yyyy");
     int ano = Integer.parseInt(formatador.format(data1));
     char tipo = 'N';
+    Ocorrencia ocorrencia = new Ocorrencia();
 
     public void relatorioGeral() throws SQLException, JRException, IOException {
         HashMap param = new HashMap();
@@ -59,6 +61,14 @@ public class MbRelatorio implements Serializable {
         param.put("ano", ano);
         param.put("tipo", tipo);
         imprimeRelatorio(param, "relatorioAnual.jasper");
+    }
+
+    public void relatoriOcorrencia() throws SQLException, JRException, IOException {
+        HashMap param = new HashMap();
+        Integer idocorrencia = ocorrencia.getIdOcorrencia();
+        param.put("id", idocorrencia);
+
+        imprimeRelatorio(param, "Ocorrencia.jasper");
     }
 
     public Date getData1() {
@@ -93,11 +103,19 @@ public class MbRelatorio implements Serializable {
         this.tipo = tipo;
     }
 
+    public Ocorrencia getOcorrencia() {
+        return ocorrencia;
+    }
+
+    public void setOcorrencia(Ocorrencia ocorrencia) {
+        this.ocorrencia = ocorrencia;
+    }
+
     /*
      Recebe os parámetros do tipo HashMap ex: parametros.put("data2", data2);
      Recebe o nome do arquivo do relatorio ex: relatorio.jasper
      */
-    public void imprimeRelatorio(HashMap param, String relatorio) throws SQLException, JRException, IOException {
+    private void imprimeRelatorio(HashMap param, String relatorio) throws SQLException, JRException, IOException {
 
         Connection con = dao.getConnection();
 
@@ -137,6 +155,9 @@ public class MbRelatorio implements Serializable {
             outputStream.flush();
 
             outputStream.close();
+            
+            
+            con.close(); //Fecha a Conexão
 
         }
 

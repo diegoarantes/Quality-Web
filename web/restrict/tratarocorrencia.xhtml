@@ -18,7 +18,16 @@
         <h:form id="formDetalhes">
 
             <p:fieldset legend="Detalhes Ocorrência" toggleable="true" toggleSpeed="500" collapsed="true">
-                <h:outputText value="#{mbOcorrencia.ocorrencia.idOcorrencia} - #{mbOcorrencia.ocorrencia.titulo}" style="font-size: 18px; font-weight: bold;"/>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{mbOcorrencia.ocorrencia.idOcorrencia} - #{mbOcorrencia.ocorrencia.titulo}" style="font-size: 18px; font-weight: bold;"/>
+                   
+                    <p:commandButton icon="ui-icon-print" title="Imprimir" onclick="form.target = '_blank'" ajax="false" value="Imprimir">
+                        <f:setPropertyActionListener value="#{mbOcorrencia.ocorrencia}" target="#{mbRelatorio.ocorrencia}" />
+                        <f:actionListener binding="#{mbRelatorio.relatoriOcorrencia()}"/>
+                    </p:commandButton>
+
+                </h:panelGrid>
+
                 <h:panelGrid columns="2">
                     <h:outputLabel value="Descrição:" style="font-weight: bold;"/>
                     <h:outputText value="#{mbOcorrencia.ocorrencia.descricao}"/>
