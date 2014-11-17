@@ -8,30 +8,30 @@
     </h:head>
     <h:body>
         <p:dialog widgetVar="dlgAnexos" closable="true" width="600" height="400" header="Anexos da ocorrência">
-            <h:form id="frmAnexos">
-                 <p:messages id="msg"/>
-                        <p:fileUpload  cancelLabel="Cancelar" label="Procurar..." uploadLabel="Enviar" invalidFileMessage="Tipo de arquivo não permitido!" invalidSizeMessage="Arquivo muito grande"
-                                       fileUploadListener="#{mbAnexosOcorrencia.upload}" allowTypes="/(\.|\/)(jpe?g|png|pdf|doc|docx|xls|xlsx)$/" sizeLimit="10485760" update="@form" multiple="true"/>
-                 
-                <p:dataTable id="tblArquivos" var="arq" value="#{mbAnexosOcorrencia.arquivos}" emptyMessage="Não há arquivos">
-                    <p:column headerText="Id" width="50">
-                        <h:outputText value="#{arq.idArquivosOcorrencia}"/>
-                    </p:column>
+                <h:form id="frmAnexos">
+                     <p:messages id="msg"/>
+                            <p:fileUpload  cancelLabel="Cancelar" label="Procurar..." uploadLabel="Enviar" invalidFileMessage="Tipo de arquivo não permitido!" invalidSizeMessage="Arquivo muito grande"
+                                           fileUploadListener="#{mbAnexosOcorrencia.upload}" allowTypes="/(\.|\/)(jpe?g|png|pdf|doc|docx|xls|xlsx)$/" sizeLimit="10485760" update="@form" multiple="true"/>
+                     
+                    <p:dataTable id="tblArquivos" var="arq" value="#{mbAnexosOcorrencia.arquivos}" emptyMessage="Não há arquivos">
+                        <p:column headerText="Id" width="50">
+                            <h:outputText value="#{arq.idArquivosOcorrencia}"/>
+                        </p:column>
 
-                    <p:column headerText="Caminho">
-                        <h:outputText value="#{arq.caminho}"/>
-                    </p:column>
+                        <p:column headerText="Caminho">
+                            <h:outputText value="#{arq.caminho}"/>
+                        </p:column>
 
-                    <p:column headerText="Ações" width="100">
-                        <p:button href="#{arq.caminho}" target="_blank" icon="ui-icon-arrowthick-1-s" title="Baixar"/>
-                        <p:commandButton icon="ui-icon-close" title="Apagar" update="tblArquivos" >
-                            <f:setPropertyActionListener value="#{arq}" target="#{mbAnexosOcorrencia.arquivoOcorrencia}"/>
-                            <f:actionListener binding="#{mbAnexosOcorrencia.Apagar()}"/>
-                        </p:commandButton>
-                    </p:column>
-                </p:dataTable>
-                  
-            </h:form>
+                        <p:column headerText="Ações" width="100">
+                            <p:button href="#{arq.caminho}" target="_blank" icon="ui-icon-arrowthick-1-s" title="Baixar"/>
+                            <p:commandButton icon="ui-icon-close" title="Apagar" update="tblArquivos" >
+                                <f:setPropertyActionListener value="#{arq}" target="#{mbAnexosOcorrencia.arquivoOcorrencia}"/>
+                                <f:actionListener binding="#{mbAnexosOcorrencia.Apagar()}"/>
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                      
+                </h:form>
         </p:dialog>
     </h:body>
 </html>

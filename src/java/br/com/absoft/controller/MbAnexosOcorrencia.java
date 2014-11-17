@@ -8,6 +8,7 @@ package br.com.absoft.controller;
 import br.com.absoft.model.dao.DAOGenerico;
 import br.com.absoft.model.entities.ArquivosOcorrencia;
 import br.com.absoft.model.entities.Ocorrencia;
+import br.com.absoft.util.StringUtil;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -71,8 +72,8 @@ public class MbAnexosOcorrencia {
                 caminho.mkdirs();
             }
 
-            //Adiciona o nome do arquivo no caminho
-            caminho = new File(path + fileName);
+            //Adiciona o nome do arquivo no caminho e remove os acentos
+            caminho = new File(path + StringUtil.removerAcentos(fileName));
 
             //Seta o destino
             OutputStream out = new FileOutputStream(caminho);
@@ -95,7 +96,7 @@ public class MbAnexosOcorrencia {
         }
 
         //----------------------------
-        arquivoOcorrencia.setCaminho(pasta + ocorrencia.getIdOcorrencia() + "/" + fileName);
+        arquivoOcorrencia.setCaminho(pasta + ocorrencia.getIdOcorrencia() + "/" + StringUtil.removerAcentos(fileName));
         arquivoOcorrencia.setOcorrencia(ocorrencia);
         dao.inserir(arquivoOcorrencia);
 
