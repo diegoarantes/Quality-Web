@@ -8,7 +8,7 @@
                 template="./../resources/main.xhtml"> 
 
     <ui:define name="tarefas">
-
+        <ui:include src="/restrict/dialog/anexosocorrencia.xhtml"/>
 
         <p:panel header="Ocorrências">
 
@@ -89,7 +89,7 @@
                         <h:outputText value="#{ocorrencia.status}" converter="converterStatus"/>
                     </p:column>
 
-                    <p:column headerText="Ações" width="95">
+                    <p:column headerText="Ações" width="125">
                         <p:commandButton icon="ui-icon-print" title="Imprimir" onclick="form.target = '_blank'" ajax="false">
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbRelatorio.ocorrencia}" />
                             <f:actionListener binding="#{mbRelatorio.relatoriOcorrencia()}"/>
@@ -98,6 +98,10 @@
                         <p:commandButton id="btEdit" icon="ui-icon-pencil" action="#{mbOcorrencia.editOcorrencia}" title="Revisar" ajax="false">
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrencia.ocorrencia}" /> 
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrenciaFilha.ocorrenciaPai}" />
+                        </p:commandButton>
+
+                        <p:commandButton icon="ui-icon-image" title="Anexos" onclick="PF('dlgAnexos').show()" update=":frmAnexos">
+                            <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbAnexosOcorrencia.ocorrencia}" />
                         </p:commandButton>
 
                         <p:commandButton icon="ui-icon-clipboard"  action="tratarocorrencia" title="Tratar" ajax="false">
