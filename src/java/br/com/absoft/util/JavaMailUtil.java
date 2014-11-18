@@ -95,11 +95,11 @@ public class JavaMailUtil {
                 + "<center>\n"
                 + "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n"
                 + "<tbody style=\"background:#FFFFFF;\">\n"
-                + "<tr><td><img style=\"display:block; border:0;\" alt=\"ABSoft - Tecnologia\" title=\"ABSoft - Tecnologia\" src=\"http://ws.absoft.com.br/images/mail/top.png\"></td></tr>\n"
+                + "<tr><td><img style=\"display:block; border:0;\" alt=\"ABSoft - Tecnologia\" title=\"ABSoft - Tecnologia\" src=\"http://www.absoft.com.br/sys/mail/top.png\"></td></tr>\n"
                 + "<tr><td><p style=\"padding: 10px; color: #606060;font-family: Helvetica;font-size: 15px;\">";
 
         String footer = "</p></td></tr>\n"
-                + "<tr><td><img style=\"display:block; border:0;\" alt=\"\" title=\"\" src=\"http://ws.absoft.com.br/images/mail/footer.png\"></td></tr>\n"
+                + "<tr><td><img style=\"display:block; border:0;\" alt=\"\" title=\"\" src=\"http://www.absoft.com.br/sys/mail/button.png\"></td></tr>\n"
                 + "</tbody>\n"
                 + "</table>\n"
                 + "</center>\n"

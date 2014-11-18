@@ -57,7 +57,7 @@
             }
 
             /* Tamanho do Selection Menu*/
-           /* .ui-selectonemenu{width: 400px !important;} */
+            /* .ui-selectonemenu{width: 400px !important;} */
 
             .obrigatorio{
                 color: red;
@@ -99,8 +99,9 @@
                                     <p:menuitem value="Setor" action="setores" ajax="false"/> 
                                     <p:menuitem value="Processo" action="processos" ajax="false" /> 
                                     <p:menuitem value="Origem" action="origens" ajax="false"/> 
-                                    <p:menuitem value="Auditor" ajax="false"/> 
-                                    <p:menuitem value="Órgão certificador" ajax="false"/> 
+                                    <p:menuitem value="Auditor" ajax="false" disabled="true"/> 
+                                    <p:menuitem value="Órgão certificador" ajax="false" disabled="true"/> 
+                                    <p:menuitem value="Tipo de Documento" action="tiposdedocumento" ajax="false"/> 
                                 </p:submenu>  
 
                             </p:column>
@@ -118,7 +119,8 @@
                                 </p:submenu> 
 
                                 <p:submenu label="Documentos">
-                                    <p:menuitem value="Documentos obsoletos" url="#" /> 
+                                    <p:menuitem value="Documentos por tipo" url="#" disabled="true"/> 
+                                    <p:menuitem value="Documentos obsoletos" url="#" disabled="true"/> 
                                 </p:submenu>
 
                             </p:column>
@@ -130,10 +132,10 @@
                             <p:column> 
                                 <p:submenu label="Configurações">
                                     <p:menuitem value="Usuários" action="pessoas" ajax="false"/>
-                                    <p:menuitem value="Empresas" url="#" />
+                                    <p:menuitem value="Empresas" url="#" disabled="true"/>
                                 </p:submenu> 
                                 <p:submenu label="Sistema">  
-                                    <p:menuitem value="Parâmetros" url="#" />  
+                                    <p:menuitem value="Parâmetros" url="#" disabled="true" />  
                                 </p:submenu>                                  
                             </p:column>
 
@@ -150,7 +152,7 @@
                         </p:submenu>  
 
                         <f:facet name="options"> 
-                       <h:outputText value="SEJA BEM VINDO(A) #{bbUsuarioLogado.procuraPessoa().getNome()} !   "/>
+                            <h:outputText value="SEJA BEM VINDO(A) #{bbUsuarioLogado.procuraPessoa().getNome()} !   "/>
                             <p:commandButton type="button" value="Sair" icon="ui-icon-extlink" onclick="location.href = '#{facesContext.externalContext.requestContextPath}/j_spring_security_logout'"/>  
                         </f:facet>  
 
@@ -179,7 +181,7 @@
                     </h:panelGrid>
 
                 </p:dialog> 
-                
+
                 <ui:include src="/restrict/dialog/relatoriogeral.xhtml"/>
                 <ui:include src="/restrict/dialog/relatorioanual.xhtml"/>
 

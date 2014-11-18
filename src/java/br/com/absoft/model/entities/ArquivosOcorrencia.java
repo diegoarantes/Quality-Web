@@ -23,17 +23,14 @@ import org.hibernate.annotations.ForeignKey;
 @Entity
 @Table(name = "arquivosOcorrencia")
 public class ArquivosOcorrencia implements Serializable {
-
+   private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idArquivosOcorrencia;
 
     @Column(name = "Caminho", nullable = false)
     private String caminho;
-
-    public Long getIdArquivosOcorrencia() {
-        return idArquivosOcorrencia;
-    }
 
     @ManyToOne(optional = false)//1 para Muitos
     @ForeignKey(name = "ArquivosOcorrencia")
@@ -42,6 +39,10 @@ public class ArquivosOcorrencia implements Serializable {
 
     public ArquivosOcorrencia() {
         ocorrencia = new Ocorrencia();
+    }
+
+    public Long getIdArquivosOcorrencia() {
+        return idArquivosOcorrencia;
     }
 
     public void setIdArquivosOcorrencia(Long idArquivosOcorrencia) {

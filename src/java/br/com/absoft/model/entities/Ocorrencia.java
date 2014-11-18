@@ -90,6 +90,11 @@ public class Ocorrencia implements Serializable {
     @JoinColumn(name = "IdProcesso", referencedColumnName = "IdProcesso")
     private Processo processo;
 
+    @ManyToOne(optional = true)
+    @ForeignKey(name = "OcorrenciaAuditoria")
+    @JoinColumn(name = "IdAuditoria")
+    private Auditoria auditoria;
+
     @OneToMany(mappedBy = "ocorrencia", fetch = FetchType.LAZY) //1 para Muitos
     @ForeignKey(name = "OcorrenciaAnaliseDaCausa")
     private List<AnaliseDaCausa> analisesDasCausas;
@@ -255,6 +260,14 @@ public class Ocorrencia implements Serializable {
 
     public void setProcesso(Processo processo) {
         this.processo = processo;
+    }
+
+    public Auditoria getAuditoria() {
+        return auditoria;
+    }
+
+    public void setAuditoria(Auditoria auditoria) {
+        this.auditoria = auditoria;
     }
 
     public List<AnaliseDaCausa> getAnalisesDasCausas() {

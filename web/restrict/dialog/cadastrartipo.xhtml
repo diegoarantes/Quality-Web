@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+    </h:head>
+    <h:body>
+        <p:dialog header="Cadastro de tipo de documento" widgetVar="dlgti" width="350" height="100"  maximizable="false" minimizable="true" resizable="false">
+
+            <h:form id="formcadti" prependId="false">
+                <h:panelGrid columns="2" cellpadding="3" id="grid-tipo" >
+                    <h:outputLabel value="Tipo Documento*" for="campo-tipo"/>
+                    <p:inputText id="campo-tipo" size="30" value="#{mbTipoDocumento.tipoDocumento.tipoDocumento}" required="true"
+                                 requiredMessage="O campo [Tipo Documento] é obrigatório" onkeyup="this.value = this.value.toUpperCase()"/>
+
+                    <p:commandButton value="Salvar" actionListener="#{mbTipoDocumento.addTipoDocumento}" id="btdoido" update="@form :formtabletipo" 
+                                     oncomplete="sucesso(xhr, status, args)" icon="ui-icon-check"/>
+                    <p:commandButton value="Cancelar" onclick="PF('dlgse').hide();" 
+                                     icon="ui-icon-close"/>
+                </h:panelGrid>
+            </h:form>
+
+            <script type="text/javascript">
+                function sucesso(xhr, status, args) {
+                    if (args.sucesso) {
+                        PF('dlgti').hide();
+
+                    } else {
+                        PF('dlgti').jq.effect("shake", {times: 5}, 100);
+                    }
+                }
+            </script>  
+
+        </p:dialog>
+    </h:body>
+</html>
+
