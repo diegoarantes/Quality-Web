@@ -47,7 +47,7 @@ public class Documento implements Serializable {
     private String caminho;
 
     @Column(name = "Observacoes")
-    private String observações;
+    private String observacoes;
 
     @ManyToOne
     @ForeignKey(name = "DocumentoTipo")
@@ -123,12 +123,12 @@ public class Documento implements Serializable {
         this.caminho = caminho;
     }
 
-    public String getObservações() {
-        return observações;
+    public String getObservacoes() {
+        return observacoes;
     }
 
-    public void setObservações(String observações) {
-        this.observações = observações;
+    public void setObservacoes(String observacoes) {
+        this.observacoes = observacoes;
     }
 
     public TipoDocumento getTipoDocumento() {
