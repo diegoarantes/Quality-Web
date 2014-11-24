@@ -47,6 +47,13 @@
                         <h:outputText value="#{ocorrencia.tipo}"/>
                     </p:column>
 
+                    <p:column width="50">
+                        <f:facet name="header">
+                            <h:outputText value="Usuário"/>
+                        </f:facet>
+                        <h:outputText value="#{ocorrencia.usuario}"/>
+                    </p:column>
+
                     <p:column filterBy="setor.setor" filterMatchMode="contains" width="150">
                         <f:facet name="filter">
                             <p:selectOneMenu onchange="PF('tabelaOcorrencia').filter()" >

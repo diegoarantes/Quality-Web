@@ -42,7 +42,7 @@
                             </p:column>
                             <p:column/>
 
-                            <p:column><h:outputLabel value="Tipo*" for="campo-tipo"/><h:outputLabel value="*" styleClass="obrigatorio"/></p:column>
+                           <h:outputLabel value="Tipo*" for="campo-tipo"/>
                             <p:selectOneRadio id="campo-tipo" value="#{mbOcorrencia.ocorrencia.tipo}" required="true" requiredMessage="O campo [Tipo] é obrigatório">
                                 <f:selectItem itemLabel="Não-Conformidade" itemValue="N"/> 
                                 <f:selectItem itemLabel="Ação Preventiva" itemValue="A" />

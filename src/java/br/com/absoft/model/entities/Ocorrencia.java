@@ -95,26 +95,6 @@ public class Ocorrencia implements Serializable {
     @JoinColumn(name = "IdAuditoria")
     private Auditoria auditoria;
 
-    @OneToMany(mappedBy = "ocorrencia", fetch = FetchType.LAZY) //1 para Muitos
-    @ForeignKey(name = "OcorrenciaAnaliseDaCausa")
-    private List<AnaliseDaCausa> analisesDasCausas;
-
-    @OneToMany(mappedBy = "ocorrencia", fetch = FetchType.LAZY) //1 para Muitos
-    @ForeignKey(name = "OcorrenciaPlanoAcao")
-    private List<PlanoAcao> planosDeAcao;
-
-    @OneToMany(mappedBy = "ocorrencia", fetch = FetchType.LAZY) //1 para Muitos
-    @ForeignKey(name = "OcorrenciaImplementacao")
-    private List<Implementacao> implementacoes;
-
-    @OneToMany(mappedBy = "ocorrencia", fetch = FetchType.LAZY) //1 para Muitos
-    @ForeignKey(name = "OcorrenciaAnaliseEficacia")
-    private List<AnaliseEficacia> analisesEficacia;
-
-    @OneToMany(mappedBy = "ocorrencia", fetch = FetchType.LAZY) //1 para muitos
-    @ForeignKey(name = "OcorrenciaOcorrencia")
-    private List<OcorrenciaOcorrencia> ocorrenciasFilhas;
-
     //Construtor
     public Ocorrencia() {
         empresa = new Empresa();
@@ -268,46 +248,6 @@ public class Ocorrencia implements Serializable {
 
     public void setAuditoria(Auditoria auditoria) {
         this.auditoria = auditoria;
-    }
-
-    public List<AnaliseDaCausa> getAnalisesDasCausas() {
-        return analisesDasCausas;
-    }
-
-    public void setAnalisesDasCausas(List<AnaliseDaCausa> analisesDasCausas) {
-        this.analisesDasCausas = analisesDasCausas;
-    }
-
-    public List<PlanoAcao> getPlanosDeAcao() {
-        return planosDeAcao;
-    }
-
-    public void setPlanosDeAcao(List<PlanoAcao> planosDeAcao) {
-        this.planosDeAcao = planosDeAcao;
-    }
-
-    public List<Implementacao> getImplementacoes() {
-        return implementacoes;
-    }
-
-    public void setImplementacoes(List<Implementacao> implementacoes) {
-        this.implementacoes = implementacoes;
-    }
-
-    public List<AnaliseEficacia> getAnalisesEficacia() {
-        return analisesEficacia;
-    }
-
-    public void setAnalisesEficacia(List<AnaliseEficacia> analisesEficacia) {
-        this.analisesEficacia = analisesEficacia;
-    }
-
-    public List<OcorrenciaOcorrencia> getOcorrenciasFilhas() {
-        return ocorrenciasFilhas;
-    }
-
-    public void setOcorrenciasFilhas(List<OcorrenciaOcorrencia> ocorrenciasFilhas) {
-        this.ocorrenciasFilhas = ocorrenciasFilhas;
     }
 
     //Equals e Hashcode

@@ -25,11 +25,6 @@ public class Origem implements Serializable {
     @Column(name = "Origem", nullable = false, length = 45)
     private String origem;
 
-    //Relacionamentos
-    @OneToMany(mappedBy = "origem", fetch = FetchType.LAZY)
-    @ForeignKey(name = "OrigemOcorrencia")
-    private List<Ocorrencia> ocorrencias;
-
     //Construtor
     public Origem() {
     }
@@ -49,15 +44,6 @@ public class Origem implements Serializable {
 
     public void setOrigem(String origem) {
         this.origem = origem;
-    }
-
-    //Getters e Setters dos Relacionamentos
-    public List<Ocorrencia> getOcorrencias() {
-        return ocorrencias;
-    }
-
-    public void setOcorrencias(List<Ocorrencia> ocorrencias) {
-        this.ocorrencias = ocorrencias;
     }
 
     //Equals e Hashcode

@@ -25,15 +25,6 @@ public class Setor implements Serializable {
     @Column(name = "Setor", nullable = false, length = 40)
     private String setor;
 
-    //Relacionamentos    
-    @OneToMany(mappedBy = "setor", fetch = FetchType.LAZY)//1 para Muitos
-    @ForeignKey(name = "SetorPessoa")
-    private List<Pessoa> pessoas;
-
-    @OneToMany(mappedBy = "setor", fetch = FetchType.LAZY)// 1 para Muitos
-    @ForeignKey(name = "SetorOcorrencia")
-    private List<Ocorrencia> ocorrencias;
-
     //Construtor
     public Setor() {
     }
@@ -53,23 +44,6 @@ public class Setor implements Serializable {
 
     public void setSetor(String setor) {
         this.setor = setor;
-    }
-
-    //Getters e Setters dos Relacionamentos
-    public List<Pessoa> getPessoas() {
-        return pessoas;
-    }
-
-    public void setPessoas(List<Pessoa> pessoas) {
-        this.pessoas = pessoas;
-    }
-
-    public List<Ocorrencia> getOcorrencias() {
-        return ocorrencias;
-    }
-
-    public void setOcorrencias(List<Ocorrencia> ocorrencias) {
-        this.ocorrencias = ocorrencias;
     }
 
     //Equals e Hashcode

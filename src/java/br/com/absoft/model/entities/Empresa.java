@@ -34,11 +34,6 @@ public class Empresa implements Serializable {
     public Empresa() {
     }
 
-    //Relacionamentos
-    @OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY)
-    @ForeignKey(name = "EmpresaOcorrencia")
-    private List<Ocorrencia> ocorrencias;
-
     public Integer getIdEmpresa() {
         return idEmpresa;
     }
@@ -71,15 +66,6 @@ public class Empresa implements Serializable {
         this.endereco = endereco;
     }
 
-    //Getters e Setters dos Relacionamentos
-    public List<Ocorrencia> getOcorrencias() {
-        return ocorrencias;
-    }
-
-    public void setOcorrencias(List<Ocorrencia> ocorrencias) {
-        this.ocorrencias = ocorrencias;
-    }
-    
     //Equals e HashCode
     @Override
     public int hashCode() {

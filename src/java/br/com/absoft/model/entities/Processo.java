@@ -25,10 +25,6 @@ public class Processo implements Serializable {
     @Column(name = "Processo", nullable = false)
     private String processo;
 
-    @OneToMany(mappedBy = "processo", fetch = FetchType.LAZY)// 1 para Muitos
-    @ForeignKey(name = "ProcessoOcorrencia")
-    private List<Ocorrencia> ocorrencias;
-
     public Processo() {
     }
 
@@ -47,15 +43,6 @@ public class Processo implements Serializable {
 
     public void setProcesso(String processo) {
         this.processo = processo;
-    }
-
-    //Getters e Setters dos Relacionamentos
-    public List<Ocorrencia> getOcorrencias() {
-        return ocorrencias;
-    }
-
-    public void setOcorrencias(List<Ocorrencia> ocorrencias) {
-        this.ocorrencias = ocorrencias;
     }
 
     //Equals e Hashcode

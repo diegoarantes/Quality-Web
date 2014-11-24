@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -53,10 +52,10 @@ public class PlanoAcao implements Serializable {
     @Column(name = "Implementado", nullable = true)
     private boolean implementado;
 
-    @OneToOne(optional = true) // 1 para 1
-    @ForeignKey(name = "PlanoAcaoPessoaPA")
-    @JoinColumn(name = "IdPessoaPA", referencedColumnName = "IdPessoaPA")
-    private PessoaPA pessoaPA;
+    @ManyToOne
+    @ForeignKey(name = "PlanoAcaoPessoa")
+    @JoinColumn(name = "IdPessoa")
+    private Pessoa pessoa;
 
     @ManyToOne(optional = true) // Muitos para 1
     @ForeignKey(name = "PlanoAcaoOcorrencia")
@@ -151,13 +150,15 @@ public class PlanoAcao implements Serializable {
     }
 
     //Getters e Setters dos Relacionamentos
-    public PessoaPA getPessoaPA() {
-        return pessoaPA;
+
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setPessoaPA(PessoaPA pessoaPA) {
-        this.pessoaPA = pessoaPA;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
+    
 
     public Ocorrencia getOcorrencia() {
         return ocorrencia;

@@ -55,26 +55,6 @@ public class Pessoa implements Serializable {
     @JoinColumn(name = "IdSetor", referencedColumnName = "IdSetor")
     private Setor setor;
 
-    @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY) //1 para Muitos
-    @ForeignKey(name = "PessoaOcorrencia")
-    private List<Ocorrencia> ocorrencias;
-
-    @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY) //1 para muitos
-    @ForeignKey(name = "PessoaAnaliseDaCausa")
-    private List<AnaliseDaCausa> analiseDasCausas;
-
-    @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY) //1 para muitos
-    @ForeignKey(name = "PessoaAnaliseDaEficacia")
-    private List<AnaliseEficacia> analisesEficacia;
-
-    @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY) //1 para muitos
-    @ForeignKey(name = "PessoaPessoaPA")
-    private List<PessoaPA> pessoasPA;
-
-    @OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY) //1 para muitos
-    @ForeignKey(name = "PessoaImplementacao")
-    private List<Implementacao> implementacoes;
-
     //Construtor
     public Pessoa() {
         setor = new Setor();
@@ -161,47 +141,7 @@ public class Pessoa implements Serializable {
     public void setSetor(Setor setor) {
         this.setor = setor;
     }
-
-    public List<Ocorrencia> getOcorrencias() {
-        return ocorrencias;
-    }
-
-    public void setOcorrencias(List<Ocorrencia> ocorrencias) {
-        this.ocorrencias = ocorrencias;
-    }
-
-    public List<AnaliseDaCausa> getAnaliseDasCausas() {
-        return analiseDasCausas;
-    }
-
-    public void setAnaliseDasCausas(List<AnaliseDaCausa> analiseDasCausas) {
-        this.analiseDasCausas = analiseDasCausas;
-    }
-
-    public List<AnaliseEficacia> getAnalisesEficacia() {
-        return analisesEficacia;
-    }
-
-    public void setAnalisesEficacia(List<AnaliseEficacia> analisesEficacia) {
-        this.analisesEficacia = analisesEficacia;
-    }
-
-    public List<PessoaPA> getPessoasPA() {
-        return pessoasPA;
-    }
-
-    public void setPessoasPA(List<PessoaPA> pessoasPA) {
-        this.pessoasPA = pessoasPA;
-    }
-
-    public List<Implementacao> getImplementacoes() {
-        return implementacoes;
-    }
-
-    public void setImplementacoes(List<Implementacao> implementacoes) {
-        this.implementacoes = implementacoes;
-    }
-
+    
     //Equals e Hashcode
     @Override
     public int hashCode() {
