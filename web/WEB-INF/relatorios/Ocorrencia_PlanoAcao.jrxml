@@ -172,6 +172,17 @@ plano_acao.`IdOcorrencia` = $P{id}]]>
 					<pen lineStyle="Dashed"/>
 				</graphicElement>
 			</line>
+			<textField>
+				<reportElement x="210" y="2" width="141" height="20" uuid="f3e7e43d-3621-4969-854b-745ed7f02eb9"/>
+				<textFieldExpression><![CDATA[$F{pessoa_Nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="160" y="2" width="50" height="20" uuid="14ff6b4f-598c-4d2e-b18c-36c1c1389e3d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pessoa:]]></text>
+			</staticText>
 		</band>
 	</detail>
 </jasperReport>
