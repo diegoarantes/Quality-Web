@@ -10,6 +10,7 @@
 
         <p:fieldset legend="Documentos" id="fildDoc">
             <h:form>
+                <p:growl/>
                 <p:commandButton onclick="PF('dlgDoc').show();" value="Novo documento" update=":formDocumento" icon="ui-icon-plus"/>
 
                 <p:dataTable id="tblDoc" var="doc" value="#{mbDocumento.documentos}" emptyMessage="Não há documentos">

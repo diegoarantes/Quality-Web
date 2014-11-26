@@ -9,8 +9,7 @@
     </h:head>
     <h:body>
         <p:dialog widgetVar="dlgDoc" closable="true" width="600" height="400" header="Novo documento">
-            <h:form id="formDocumento">
-                <p:messages id="mens"/>
+            <h:form id="formDocumento" enctype="multipart/form-data">
                 <h:panelGrid columns="2">
 
                     <h:outputLabel value="Título: "/>
@@ -51,10 +50,10 @@
                         <br />                                
                         <h:outputText id="counter" /> 
                     </p:column>
+                            <p:fileUpload value="#{mbDocumento.file}" mode="simple"/>
 
-                            <p:fileUpload  cancelLabel="Cancelar" label="Procurar..." uploadLabel="Enviar" invalidFileMessage="Tipo de arquivo não permitido!" invalidSizeMessage="Arquivo muito grande"
-                                           fileUploadListener="#{mbDocumento.upload}" allowTypes="/(\.|\/)(jpe?g|png|pdf|doc|docx|xls|xlsx)$/" sizeLimit="10485760" update="@form" multiple="false"/>
-
+                    <p:column/>
+                    <p:commandButton ajax="false" value="Gravar" actionListener="#{mbDocumento.upload}"/>
                 </h:panelGrid>
             </h:form>
         </p:dialog>

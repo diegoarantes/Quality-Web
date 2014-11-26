@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -18,6 +19,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -30,6 +32,8 @@ public class MbDocumento implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private final String pasta = "/uploads/documentos/"; //Pasta onde o arquivo será gravado
+
+    private UploadedFile file;
 
     @EJB
     DAOGenerico dao;
@@ -48,9 +52,12 @@ public class MbDocumento implements Serializable {
         return pastaReal;
     }
 
-    public void upload(FileUploadEvent event) {
+    public void upload() {
 
         //---------------------
+        documento.setDataRevisao(new Date());
+//        documento.setTitulo("sad");
+        documento.setRevisao(1);
         documento.setCaminho(" ");
 
         documento.setUsuario(BbUsuarioLogado.user.getUsuario());
@@ -60,11 +67,8 @@ public class MbDocumento implements Serializable {
         dao.inserir(documento);
 
         //---------------------
-        FacesMessage msg = new FacesMessage("O arquivo " + event.getFile().getFileName() + " foi enviado com sucesso!.", "");
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-
         try {
-            copyFile(event.getFile().getFileName(), event.getFile().getInputstream());
+            copyFile(file.getFileName(), file.getInputstream());
         } catch (IOException e) {
         }
 
@@ -110,6 +114,10 @@ public class MbDocumento implements Serializable {
         documento.setCaminho(pasta + documento.getIdDocumento() + "/" + StringUtil.removerAcentos(fileName));
 
         dao.atualizar(documento);
+        
+        //Mensagem de sucesso
+        FacesMessage msg = new FacesMessage("O documento " + documento.getTitulo() + " foi enviado com sucesso!.", "");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
 
         //Limpa a Variável
         documento = new Documento();
@@ -130,6 +138,14 @@ public class MbDocumento implements Serializable {
 
     public void setDocumentos(List<Documento> documentos) {
         this.documentos = documentos;
+    }
+
+    public UploadedFile getFile() {
+        return file;
+    }
+
+    public void setFile(UploadedFile file) {
+        this.file = file;
     }
 
 }
