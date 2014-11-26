@@ -117,15 +117,16 @@
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbPlanoAcao.ocorrencia}" />
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbImplementacao.ocorrencia}" />
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbAnaliseEficacia.ocorrencia}" />
-                        </p:commandButton>
+                            <f:setPropertyActionListener value="#{ocorrencia}" target="#{bbTratativas.ocorrencia}" />
+                    </p:commandButton>
 
-                    </p:column>
+                </p:column>
 
-                </p:dataTable>
-            </h:form>
+            </p:dataTable>
+        </h:form>
 
-        </p:panel>
+    </p:panel>
 
-    </ui:define>
+</ui:define>
 
 </ui:composition>

@@ -103,6 +103,20 @@ public class MbOcorrencia implements Serializable {
         this.opcoes = false;
     }
 
+    public void aprovar() {
+        ocorrencia.setStatus('C');
+        dao.atualizar(ocorrencia);
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "A ocorrência foi aprovada!", ""));
+    }
+
+    public void reprovar() {
+        ocorrencia.setStatus('R');
+        dao.atualizar(ocorrencia);
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "A ocorrência foi reprovada!", ""));
+    }
+
     public MbOcorrencia() {
         this.opcoes = true;
     }

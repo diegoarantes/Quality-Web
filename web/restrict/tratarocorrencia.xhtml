@@ -20,7 +20,7 @@
             <p:fieldset legend="Detalhes Ocorrência" toggleable="true" toggleSpeed="500" collapsed="true">
                 <h:panelGrid columns="2">
                     <h:outputText value="#{mbOcorrencia.ocorrencia.idOcorrencia} - #{mbOcorrencia.ocorrencia.titulo}" style="font-size: 18px; font-weight: bold;"/>
-                   
+
                     <p:commandButton icon="ui-icon-print" title="Imprimir" onclick="form.target = '_blank'" ajax="false" value="Imprimir">
                         <f:setPropertyActionListener value="#{mbOcorrencia.ocorrencia}" target="#{mbRelatorio.ocorrencia}" />
                         <f:actionListener binding="#{mbRelatorio.relatoriOcorrencia()}"/>
@@ -99,8 +99,18 @@
             </p:fieldset>
 
         </h:form>
-        <p:tabView  dynamic="true" cache="false" orientation="left"  style="padding-top: 3px;" id="WizardTratativas" activeIndex="1"> <!--Aqui eu seto em qual Step parou -->
-            <p:tab id="tba1" title="Análise da causa" disabled="false">    
+        <p:tabView  dynamic="true" cache="false" orientation="left"  style="padding-top: 3px;" id="WizardTratativas"> <!--Aqui eu seto em qual Step parou -->
+            <p:tab id="tba0" title="Aprovação" rendered="#{bbTratativas.desAprovacao}">    
+                <p:panel header="Aprovar a ocorrência">
+                    <h:panelGrid columns="2">
+                        <h:form>
+                            <p:commandButton value="Aprovar" icon="ui-icon-check" actionListener="#{mbOcorrencia.aprovar}"/>
+                            <p:commandButton value="Reprovar" icon="ui-icon-closethick" actionListener="#{mbOcorrencia.reprovar}"/>
+                        </h:form>
+                    </h:panelGrid>
+                </p:panel>
+            </p:tab>
+            <p:tab id="tba1" title="Análise da causa" rendered="#{bbTratativas.desAnaliseCausa}">    
                 <p:panel header="Realizar análise da Causa" >
                     <h:form id="formCausa">
                         <p:growl/>
@@ -148,7 +158,7 @@
 
             </p:tab>
 
-            <p:tab id="tba2" title="Plano de ação">  
+            <p:tab id="tba2" title="Plano de ação" rendered="#{bbTratativas.desPlanoAcao}">  
                 <p:panel header="Montar Plano de Ação" >
                     <h:form id="frmPlano">
                         <p:growl/>
@@ -241,7 +251,7 @@
                 </p:panel>
             </p:tab>
 
-            <p:tab id="tba3" title="Validação">
+            <p:tab id="tba3" title="Validação" rendered="#{bbTratativas.desValidacao}">
                 <p:panel header="Realizar Validação" >
                     <h:form>
                         <p:growl/>
@@ -281,7 +291,7 @@
                 </p:panel>   
             </p:tab>
 
-            <p:tab id="tba4" title="Implementação" rendered="true"> <!--terei de não renderizar os passos que não estão na fase-->
+            <p:tab id="tba4" title="Implementação" rendered="#{bbTratativas.desImplementacao}">
                 <p:panel header="Realizar Implementação" >
                     <h:form>
                         <p:growl/>
@@ -302,7 +312,7 @@
                 </p:panel>
             </p:tab>
 
-            <p:tab id="tba5" title="Análise de Eficácia">
+            <p:tab id="tba5" title="Análise de Eficácia" rendered="#{bbTratativas.desAnaliseEficacia}">
                 <p:panel header="Analizar a Eficácia" >
                     <h:form>
                         <p:fieldset legend="Detalhes da ação" toggleable="true" toggleSpeed="500" collapsed="true">

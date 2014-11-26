@@ -8,69 +8,183 @@
                 xmlns:h="http://java.sun.com/jsf/html">
 
     <ui:define name="tarefas">
-        <p:growl id="msghome" life="300000"/> 
 
         <p:scrollPanel style="width:99%; height:100%; border: 0px">
 
 
             <p:panel header="Minhas pendências" toggleable="true" collapsed="false">
-                <p:dataTable emptyMessage="Não há aprovaçãoes pendentes." rendered="true" value="#{mbPendencias.aAprovacao}" var="oco">
-                    <f:facet name="header">
-                        Aprovações
-                    </f:facet>
+                <h:form>
+                    <p:dataTable emptyMessage="Não há aprovaçãoes pendentes." rendered="true" value="#{mbPendencias.listaAprovacao}" var="ocorrencia">
+                        <f:facet name="header">
+                            Aprovações
+                        </f:facet>
 
-                    <p:column headerText="ID" width="90">
-                        <h:outputText value="#{oco.idOcorrencia}"/>
-                    </p:column>
+                        <p:column headerText="ID" width="90">
+                            <h:outputText value="#{ocorrencia.idOcorrencia}"/>
+                        </p:column>
 
-                    <p:column headerText="Tipo" width="50">
-                        <h:outputText value="#{oco.tipo}"/>
-                    </p:column>
+                        <p:column headerText="Tipo" width="50">
+                            <h:outputText value="#{ocorrencia.tipo}"/>
+                        </p:column>
 
-                    <p:column headerText="Data de abertura" width="100">
-                        <h:outputText value="#{oco.dataAbertura}" converter="javax.faces.DateTime"/>
-                    </p:column>
+                        <p:column headerText="Data de abertura" width="100">
+                            <h:outputText value="#{ocorrencia.dataAbertura}" converter="javax.faces.DateTime"/>
+                        </p:column>
 
-                    <p:column headerText="Título">
-                        <h:outputText value="#{oco.titulo}"/>
-                    </p:column>
-                    <p:column width="100">
-                        <p:commandLink value="Aprovar"/>
-                    </p:column>
+                        <p:column headerText="Título">
+                            <h:outputText value="#{ocorrencia.titulo}"/>
+                        </p:column>
+                        <p:column width="100">
+                            <p:commandLink value="Aprovar" action="tratarocorrencia" ajax="false">
+                                <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrencia.ocorrencia}" />
+                                <f:setPropertyActionListener value="#{ocorrencia}" target="#{bbTratativas.ocorrencia}" />
+                            </p:commandLink>
+                        </p:column>
 
-                </p:dataTable>
+                    </p:dataTable>
 
-                <p:dataTable emptyMessage="Não há análises da causa pendentes." rendered="true">
-                    <f:facet name="header">
-                        Análise da causa
-                    </f:facet>
-                </p:dataTable>
+                    <p:dataTable emptyMessage="Não há análises da causa pendentes." rendered="true" value="#{mbPendencias.listaAnalise}" var="ocorrencia">
+                        <f:facet name="header">
+                            Análise da causa
+                        </f:facet>
+                        <p:column headerText="ID" width="90">
+                            <h:outputText value="#{ocorrencia.idOcorrencia}"/>
+                        </p:column>
 
-                <p:dataTable emptyMessage="Não há planos de ação pendentes." rendered="true">
-                    <f:facet name="header">
-                        Plano de Ação
-                    </f:facet>
-                </p:dataTable>
+                        <p:column headerText="Tipo" width="50">
+                            <h:outputText value="#{ocorrencia.tipo}"/>
+                        </p:column>
 
-                <p:dataTable emptyMessage="Não há validações pendentes." rendered="true">
-                    <f:facet name="header">
-                        Validação
-                    </f:facet>
-                </p:dataTable>
+                        <p:column headerText="Data de abertura" width="100">
+                            <h:outputText value="#{ocorrencia.dataAbertura}" converter="javax.faces.DateTime"/>
+                        </p:column>
 
-                <p:dataTable emptyMessage="Não há implementações pendentes." rendered="true">
-                    <f:facet name="header">
-                        Implementação
-                    </f:facet>
-                </p:dataTable>
+                        <p:column headerText="Título">
+                            <h:outputText value="#{ocorrencia.titulo}"/>
+                        </p:column>
+                        <p:column width="100">
+                            <p:commandLink value="Analisar a causa" action="tratarocorrencia" ajax="false">
+                                <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrencia.ocorrencia}" />
+                                <f:setPropertyActionListener value="#{ocorrencia}" target="#{bbTratativas.ocorrencia}" />
+                                <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbAnaliseDaCausa.ocorrencia}"/>
+                            </p:commandLink>
+                        </p:column>
+                    </p:dataTable>
 
-                <p:dataTable emptyMessage="Não há análises da eficácia pendentes." rendered="true">
-                    <f:facet name="header">
-                        Análise da Eficácia
-                    </f:facet>
-                </p:dataTable>
+                    <p:dataTable emptyMessage="Não há planos de ação pendentes." rendered="true" value="#{mbPendencias.listaPlano}" var="ocorrencia">
+                        <f:facet name="header">
+                            Plano de Ação
+                        </f:facet>
 
+                        <p:column headerText="ID" width="90">
+                            <h:outputText value="#{ocorrencia.idOcorrencia}"/>
+                        </p:column>
 
+                        <p:column headerText="Tipo" width="50">
+                            <h:outputText value="#{ocorrencia.tipo}"/>
+                        </p:column>
+
+                        <p:column headerText="Data de abertura" width="100">
+                            <h:outputText value="#{ocorrencia.dataAbertura}" converter="javax.faces.DateTime"/>
+                        </p:column>
+
+                        <p:column headerText="Título">
+                            <h:outputText value="#{ocorrencia.titulo}"/>
+                        </p:column>
+                        <p:column width="100">
+                            <p:commandLink value="Plano de ação" action="tratarocorrencia" ajax="false">
+                                <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrencia.ocorrencia}" />
+                                <f:setPropertyActionListener value="#{ocorrencia}" target="#{bbTratativas.ocorrencia}" />
+                                <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbPlanoAcao.ocorrencia}" />
+                            </p:commandLink>
+                        </p:column>
+                    </p:dataTable>
+
+                    <p:dataTable emptyMessage="Não há validações pendentes." rendered="true" value="#{mbPendencias.listaValidacao}" var="ocorrencia">
+                        <f:facet name="header">
+                            Validação
+                        </f:facet>
+                        <p:column headerText="ID" width="90">
+                            <h:outputText value="#{ocorrencia.idOcorrencia}"/>
+                        </p:column>
+
+                        <p:column headerText="Tipo" width="50">
+                            <h:outputText value="#{ocorrencia.tipo}"/>
+                        </p:column>
+
+                        <p:column headerText="Data de abertura" width="100">
+                            <h:outputText value="#{ocorrencia.dataAbertura}" converter="javax.faces.DateTime"/>
+                        </p:column>
+
+                        <p:column headerText="Título">
+                            <h:outputText value="#{ocorrencia.titulo}"/>
+                        </p:column>
+                        <p:column width="100">
+                            <p:commandLink value="Validar" action="tratarocorrencia" ajax="false">
+                                <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrencia.ocorrencia}" />
+                                <f:setPropertyActionListener value="#{ocorrencia}" target="#{bbTratativas.ocorrencia}" />
+                                <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbPlanoAcao.ocorrencia}" />
+                            </p:commandLink>
+                        </p:column>
+                    </p:dataTable>
+
+                    <p:dataTable emptyMessage="Não há implementações pendentes." rendered="true" value="#{mbPendencias.listaImplementacao}" var="ocorrencia">
+                        <f:facet name="header">
+                            Implementação
+                        </f:facet>
+                        <p:column headerText="ID" width="90">
+                            <h:outputText value="#{ocorrencia.idOcorrencia}"/>
+                        </p:column>
+
+                        <p:column headerText="Tipo" width="50">
+                            <h:outputText value="#{ocorrencia.tipo}"/>
+                        </p:column>
+
+                        <p:column headerText="Data de abertura" width="100">
+                            <h:outputText value="#{ocorrencia.dataAbertura}" converter="javax.faces.DateTime"/>
+                        </p:column>
+
+                        <p:column headerText="Título">
+                            <h:outputText value="#{ocorrencia.titulo}"/>
+                        </p:column>
+                        <p:column width="100">
+                            <p:commandLink value="Implementação" action="tratarocorrencia" ajax="false">
+                                <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrencia.ocorrencia}" />
+                                <f:setPropertyActionListener value="#{ocorrencia}" target="#{bbTratativas.ocorrencia}" />
+                                <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbImplementacao.ocorrencia}" />
+                            </p:commandLink>
+                        </p:column>
+                    </p:dataTable>
+
+                    <p:dataTable emptyMessage="Não há análises da eficácia pendentes." rendered="true" value="#{mbPendencias.listaEficacia}" var="ocorrencia">
+                        <f:facet name="header">
+                            Análise da Eficácia
+                        </f:facet>
+                        <p:column headerText="ID" width="90">
+                            <h:outputText value="#{ocorrencia.idOcorrencia}"/>
+                        </p:column>
+
+                        <p:column headerText="Tipo" width="50">
+                            <h:outputText value="#{ocorrencia.tipo}"/>
+                        </p:column>
+
+                        <p:column headerText="Data de abertura" width="100">
+                            <h:outputText value="#{ocorrencia.dataAbertura}" converter="javax.faces.DateTime"/>
+                        </p:column>
+
+                        <p:column headerText="Título">
+                            <h:outputText value="#{ocorrencia.titulo}"/>
+                        </p:column>
+                        <p:column width="100">
+                            <p:commandLink value="Analisar" action="tratarocorrencia" ajax="false">
+                                <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrencia.ocorrencia}" />
+                                <f:setPropertyActionListener value="#{ocorrencia}" target="#{bbTratativas.ocorrencia}" />
+                                <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbAnaliseEficacia.ocorrencia}" />
+                            </p:commandLink>
+                        </p:column>
+                    </p:dataTable>
+
+                </h:form>
             </p:panel>  
 
         </p:scrollPanel>  

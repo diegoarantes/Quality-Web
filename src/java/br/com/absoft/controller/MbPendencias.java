@@ -6,7 +6,7 @@ import br.com.absoft.suport.BbUsuarioLogado;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;    
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 /**
@@ -22,62 +22,41 @@ public class MbPendencias implements Serializable {
     @EJB
     DAOGenerico dao;
 
-    private List<Ocorrencia> aAprovacao;
-    private List<Ocorrencia> aAnalise;
-    private List<Ocorrencia> aPlano;
-    private List<Ocorrencia> aValidacao;
-    private List<Ocorrencia> aImplementacao;
-    private List<Ocorrencia> aEficacia;
+    private List<Ocorrencia> listaAprovacao;
+    private List<Ocorrencia> listaAnalise;
+    private List<Ocorrencia> listaPlano;
+    private List<Ocorrencia> listaValidacao;
+    private List<Ocorrencia> listaImplementacao;
+    private List<Ocorrencia> listaEficacia;
 
-    public List<Ocorrencia> getaAprovacao() {
-        aAprovacao = dao.listaCondicao(Ocorrencia.class, "pessoa.idPessoa = " + BbUsuarioLogado.user.getIdPessoa() + " AND status = 'A' ");
-        return aAprovacao;
+    public List<Ocorrencia> getListaAprovacao() {
+        listaAprovacao = dao.listaCondicao(Ocorrencia.class, "pessoa.idPessoa = " + BbUsuarioLogado.user.getIdPessoa() + " AND status = 'A' ");
+        return listaAprovacao;
     }
 
-    public void setaAprovacao(List<Ocorrencia> aAprovacao) {
-        this.aAprovacao = aAprovacao;
+    public List<Ocorrencia> getListaAnalise() {
+        listaAnalise = dao.listaCondicao(Ocorrencia.class, "setor.idSetor = " + BbUsuarioLogado.user.getSetor().getIdSetor() + " AND status = 'C' ");
+        return listaAnalise;
     }
 
-    public List<Ocorrencia> getaAnalise() {
-        return aAnalise;
+    public List<Ocorrencia> getListaPlano() {
+        listaPlano = dao.listaCondicao(Ocorrencia.class, "setor.idSetor = " + BbUsuarioLogado.user.getSetor().getIdSetor() + " AND status = 'P' ");
+        return listaPlano;
     }
 
-    public void setaAnalise(List<Ocorrencia> aAnalise) {
-        this.aAnalise = aAnalise;
+    public List<Ocorrencia> getListaValidacao() {
+        listaValidacao = dao.listaCondicao(Ocorrencia.class, "setor.idSetor = " + BbUsuarioLogado.user.getSetor().getIdSetor() + " AND status = 'V' ");
+        return listaValidacao;
     }
 
-    public List<Ocorrencia> getaPlano() {
-        return aPlano;
+    public List<Ocorrencia> getListaImplementacao() {
+        listaImplementacao = dao.listaCondicao(Ocorrencia.class, "setor.idSetor = " + BbUsuarioLogado.user.getSetor().getIdSetor() + " AND status = 'I' ");
+        return listaImplementacao;
     }
 
-    public void setaPlano(List<Ocorrencia> aPlano) {
-        this.aPlano = aPlano;
+    public List<Ocorrencia> getListaEficacia() {
+        listaEficacia = dao.listaCondicao(Ocorrencia.class, "setor.idSetor = " + BbUsuarioLogado.user.getSetor().getIdSetor() + " AND status = 'E' ");
+        return listaEficacia;
     }
 
-    public List<Ocorrencia> getaValidacao() {
-        return aValidacao;
-    }
-
-    public void setaValidacao(List<Ocorrencia> aValidacao) {
-        this.aValidacao = aValidacao;
-    }
-
-    public List<Ocorrencia> getaImplementacao() {
-        return aImplementacao;
-    }
-
-    public void setaImplementacao(List<Ocorrencia> aImplementacao) {
-        this.aImplementacao = aImplementacao;
-    }
-
-    public List<Ocorrencia> getaEficacia() {
-        return aEficacia;
-    }
-
-    public void setaEficacia(List<Ocorrencia> aEficacia) {
-        this.aEficacia = aEficacia;
-    }
-
-    
-    
 }
