@@ -29,28 +29,28 @@ public class Auditoria implements Serializable {
 
     @Column(name = "Tipo", nullable = false)
     private char tipo;
-    
+
     @Column(name = "Status", nullable = false)
     private char status;
-    
-    
+
     @Temporal(javax.persistence.TemporalType.DATE)
     @Column(name = "DataInicio", nullable = false)
     private Date dataInicio;
-    
+
     @Temporal(javax.persistence.TemporalType.DATE)
     @Column(name = "DataFim", nullable = false)
     private Date dataFim;
-    
-    @Column(name = "Evidencias", nullable = false)
+
+    @Column(name = "Evidencias", nullable = false, length = 2000)
     private String evidencias;
-    
+
     @ManyToOne(optional = false)
     @ForeignKey(name = "AuditoriaAuditor")
     @JoinColumn(name = "IdAuditor")
     private Auditor auditor;
 
     public Auditoria() {
+        auditor = new Auditor();
     }
 
     public Integer getIdAuditoria() {
@@ -109,6 +109,4 @@ public class Auditoria implements Serializable {
         this.auditor = auditor;
     }
 
-    
-    
 }

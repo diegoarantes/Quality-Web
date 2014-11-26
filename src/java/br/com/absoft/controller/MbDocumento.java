@@ -1,19 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.absoft.controller;
 
 import br.com.absoft.model.dao.DAOGenerico;
-import br.com.absoft.model.entities.ArquivosOcorrencia;
-import br.com.absoft.model.entities.Ocorrencia;
+import br.com.absoft.model.entities.Documento;
+import br.com.absoft.suport.BbUsuarioLogado;
 import br.com.absoft.util.StringUtil;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -29,16 +25,20 @@ import org.primefaces.event.FileUploadEvent;
  */
 @ManagedBean
 @SessionScoped
-public class MbAnexosOcorrencia {
+public class MbDocumento implements Serializable {
 
-    private final String pasta = "/uploads/ocorrencias/"; //Pasta onde o arquivo será gravado
-    
+    private static final long serialVersionUID = 1L;
+
+    private final String pasta = "/uploads/documentos/"; //Pasta onde o arquivo será gravado
+
     @EJB
     DAOGenerico dao;
 
-    Ocorrencia ocorrencia = new Ocorrencia();
-    ArquivosOcorrencia arquivoOcorrencia = new ArquivosOcorrencia();
-    List<ArquivosOcorrencia> arquivos;
+    private Documento documento = new Documento();
+    List<Documento> documentos;
+
+    public MbDocumento() {
+    }
 
     private String getPastaReal() { //Recupera a Pasta real onde o servidor está instalado
         FacesContext aFacesContext = FacesContext.getCurrentInstance();
@@ -49,6 +49,17 @@ public class MbAnexosOcorrencia {
     }
 
     public void upload(FileUploadEvent event) {
+
+        //---------------------
+        documento.setCaminho(" ");
+
+        documento.setUsuario(BbUsuarioLogado.user.getUsuario());
+
+        documento.setStatus('V');
+
+        dao.inserir(documento);
+
+        //---------------------
         FacesMessage msg = new FacesMessage("O arquivo " + event.getFile().getFileName() + " foi enviado com sucesso!.", "");
         FacesContext.getCurrentInstance().addMessage(null, msg);
 
@@ -62,7 +73,7 @@ public class MbAnexosOcorrencia {
     private void copyFile(String fileName, InputStream in) {
         try {
             //Monta o caminho em uma String
-            String path = getPastaReal() + pasta + ocorrencia.getIdOcorrencia() + "/";
+            String path = getPastaReal() + pasta + documento.getIdDocumento() + "/";
 
             //Cria o caminho onde o arquivo será gravado
             File caminho = new File(path);
@@ -96,52 +107,29 @@ public class MbAnexosOcorrencia {
         }
 
         //----------------------------
-        arquivoOcorrencia.setCaminho(pasta + ocorrencia.getIdOcorrencia() + "/" + StringUtil.removerAcentos(fileName));
-        arquivoOcorrencia.setOcorrencia(ocorrencia);
-        dao.inserir(arquivoOcorrencia);
+        documento.setCaminho(pasta + documento.getIdDocumento() + "/" + StringUtil.removerAcentos(fileName));
+
+        dao.atualizar(documento);
 
         //Limpa a Variável
-        arquivoOcorrencia = new ArquivosOcorrencia();
+        documento = new Documento();
 
     }
 
-    public void Apagar() throws Exception {
-        //Armazena o caminho do arquivo
-        File file = new File(arquivoOcorrencia.getCaminho());
-
-        //Comando para apagar o arquivo da pasta
-        file.delete();
-
-        //Comando para apagar o arquivo no banco de Dados
-        dao.excluir(arquivoOcorrencia);
-
-        //Limpa a Variável
-        arquivoOcorrencia = new ArquivosOcorrencia();
+    public Documento getDocumento() {
+        return documento;
     }
 
-    public Ocorrencia getOcorrencia() {
-        return ocorrencia;
+    public void setDocumento(Documento documento) {
+        this.documento = documento;
     }
 
-    public void setOcorrencia(Ocorrencia ocorrencia) {
-        this.ocorrencia = ocorrencia;
+    public List<Documento> getDocumentos() {
+        return dao.lista(Documento.class);
     }
 
-    public ArquivosOcorrencia getArquivoOcorrencia() {
-        return arquivoOcorrencia;
-    }
-
-    public void setArquivoOcorrencia(ArquivosOcorrencia arquivoOcorrencia) {
-        this.arquivoOcorrencia = arquivoOcorrencia;
-    }
-
-    public List<ArquivosOcorrencia> getArquivos() {
-        arquivos = dao.listaCondicao(ArquivosOcorrencia.class, "ocorrencia.idOcorrencia = " + ocorrencia.getIdOcorrencia());
-        return arquivos;
-    }
-
-    public void setArquivos(List<ArquivosOcorrencia> arquivos) {
-        this.arquivos = arquivos;
+    public void setDocumentos(List<Documento> documentos) {
+        this.documentos = documentos;
     }
 
 }

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ocorrencia_PlanoAcao" language="groovy" pageWidth="572" pageHeight="752" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="b8e9c63a-4493-4c30-a0ef-3819915c3b8e">
+	<property name="ireport.zoom" value="1.210000000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     plano_acao.`ComoFazer` AS plano_acao_ComoFazer,
+     plano_acao.`DataCadastro` AS plano_acao_DataCadastro,
+     plano_acao.`Implementado` AS plano_acao_Implementado,
+     plano_acao.`OndeFazer` AS plano_acao_OndeFazer,
+     plano_acao.`OqFazer` AS plano_acao_OqFazer,
+     plano_acao.`PqFazer` AS plano_acao_PqFazer,
+     plano_acao.`QuandoFazer` AS plano_acao_QuandoFazer,
+     plano_acao.`QuantoCusta` AS plano_acao_QuantoCusta,
+     plano_acao.`QuemFazer` AS plano_acao_QuemFazer,
+     plano_acao.`IdOcorrencia` AS plano_acao_IdOcorrencia,
+     pessoa.`Nome` AS pessoa_Nome
+FROM
+     `pessoa` pessoa INNER JOIN `plano_acao` plano_acao ON pessoa.`IdPessoa` = plano_acao.`IdPessoa`
+WHERE
+plano_acao.`IdOcorrencia` = $P{id}]]>
+	</queryString>
+	<field name="plano_acao_ComoFazer" class="java.lang.String"/>
+	<field name="plano_acao_DataCadastro" class="java.sql.Date"/>
+	<field name="plano_acao_Implementado" class="java.lang.Boolean"/>
+	<field name="plano_acao_OndeFazer" class="java.lang.String"/>
+	<field name="plano_acao_OqFazer" class="java.lang.String"/>
+	<field name="plano_acao_PqFazer" class="java.lang.String"/>
+	<field name="plano_acao_QuandoFazer" class="java.lang.String"/>
+	<field name="plano_acao_QuantoCusta" class="java.lang.String"/>
+	<field name="plano_acao_QuemFazer" class="java.lang.String"/>
+	<field name="plano_acao_IdOcorrencia" class="java.lang.Integer"/>
+	<field name="pessoa_Nome" class="java.lang.String"/>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="1" width="572" height="20" uuid="5a92b27e-0026-4664-b81b-dd9453f391de"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Plano de ação]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="344" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="262" width="571" height="36" uuid="760e8dfa-b72a-4015-8d0c-9ab2610e435b"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{plano_acao_ComoFazer}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="37" y="2" width="90" height="20" uuid="0c0c3775-a920-47a8-aa3e-28cb59936784"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{plano_acao_DataCadastro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="42" width="572" height="40" uuid="557290e1-ac81-467d-9078-684cb5629202"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{plano_acao_OqFazer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="102" width="572" height="23" uuid="d69ba346-28ec-4eb7-b19b-14f38c58117a"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{plano_acao_PqFazer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="186" width="570" height="19" uuid="5be107fc-eb9f-4a86-831a-11f87dfc5996"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{plano_acao_QuandoFazer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="318" width="571" height="23" uuid="b9d5699e-8e3b-4e48-bd75-cd07b88a7765"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{plano_acao_QuantoCusta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="225" width="570" height="17" uuid="b0f6cc1c-23a2-4ce5-b0a3-ae3f3a9fc5d5"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{plano_acao_QuemFazer}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="145" width="572" height="23" uuid="9a3f1aed-c2a4-47c3-80ec-46720cb1b5eb"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{plano_acao_OndeFazer}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="2" width="36" height="20" uuid="93a0a788-a2e0-49b8-9441-10378f5b77c4"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="22" width="90" height="20" uuid="7f249014-2139-4421-a950-bccd6a79a410"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[O que fazer ?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="82" width="90" height="20" uuid="53e03ebe-f9ac-4306-94f2-d8d95a79aacb"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Porque fazer ?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="125" width="79" height="20" uuid="12cb885f-aa90-4524-b41e-1b44ded4ac48"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Onde fazer ?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="242" width="118" height="20" uuid="ecb75361-43f0-4ff7-bc41-de7500ab700d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Como fazer ?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="168" width="90" height="20" uuid="6c78fb34-9277-4f06-9533-c50a272449e6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quando fazer ?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="298" width="90" height="20" uuid="733aa2fa-8e79-4fa5-ac22-e663655ddee2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quanto custa ?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="205" width="103" height="20" uuid="8dd02655-0f09-4652-b501-359617bdd8c6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quem vai fazer ?]]></text>
+			</staticText>
+			<image>
+				<reportElement x="526" y="8" width="30" height="30" uuid="6b6fc4ff-6537-4a59-bac3-e1cb196e2ba0">
+					<printWhenExpression><![CDATA[$F{plano_acao_Implementado}]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA["/home/diego/NetBeansProjects/quality-web/web/resources/images/tick.png"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="342" width="572" height="1" uuid="b5058aa6-f1aa-47d7-ac70-314dfc91ef97"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

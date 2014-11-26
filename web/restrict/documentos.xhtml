@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../resources/main.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="tarefas">
+        <ui:include src="dialog/novodocumento.xhtml"/>
+
+        <p:fieldset legend="Documentos" id="fildDoc">
+            <h:form>
+                <p:commandButton onclick="PF('dlgDoc').show();" value="Novo documento" update=":formDocumento" icon="ui-icon-plus"/>
+
+                <p:dataTable id="tblDoc" var="doc" value="#{mbDocumento.documentos}" emptyMessage="Não há documentos">
+                    <p:column headerText="Id" width="20">
+                        <h:outputText value="#{doc.idDocumento}"/>
+                    </p:column>
+
+                    <p:column headerText="Título" width="150">
+                        <h:outputText value="#{doc.titulo}"/>
+                    </p:column>
+
+                    <p:column headerText="Tipo" width="50">
+                        <h:outputText value="#{doc.tipoDocumento.tipoDocumento}"/>
+                    </p:column>
+
+                    <p:column headerText="Status" width="10">
+                        <h:outputText value="#{doc.status}"/>
+                    </p:column>
+
+                    <p:column headerText="Setor" width="15">
+                        <h:outputText value="#{doc.setor.setor}"/>
+                    </p:column>
+
+
+                    <p:column headerText="Revisão" width="10">
+                        <h:outputText value="#{doc.revisao}"/>
+                    </p:column>
+
+                    <p:column headerText="Data Revisão" width="35">
+                        <h:outputText value="#{doc.dataRevisao}" converter="javax.faces.DateTime"/>
+                    </p:column>
+
+                    <p:column headerText="Usuário" width="35">
+                        <h:outputText value="#{doc.usuario}"/>
+                    </p:column>
+
+                    <p:column headerText="Ações" width="70">
+                        <p:button href="#{doc.caminho}" target="_blank" icon="ui-icon-arrowthick-1-s" value="Ver"/>
+                        <p:commandButton value="Revisar" />
+                    </p:column>
+
+                </p:dataTable>
+
+            </h:form>
+        </p:fieldset>
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ocorrencia_AnaliseCausa" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3746b7e3-ce1b-4adf-a0f1-a462106acd54">
+	<property name="ireport.zoom" value="1.7715610000000017"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     analise_da_causa.`CausaRaiz` AS analise_da_causa_CausaRaiz,
+     analise_da_causa.`DataCadastro` AS analise_da_causa_DataCadastro,
+     analise_da_causa.`Porque` AS analise_da_causa_Porque,
+     analise_da_causa.`IdOcorrencia` AS analise_da_causa_IdOcorrencia,
+     pessoa.`Nome` AS pessoa_Nome
+FROM
+     `pessoa` pessoa INNER JOIN `analise_da_causa` analise_da_causa ON pessoa.`IdPessoa` = analise_da_causa.`IdPessoa`
+WHERE
+analise_da_causa.`IdOcorrencia` = $P{id};]]>
+	</queryString>
+	<field name="analise_da_causa_CausaRaiz" class="java.lang.String"/>
+	<field name="analise_da_causa_DataCadastro" class="java.sql.Date"/>
+	<field name="analise_da_causa_Porque" class="java.lang.String"/>
+	<field name="analise_da_causa_IdOcorrencia" class="java.lang.Integer"/>
+	<field name="pessoa_Nome" class="java.lang.String"/>
+	<columnHeader>
+		<band height="41" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="21" width="67" height="20" uuid="8632b37c-8cdb-48dc-89b4-f14bf5ead7f5"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="67" y="21" width="138" height="20" uuid="a43e2cf6-9942-4401-a831-2284f1d0b7e0"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pessoa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="232" y="21" width="323" height="20" uuid="76f5164e-461b-45d0-9477-1bba068017d5"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Porque ?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="1" width="555" height="20" uuid="658c8d7b-00c5-4b14-a1c3-fc2df21bf4b5"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Análise da causa]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="0" width="67" height="20" backcolor="#FFFFFF" uuid="2f2ccdd6-1273-49bc-a9e8-cb3cd90f8bec"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{analise_da_causa_DataCadastro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="232" y="0" width="323" height="20" backcolor="#FFFFFF" uuid="5934a95b-d040-4ea9-b404-46996fbd7e89"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{analise_da_causa_Porque}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="67" y="0" width="138" height="20" backcolor="#FFFFFF" uuid="6aac24d6-da66-418c-8285-8ff9c6b046ae"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{pessoa_Nome}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="207" y="-1" width="27" height="19" uuid="8cc03426-f531-44df-b963-8514229d906f">
+					<printWhenExpression><![CDATA[Boolean.valueOf($F{analise_da_causa_CausaRaiz}.equals('S'))]]></printWhenExpression>
+				</reportElement>
+				<imageExpression><![CDATA["/../../home/diego/NetBeansProjects/quality-web/web/resources/images/tick.png"]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+</jasperReport>

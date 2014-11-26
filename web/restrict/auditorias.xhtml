@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../resources/main.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="tarefas">
+        <ui:include src="dialog/novaauditoria.xhtml"/>
+        
+        <p:fieldset legend="Auditorias" id="fildDoc">
+            <h:form>
+                <p:commandButton onclick="PF('dlgAud').show()" value="Nova auditoria" update=":formAuditoria" icon="ui-icon-plus"/>
+
+                <p:dataTable id="tblDoc" var="aud" value="#{mbAuditoria.auditorias}" emptyMessage="Não há auditorias registradas">
+                    <p:column headerText="Id" width="20">
+                        <h:outputText value="#{aud.idAuditoria}"/>
+                    </p:column>
+
+                    <p:column headerText="Tipo" width="20">
+                        <h:outputText value="#{aud.tipo}"/>
+                    </p:column>
+
+                    <p:column headerText="Status" width="20">
+                        <h:outputText value="#{aud.status}"/>
+                    </p:column>
+
+                    <p:column headerText="Data início" width="35">
+                        <h:outputText value="#{aud.dataInicio}" converter="javax.faces.DateTime"/>
+                    </p:column>
+
+                    <p:column headerText="Data fim" width="35">
+                        <h:outputText value="#{aud.dataFim}" converter="javax.faces.DateTime"/>
+                    </p:column>
+
+                    <p:column headerText="Ações" width="40">
+                        <p:commandButton value="editar"/>
+                        <p:commandButton value="Ver ocorrências"/>
+                    </p:column>
+                </p:dataTable>
+
+            </h:form>
+
+        </p:fieldset>
+    </ui:define>
+
+</ui:composition>

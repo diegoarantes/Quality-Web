@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ocorrencia_Implementacao" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="9f414435-c41b-4c84-8d65-be933c29e0b9">
+	<property name="ireport.zoom" value="1.2100000000000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     implementacao.`DataCadastro` AS implementacao_DataCadastro,
+     implementacao.`Evidencia` AS implementacao_Evidencia,
+     implementacao.`IdOcorrencia` AS implementacao_IdOcorrencia,
+     plano_acao.`OqFazer` AS plano_acao_OqFazer,
+     pessoa.`Nome` AS pessoa_Nome
+FROM
+     `plano_acao` plano_acao INNER JOIN `implementacao` implementacao ON plano_acao.`IdPlanoAcao` = implementacao.`IdPlanoAcao`
+     INNER JOIN `pessoa` pessoa ON implementacao.`IdPessoa` = pessoa.`IdPessoa`
+WHERE
+implementacao.`IdOcorrencia` = $P{id};]]>
+	</queryString>
+	<field name="implementacao_DataCadastro" class="java.sql.Date"/>
+	<field name="implementacao_Evidencia" class="java.lang.String"/>
+	<field name="implementacao_IdOcorrencia" class="java.lang.Integer"/>
+	<field name="plano_acao_OqFazer" class="java.lang.String"/>
+	<field name="pessoa_Nome" class="java.lang.String"/>
+	<columnHeader>
+		<band height="23">
+			<staticText>
+				<reportElement x="0" y="3" width="100" height="20" uuid="121b362f-0648-4beb-85e1-586fc537f54c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Implementação]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="112" splitType="Stretch">
+			<textField>
+				<reportElement x="186" y="0" width="139" height="20" uuid="78891354-9f9c-431d-97fe-3f660cb3f24e"/>
+				<textFieldExpression><![CDATA[$F{pessoa_Nome}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="33" y="0" width="100" height="20" uuid="d819ea4e-8467-4075-ae15-979900f203d0"/>
+				<textFieldExpression><![CDATA[$F{implementacao_DataCadastro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="33" height="20" uuid="068fe403-8c24-4c5a-a89b-4332401bc820"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="138" y="0" width="48" height="20" uuid="9de2d8c4-5047-42e4-9d92-e33a2fe46722"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pessoa:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="51" width="555" height="60" uuid="6f56277b-167e-4fd6-a17a-a60df36b25e3"/>
+				<textFieldExpression><![CDATA[$F{implementacao_Evidencia}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="31" width="100" height="20" uuid="ffef6852-0160-4af4-a08e-ed7b06a01acd"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Evidências:]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <p:dialog widgetVar="dlgAud" closable="true" width="600" height="400" header="Nova auditoria">
+            <h:form id="formAuditoria">
+                <p:growl/>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Tipo*" for="campo-tipo"/>
+                    <p:selectOneRadio id="campo-tipo" value="#{mbAuditoria.auditoria.tipo}" required="true" requiredMessage="O campo [Tipo] é obrigatório">
+                        <f:selectItem itemLabel="Interna" itemValue="I"/> 
+                        <f:selectItem itemLabel="Externa" itemValue="E" /> 
+                    </p:selectOneRadio>
+
+                    <h:outputLabel value="Status*" for="campo-status"/>
+                    <p:selectOneRadio id="campo-status" value="#{mbAuditoria.auditoria.status}" required="true" requiredMessage="O campo [Status] é obrigatório">
+                        <f:selectItem itemLabel="Agendada" itemValue="A"/> 
+                        <f:selectItem itemLabel="Em andamento" itemValue="E" /> 
+                        <f:selectItem itemLabel="Encerrada" itemValue="C" /> 
+                    </p:selectOneRadio>
+
+                    <h:outputLabel value="Auditor: "/> 
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" effect="fade" value="#{mbAuditoria.auditoria.auditor.idAuditor}"
+                                     required="true" requiredMessage="O campo [Auditor] é obrigatório">
+                        <f:selectItem itemLabel="Selecione o auditor." noSelectionOption="true"/>
+                        <f:selectItems value="#{bbAuditor.auditores}" var="auditor" itemValue="#{auditor.idAuditor}" itemLabel="#{auditor.nome}"/>
+                    </p:selectOneMenu>
+
+                    <h:outputLabel value="Data Início: "/>
+                    <p:calendar navigator="true" effect="explode" pattern="dd/MM/yyyy" locale="pt_BR" value="#{mbAuditoria.auditoria.dataInicio}"
+                                required="true" requiredMessage="O campo [Data Início] é obrigatório"/>
+                    <h:outputLabel value="Data Fim: "/>
+                    <p:calendar navigator="true" effect="explode" pattern="dd/MM/yyyy" locale="pt_BR" value="#{mbAuditoria.auditoria.dataFim}"
+                                required="true" requiredMessage="O campo [Data Fim] é obrigatório"/>
+
+                    <h:outputLabel value="Evidências: "/>
+                    <p:column>
+                        <p:inputTextarea rows="5" cols="60" counter="counter" maxlength="2000"       
+                                         counterTemplate="Restam {0} caracteres." autoResize="false" value="#{mbAuditoria.auditoria.evidencias}"/> 
+                        <br />                                
+                        <h:outputText id="counter" /> 
+                    </p:column>
+
+                    <p:column/>
+
+                    <p:commandButton value="Gravar" actionListener="#{mbAuditoria.addAuditoria}" />
+
+
+                </h:panelGrid>
+
+            </h:form>
+
+        </p:dialog>
+    </h:body>
+</html>
+

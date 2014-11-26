@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <p:dialog widgetVar="dlgDoc" closable="true" width="600" height="400" header="Novo documento">
+            <h:form id="formDocumento">
+                <p:messages id="mens"/>
+                <h:panelGrid columns="2">
+
+                    <h:outputLabel value="Título: "/>
+                    <p:inputText value="#{mbDocumento.documento.titulo}" size="60"/>
+
+                    <h:outputLabel value="Tipo: "/> 
+                    <p:selectOneMenu effect="fade" value="#{mbDocumento.documento.tipoDocumento.idTipoDocumento}"
+                                     required="true" requiredMessage="O campo [Tipo] é obrigatório">
+                        <f:selectItem itemLabel="Selecione o tipo do documento." noSelectionOption="true"/>
+                        <f:selectItems value="#{bbTipoDocumento.tipos}" var="tipo" itemValue="#{tipo.idTipoDocumento}" itemLabel="#{tipo.tipoDocumento}"/>
+                    </p:selectOneMenu> 
+
+                    <h:outputLabel value="Revisão: "/>
+                    <p:spinner id="basic" value="#{mbDocumento.documento.revisao}" min="0"/>
+
+                    <h:outputLabel value="Data Revisão:"/>
+                    <p:calendar navigator="true" effect="explode" pattern="dd/MM/yyyy" locale="pt_BR" value="#{mbDocumento.documento.dataRevisao}"
+                                required="true" requiredMessage="O campo [Data Revisão] é obrigatório"/>
+
+                    <h:outputLabel value="Pessoa: "/> 
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" effect="fade" value="#{mbDocumento.documento.pessoa.idPessoa}"
+                                     required="true" requiredMessage="O campo [Pessoa] é obrigatório">
+                        <f:selectItem itemLabel="Selecione a Pessoa." noSelectionOption="true"/>
+                        <f:selectItems value="#{bbPessoa.pessoas}" var="pessoa" itemValue="#{pessoa.idPessoa}" itemLabel="#{pessoa.nome}"/>
+                    </p:selectOneMenu> 
+
+                    <h:outputLabel value="Setor: "/> 
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" effect="fade" value="#{mbDocumento.documento.setor.idSetor}"
+                                     required="true" requiredMessage="O campo [Setor] é obrigatório">
+                        <f:selectItem itemLabel="Selecione o Setor destinado." noSelectionOption="true"/>
+                        <f:selectItems value="#{bbSetor.setores}" var="setor" itemValue="#{setor.idSetor}" itemLabel="#{setor.setor}"/>
+                    </p:selectOneMenu> 
+
+                    <h:outputLabel value="Observações:"/>
+                    <p:column>
+                        <p:inputTextarea rows="5" cols="60" counter="counter" maxlength="255"       
+                                         counterTemplate="Restam {0} caracteres." autoResize="false" value="#{mbDocumento.documento.observacoes}"/> 
+                        <br />                                
+                        <h:outputText id="counter" /> 
+                    </p:column>
+
+                            <p:fileUpload  cancelLabel="Cancelar" label="Procurar..." uploadLabel="Enviar" invalidFileMessage="Tipo de arquivo não permitido!" invalidSizeMessage="Arquivo muito grande"
+                                           fileUploadListener="#{mbDocumento.upload}" allowTypes="/(\.|\/)(jpe?g|png|pdf|doc|docx|xls|xlsx)$/" sizeLimit="10485760" update="@form" multiple="false"/>
+
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>
+

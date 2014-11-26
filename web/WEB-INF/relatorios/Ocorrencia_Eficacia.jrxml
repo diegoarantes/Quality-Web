@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ocorrencia_Eficacia" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="0dc282b9-8645-46db-b155-f1305949990a">
+	<property name="ireport.zoom" value="1.4641000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     analise_eficacia.`DataCadastro` AS analise_eficacia_DataCadastro,
+     analise_eficacia.`Eficaz` AS analise_eficacia_Eficaz,
+     analise_eficacia.`Justificativa` AS analise_eficacia_Justificativa,
+     analise_eficacia.`IdOcorrencia` AS analise_eficacia_IdOcorrencia,
+     pessoa.`Nome` AS pessoa_Nome
+FROM
+     `pessoa` pessoa INNER JOIN `analise_eficacia` analise_eficacia ON pessoa.`IdPessoa` = analise_eficacia.`IdPessoa`
+WHERE
+ analise_eficacia.`IdOcorrencia` = $P{id};]]>
+	</queryString>
+	<field name="analise_eficacia_DataCadastro" class="java.sql.Date"/>
+	<field name="analise_eficacia_Eficaz" class="java.lang.String"/>
+	<field name="analise_eficacia_Justificativa" class="java.lang.String"/>
+	<field name="analise_eficacia_IdOcorrencia" class="java.lang.Integer"/>
+	<field name="pessoa_Nome" class="java.lang.String"/>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="4" width="117" height="20" uuid="b37b02ad-4f96-4a6f-8069-31ab90e206ff"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Análise da eficácia]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="97" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="35" y="1" width="111" height="20" uuid="8a4b7974-8706-49bd-8cdc-e8560820e133"/>
+				<textFieldExpression><![CDATA[$F{analise_eficacia_DataCadastro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="444" y="1" width="111" height="20" uuid="382bf83d-ddfd-48d8-b61f-3a19986b9689"/>
+				<textFieldExpression><![CDATA[$F{analise_eficacia_Eficaz}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="203" y="1" width="111" height="20" uuid="ce04e36a-4185-4e2b-8576-a1ff832d4361"/>
+				<textFieldExpression><![CDATA[$F{pessoa_Nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="1" width="35" height="20" uuid="367ab488-b908-47b1-9d79-ffd894bbd615"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="1" width="74" height="20" uuid="ff455548-446d-4a2a-81b2-ca1b8a4a0d7e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Foi eficaz ?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="21" width="111" height="20" uuid="172eae64-4c8d-4ee6-8eb3-8bc039ba65f0"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Justificativa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="158" y="1" width="45" height="20" uuid="ee6b8d33-2eff-4e45-9bbc-c4b89d4af70d"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pessoa:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="41" width="555" height="53" uuid="1f499e5e-be94-41f4-9c98-c71751a3db90"/>
+				<textFieldExpression><![CDATA[$F{analise_eficacia_Justificativa}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="94" width="555" height="1" uuid="809b47c8-7561-4db6-87f6-92d3207f0d57"/>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

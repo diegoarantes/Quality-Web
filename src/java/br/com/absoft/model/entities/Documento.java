@@ -2,6 +2,7 @@ package br.com.absoft.model.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -51,20 +52,23 @@ public class Documento implements Serializable {
 
     @ManyToOne
     @ForeignKey(name = "DocumentoTipo")
-    @JoinColumn(name = "IdTipoDocumento")
+    @JoinColumn(name = "IdTipoDocumento", referencedColumnName = "IdTipoDocumento")
     private TipoDocumento tipoDocumento;
 
     @ManyToOne
     @ForeignKey(name = "DocumentoSetor")
-    @JoinColumn(name = "IdSetor")
+    @JoinColumn(name = "IdSetor", referencedColumnName = "IdSetor")
     private Setor setor;
 
     @ManyToOne
     @ForeignKey(name = "DocumentoPessoa")
-    @JoinColumn(name = "IdPessoa")
+    @JoinColumn(name = "IdPessoa", referencedColumnName = "IdPessoa")
     private Pessoa pessoa;
 
     public Documento() {
+        tipoDocumento = new TipoDocumento();
+        setor = new Setor();
+        pessoa = new Pessoa();
     }
 
     public Integer getIdDocumento() {
@@ -155,6 +159,7 @@ public class Documento implements Serializable {
         this.pessoa = pessoa;
     }
 
+     
     @Override
     public int hashCode() {
         int hash = 7;
