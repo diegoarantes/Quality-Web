@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+    </h:head>
+    <h:body>
+        <p:dialog widgetVar="dlgDocRev" closable="true" width="600" height="400" header="Revisar documento">
+            <h:form id="formDocumentoRev" enctype="multipart/form-data">
+                <h:panelGrid columns="2">
+
+                    <h:outputLabel value="Título: "/>
+                    <p:inputText value="#{mbDocumento.documentoRev.titulo}" size="60" disabled="true"/>
+
+                    <h:outputLabel value="Tipo: "/> 
+                    <p:selectOneMenu effect="fade" value="#{mbDocumento.documentoRev.tipoDocumento.idTipoDocumento}"
+                                     required="true" requiredMessage="O campo [Tipo] é obrigatório" disabled="true">
+                        <f:selectItem itemLabel="Selecione o tipo do documento." noSelectionOption="true" />
+                        <f:selectItems value="#{bbTipoDocumento.tipos}" var="tipo" itemValue="#{tipo.idTipoDocumento}" itemLabel="#{tipo.tipoDocumento}"/>
+                    </p:selectOneMenu> 
+
+                    <h:outputLabel value="Revisão: "/>
+                    <p:spinner id="basic" value="#{mbDocumento.documentoRev.revisao}" min="0" disabled="true"/>
+
+                    <h:outputLabel value="Data Revisão:"/>
+                    <p:calendar navigator="true" effect="explode" pattern="dd/MM/yyyy" locale="pt_BR" value="#{mbDocumento.documentoRev.dataRevisao}"
+                                required="true" requiredMessage="O campo [Data Revisão] é obrigatório"/>
+
+                    <h:outputLabel value="Pessoa: "/> 
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" effect="fade" value="#{mbDocumento.documentoRev.pessoa.idPessoa}"
+                                     required="true" requiredMessage="O campo [Pessoa] é obrigatório">
+                        <f:selectItem itemLabel="Selecione a Pessoa." noSelectionOption="true"/>
+                        <f:selectItems value="#{bbPessoa.pessoas}" var="pessoa" itemValue="#{pessoa.idPessoa}" itemLabel="#{pessoa.nome}"/>
+                    </p:selectOneMenu> 
+
+                    <h:outputLabel value="Setor: "/> 
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" effect="fade" value="#{mbDocumento.documentoRev.setor.idSetor}"
+                                     required="true" requiredMessage="O campo [Setor] é obrigatório" disabled="true">
+                        <f:selectItem itemLabel="Selecione o Setor destinado." noSelectionOption="true"/>
+                        <f:selectItems value="#{bbSetor.setores}" var="setor" itemValue="#{setor.idSetor}" itemLabel="#{setor.setor}"/>
+                    </p:selectOneMenu> 
+
+                    <h:outputLabel value="Observações:"/>
+                    <p:column>
+                        <p:inputTextarea rows="5" cols="60" counter="counter" maxlength="255"       
+                                         counterTemplate="Restam {0} caracteres." autoResize="false" value="#{mbDocumento.documentoRev.observacoes}"/> 
+                        <br />                                
+                        <h:outputText id="counter" /> 
+                    </p:column>
+                            <p:fileUpload value="#{mbDocumento.file}" mode="simple"/>
+
+                    <p:column/>
+                    <p:commandButton ajax="false" value="Gravar" actionListener="#{mbDocumento.gravarRevisao()}"/>
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>
+

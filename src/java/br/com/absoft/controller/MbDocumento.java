@@ -18,7 +18,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
-import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -39,6 +38,7 @@ public class MbDocumento implements Serializable {
     DAOGenerico dao;
 
     private Documento documento = new Documento();
+    private Documento documentoRev = new Documento();
     List<Documento> documentos;
 
     public MbDocumento() {
@@ -55,9 +55,6 @@ public class MbDocumento implements Serializable {
     public void upload() {
 
         //---------------------
-        documento.setDataRevisao(new Date());
-//        documento.setTitulo("sad");
-        documento.setRevisao(1);
         documento.setCaminho(" ");
 
         documento.setUsuario(BbUsuarioLogado.user.getUsuario());
@@ -114,13 +111,47 @@ public class MbDocumento implements Serializable {
         documento.setCaminho(pasta + documento.getIdDocumento() + "/" + StringUtil.removerAcentos(fileName));
 
         dao.atualizar(documento);
-        
+
         //Mensagem de sucesso
         FacesMessage msg = new FacesMessage("O documento " + documento.getTitulo() + " foi enviado com sucesso!.", "");
         FacesContext.getCurrentInstance().addMessage(null, msg);
 
         //Limpa a Variável
         documento = new Documento();
+
+    }
+
+    public void apagar() throws Exception {
+        //Armazena o caminho do arquivo
+        File dfile = new File(documento.getCaminho());
+
+        //Comando para apagar o arquivo da pasta
+        dfile.delete();
+
+        //Comando para apagar o arquivo no banco de Dados
+        dao.excluir(documento);
+
+        //Limpa a Variável
+        documento = new Documento();
+    }
+
+    public void revisar() {
+        documentoRev.setTitulo(documento.getTitulo());
+        documentoRev.setPessoa(documento.getPessoa());
+        documentoRev.setRevisao(documento.getRevisao() + 1);
+        documentoRev.setTipoDocumento(documento.getTipoDocumento());
+        documentoRev.setSetor(documento.getSetor());
+    }
+
+    public void gravarRevisao() {
+        documento.setStatus('O');
+        dao.atualizar(documento);
+
+        documento = documentoRev;
+
+        documentoRev = new Documento();
+
+        upload();
 
     }
 
@@ -146,6 +177,14 @@ public class MbDocumento implements Serializable {
 
     public void setFile(UploadedFile file) {
         this.file = file;
+    }
+
+    public Documento getDocumentoRev() {
+        return documentoRev;
+    }
+
+    public void setDocumentoRev(Documento documentoRev) {
+        this.documentoRev = documentoRev;
     }
 
 }

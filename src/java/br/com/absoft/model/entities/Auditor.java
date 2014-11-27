@@ -56,6 +56,7 @@ public class Auditor implements Serializable {
     private OrgaoCertificador orgaoCertificador;
 
     public Auditor() {
+        orgaoCertificador = new OrgaoCertificador();
     }
 
     public Integer getIdAuditor() {

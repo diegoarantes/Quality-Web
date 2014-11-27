@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../resources/main.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="tarefas">
+        <ui:include src="dialog/novaempresa.xhtml"/>
+        <p:fieldset legend="Empresas" id="fildEmp">
+            <h:form id="frmEmpresas">
+                <p:growl/>
+                <p:commandButton onclick="PF('dlgEmp').show()" value="Nova empresa" update=":formEmpresa" icon="ui-icon-plus"/>
+
+                <p:dataTable id="tblEmp" var="emp" value="#{mbEmpresa.empresas}" emptyMessage="Não há empresas">
+                    <p:column headerText="Id" width="15">
+                        <h:outputText value="#{emp.idEmpresa}"/>
+                    </p:column>
+
+                    <p:column headerText="Nome fantasia" width="150">
+                        <h:outputText value="#{emp.nomeFantasia}"/>
+                    </p:column>
+
+                    <p:column headerText="Razão Social" width="150">
+                        <h:outputText value="#{emp.razaoSocial}"/>
+                    </p:column>
+
+                    <p:column headerText="Endereço" width="150">
+                        <h:outputText value="#{emp.endereco}"/>
+                    </p:column>
+                    
+                         <p:column headerText="Ações" width="30">
+                             <p:commandButton value="Editar" onclick="PF('dlgEmp').show()" update=":formEmpresa">
+                                 <f:setPropertyActionListener value="#{emp}" target="#{mbEmpresa.empresa}"/>
+                             </p:commandButton>
+                             <p:commandButton value="Excluir" update="@form" actionListener="#{mbEmpresa.deleteEmpresa}">
+                                 <f:setPropertyActionListener value="#{emp}" target="#{mbEmpresa.empresa}"/>
+                             </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+
+            </h:form>
+        </p:fieldset>
+    </ui:define>
+
+</ui:composition>

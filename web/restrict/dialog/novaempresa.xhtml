@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+    </h:head>
+    <h:body>
+       <p:dialog widgetVar="dlgEmp" closable="true" width="600" height="200" header="Nova empresa">
+           <h:form id="formEmpresa">
+               <h:panelGrid columns="2">
+                   <h:outputLabel value="Razão Social: "/>
+                   <p:inputText value="#{mbEmpresa.empresa.razaoSocial}" size="50"/>
+                   
+                   <h:outputLabel value="Nome Fantasia: "/>
+                   <p:inputText value="#{mbEmpresa.empresa.nomeFantasia}" size="50"/>
+                   
+                   <h:outputLabel value="Endereço: "/>
+                   <p:inputText value="#{mbEmpresa.empresa.endereco}" size="50"/>
+                   
+                   <p:column/>
+                   
+                   <p:commandButton value="Gravar" actionListener="#{mbEmpresa.addEmpresa}" update="@form :frmEmpresas" oncomplete="sucesso(xhr, status, args);"/>
+                    
+               </h:panelGrid>
+               
+           </h:form>
+           
+           <script type="text/javascript">
+                function sucesso(xhr, status, args) {
+                    if (args.sucesso) {
+                        PF('dlgEmp').hide();
+
+                    } else {
+                        PF('dlgEmp').jq.effect("shake", {times: 5}, 100);
+                    }
+                }
+            </script>  
+           
+       </p:dialog>
+    </h:body>
+</html>
+

@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../resources/main.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="tarefas">
+        <ui:include src="dialog/novoauditor.xhtml"/>
+        <p:fieldset legend="Cadastrar auditores" id="fildAud">
+            <h:form id="formAuditores">
+                <p:growl/>
+                <p:commandButton onclick="PF('dlgAuditor').show()" value="Novo auditor" update=":formAuditor" icon="ui-icon-plus"/>
+
+                <p:dataTable id="idTabelaAud" var="auditor" value="#{mbAuditor.auditores}"
+                             paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                             {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="Página: {currentPage} de {totalPages}"
+                             rowsPerPageTemplate="5,10,15">
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nome"/>
+                        </f:facet>
+                        <h:outputText value="#{auditor.nome}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tipo"/>
+                        </f:facet>
+                        <h:outputText value="#{auditor.tipo}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="E-mail"/>
+                        </f:facet>
+                        <h:outputText value="#{auditor.email}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Telefone"/>
+                        </f:facet>
+                        <h:outputText value="#{auditor.telefone}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Validade curso"/>
+                        </f:facet>
+                        <h:outputText value="#{auditor.validadeCurso}" converter="javax.faces.DateTime"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Orgão Certificador"/>
+                        </f:facet>
+                        <h:outputText value="#{auditor.orgaoCertificador.nome}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Ações"/>
+                        </f:facet>
+                        <p:commandButton value="Editar" onclick="PF('dlgAuditor').show()" update=":formAuditor">
+                            <f:setPropertyActionListener value="#{auditor}" target="#{mbAuditor.auditor}"/>
+                        </p:commandButton>
+                        <p:commandButton value="Excluir" update="@form" actionListener="#{mbAuditor.excluir()}">
+                            <f:setPropertyActionListener value="#{auditor}" target="#{mbAuditor.auditor}"/>
+                        </p:commandButton>
+
+                    </p:column>
+
+                </p:dataTable>
+
+            </h:form>
+
+        </p:fieldset>
+    </ui:define>
+
+</ui:composition>

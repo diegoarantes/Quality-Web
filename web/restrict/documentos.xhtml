@@ -3,53 +3,83 @@
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="./../resources/main.xhtml"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:h="http://java.sun.com/jsf/html">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
 
     <ui:define name="tarefas">
         <ui:include src="dialog/novodocumento.xhtml"/>
+        <ui:include src="dialog/revisardocumento.xhtml"/>
 
         <p:fieldset legend="Documentos" id="fildDoc">
             <h:form>
                 <p:growl/>
                 <p:commandButton onclick="PF('dlgDoc').show();" value="Novo documento" update=":formDocumento" icon="ui-icon-plus"/>
 
-                <p:dataTable id="tblDoc" var="doc" value="#{mbDocumento.documentos}" emptyMessage="Não há documentos">
-                    <p:column headerText="Id" width="20">
+                <p:dataTable id="tblDoc" var="doc" value="#{mbDocumento.documentos}" emptyMessage="Não há documentos" widgetVar="tabelaDoc">
+                    <p:column headerText="ID" width="10">
                         <h:outputText value="#{doc.idDocumento}"/>
                     </p:column>
 
-                    <p:column headerText="Título" width="150">
+                    <p:column headerText="Título" width="150"  filterBy="titulo" filterMatchMode="contains">
                         <h:outputText value="#{doc.titulo}"/>
                     </p:column>
 
-                    <p:column headerText="Tipo" width="50">
+                    <p:column headerText="Tipo" width="50" filterBy="tipoDocumento.tipoDocumento" filterMatchMode="exact">
+                        <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('tabelaDoc').filter()" >
+                                <f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true" />
+                                <f:selectItems value="#{bbTipoDocumento.tipos}" var="tipo" itemLabel="#{tipo.tipoDocumento}" itemValue="#{tipo.tipoDocumento}" />
+                            </p:selectOneMenu>
+                        </f:facet>
                         <h:outputText value="#{doc.tipoDocumento.tipoDocumento}"/>
                     </p:column>
 
-                    <p:column headerText="Status" width="10">
+                    <p:column headerText="Status" width="25" filterBy="status" filterMatchMode="exact">
+                        <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('tabelaDoc').filter()" >
+                                <f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true" />
+                                <f:selectItem itemLabel="Vigente" itemValue="V" />
+                                <f:selectItem itemLabel="Obsoleto" itemValue="O" />
+                            </p:selectOneMenu>
+                        </f:facet>
                         <h:outputText value="#{doc.status}"/>
                     </p:column>
 
-                    <p:column headerText="Setor" width="15">
+                    <p:column headerText="Setor" width="53" filterBy="setor.setor" filterMatchMode="exact">
+                        <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('tabelaDoc').filter()" >
+                                <f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true" />
+                                <f:selectItems value="#{bbSetor.setores}" var="setor" itemValue="#{setor.setor}" itemLabel="#{setor.setor}"/>
+                            </p:selectOneMenu>
+                        </f:facet>
                         <h:outputText value="#{doc.setor.setor}"/>
                     </p:column>
 
 
-                    <p:column headerText="Revisão" width="10">
+                    <p:column headerText="Revisão" width="6">
                         <h:outputText value="#{doc.revisao}"/>
                     </p:column>
 
-                    <p:column headerText="Data Revisão" width="35">
+                    <p:column headerText="Data Revisão" width="25">
                         <h:outputText value="#{doc.dataRevisao}" converter="javax.faces.DateTime"/>
                     </p:column>
 
-                    <p:column headerText="Usuário" width="35">
+                    <p:column headerText="Usuário" width="25">
                         <h:outputText value="#{doc.usuario}"/>
                     </p:column>
 
-                    <p:column headerText="Ações" width="70">
+                    <p:column headerText="Ações" width="90">
                         <p:button href="#{doc.caminho}" target="_blank" icon="ui-icon-arrowthick-1-s" value="Ver"/>
-                        <p:commandButton value="Revisar" />
+
+                        <p:commandButton value="Revisar" onclick="PF('dlgDocRev').show();" update=":formDocumentoRev">
+                            <f:setPropertyActionListener value="#{doc}" target="#{mbDocumento.documento}"/>
+                            <f:actionListener binding="#{mbDocumento.revisar()}"/>
+                        </p:commandButton>
+
+                        <p:commandButton value="Excluir" update="tblDoc">
+                            <f:setPropertyActionListener value="#{doc}" target="#{mbDocumento.documento}"/>
+                            <f:actionListener binding="#{mbDocumento.apagar()}"/>
+                        </p:commandButton>
                     </p:column>
 
                 </p:dataTable>

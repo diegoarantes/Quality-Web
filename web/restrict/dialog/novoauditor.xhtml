@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+    </h:head>
+    <h:body>
+        <p:dialog widgetVar="dlgAuditor" closable="true" width="600" height="400" header="Novo auditor">
+            <h:form id="formAuditor">
+                <p:growl/>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Tipo*"/>
+                    <p:selectOneRadio value="#{mbAuditor.auditor.tipo}" required="true" requiredMessage="O campo [Tipo] é obrigatório">
+                        <f:selectItem itemLabel="Interno" itemValue="I"/> 
+                        <f:selectItem itemLabel="Externo" itemValue="E" /> 
+                    </p:selectOneRadio>
+
+                    <h:outputLabel value="Nome: "/>
+                    <p:inputText value="#{mbAuditor.auditor.nome}"/>
+
+                    <h:outputLabel value="Função: "/>
+                    <p:inputText value="#{mbAuditor.auditor.funcao}"/>
+
+                    <h:outputLabel value="E-mail"/>
+                    <p:inputText value="#{mbAuditor.auditor.email}"/>
+
+                    <h:outputLabel value="Telefone"/>
+                    <p:inputText value="#{mbAuditor.auditor.telefone}" />
+
+
+                    <h:outputLabel value="Orgão certificador: "/> 
+                    <p:selectOneMenu filter="true" filterMatchMode="startsWith" effect="fade" value="#{mbAuditor.auditor.orgaoCertificador.idOrgaoCertificador}"
+                                     required="true" requiredMessage="O campo [Orgão certificador] é obrigatório">
+                        <f:selectItem itemLabel="Selecione o orgão." noSelectionOption="true"/>
+                        <f:selectItems value="#{bbOrgaoCertificador.orgaos}" var="orgao" itemValue="#{orgao.idOrgaoCertificador}" itemLabel="#{orgao.nome}"/>
+                    </p:selectOneMenu>
+
+                    <h:outputLabel value="Data curso: "/>
+                    <p:calendar navigator="true" effect="explode" pattern="dd/MM/yyyy" locale="pt_BR" value="#{mbAuditor.auditor.dataCurso}"
+                                required="true" requiredMessage="O campo [Data curso] é obrigatório"/>
+                    <h:outputLabel value="Validade curso: "/>
+                    <p:calendar navigator="true" effect="explode" pattern="dd/MM/yyyy" locale="pt_BR" value="#{mbAuditor.auditor.validadeCurso}"
+                                required="true" requiredMessage="O campo [Validade curso] é obrigatório"/>
+
+                    <p:column/>
+                    <p:commandButton value="Gravar" actionListener="#{mbAuditor.addAuditor()}" update="@form :formAuditores" oncomplete="sucesso(xhr, status, args);"/>
+
+
+                </h:panelGrid>
+
+            </h:form>
+
+            <script type="text/javascript">
+                function sucesso(xhr, status, args) {
+                    if (args.sucesso) {
+                        PF('dlgAuditor').hide();
+
+                    } else {
+                        PF('dlgAuditor').jq.effect("shake", {times: 5}, 100);
+                    }
+                }
+            </script>  
+        </p:dialog>
+
+    </h:body>
+</html>
+

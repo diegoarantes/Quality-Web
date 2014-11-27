@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./../resources/main.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="tarefas">
+        <ui:include src="dialog/novoorgao.xhtml"/>
+        <p:fieldset legend="Cadastrar Orgãos" id="fildAOrg">
+            <h:form id="formOrgao">
+                <p:growl/>
+                <p:commandButton onclick="PF('dlgOrgao').show()" value="Novo orgão" update=":formOrgaoCertificador" icon="ui-icon-plus"/>
+
+                <p:dataTable id="idTabelaOrgao" var="orgao" value="#{mbOrgao.orgaos}"
+                             paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
+                             {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="Página: {currentPage} de {totalPages}"
+                             rowsPerPageTemplate="5,10,15">
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nome"/>
+                        </f:facet>
+                        <h:outputText value="#{orgao.nome}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Norma"/>
+                        </f:facet>
+                        <h:outputText value="#{orgao.nome}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Contato"/>
+                        </f:facet>
+                        <h:outputText value="#{orgao.pessoaContato}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Telefone"/>
+                        </f:facet>
+                        <h:outputText value="#{orgao.telefone}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Endereço"/>
+                        </f:facet>
+                        <h:outputText value="#{orgao.endereco}"/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Ações"/>
+                        </f:facet>
+                        <p:commandButton value="Editar" onclick="PF('dlgOrgao').show()" update=":formOrgaoCertificador">
+                            <f:setPropertyActionListener value="#{orgao}" target="#{mbOrgao.orgao}"/>
+                        </p:commandButton>
+
+                        <p:commandButton value="Excluir" actionListener="#{mbOrgao.deleteOrgao()}" update="@form">
+                            <f:setPropertyActionListener value="#{orgao}" target="#{mbOrgao.orgao}"/>
+                        </p:commandButton>
+
+                    </p:column>
+
+                </p:dataTable>
+
+
+            </h:form>        
+        </p:fieldset>
+
+
+
+    </ui:define>
+
+</ui:composition>

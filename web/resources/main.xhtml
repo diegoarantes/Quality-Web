@@ -94,8 +94,8 @@
                                     <p:menuitem value="Setor" action="setores" ajax="false"/> 
                                     <p:menuitem value="Processo" action="processos" ajax="false" /> 
                                     <p:menuitem value="Origem" action="origens" ajax="false"/> 
-                                    <p:menuitem value="Auditor" ajax="false" disabled="true"/> 
-                                    <p:menuitem value="Órgão certificador" ajax="false" disabled="true"/> 
+                                    <p:menuitem value="Auditor" ajax="false" action="auditores"/> 
+                                    <p:menuitem value="Órgão certificador" ajax="false" action="orgaos"/> 
                                     <p:menuitem value="Tipo de Documento" action="tiposdedocumento" ajax="false"/> 
                                 </p:submenu>  
 
@@ -127,7 +127,7 @@
                             <p:column> 
                                 <p:submenu label="Configurações">
                                     <p:menuitem value="Usuários" action="pessoas" ajax="false"/>
-                                    <p:menuitem value="Empresas" url="#" disabled="true"/>
+                                    <p:menuitem value="Empresas" action="empresas" ajax="false"/>
                                 </p:submenu>                                  
                             </p:column>
 

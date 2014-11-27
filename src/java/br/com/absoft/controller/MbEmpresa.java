@@ -9,6 +9,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.context.RequestContext;
 
 @ManagedBean
 @SessionScoped
@@ -40,11 +41,13 @@ public class MbEmpresa implements Serializable {
             updateEmpresa();
         }
         empresa = new Empresa();
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+        requestContext.addCallbackParam("sucesso", true);
         return null;
     }
 
     private void insertEmpresa() {
-       dao.inserir(empresa);
+        dao.inserir(empresa);
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso", ""));
     }
@@ -59,7 +62,8 @@ public class MbEmpresa implements Serializable {
         try {
             dao.excluir(empresa);
         } catch (Exception ex) {
-            
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Há ocorrências vinculadas á esta unidade! \n" + ex.getMessage(), ""));
         }
     }
 

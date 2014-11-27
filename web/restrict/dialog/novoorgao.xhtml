@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+    </h:head>
+    <h:body>
+        <p:dialog widgetVar="dlgOrgao" closable="true" width="600" height="400" header="Novo orgão certficador">
+            <h:form id="formOrgaoCertificador">
+                <p:growl/>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Nome: "/>
+                    <p:inputText value="#{mbOrgao.orgao.nome}"/>
+
+                    <h:outputLabel value="Norma auditada: "/>
+                    <p:inputText value="#{mbOrgao.orgao.normaAuditada}"/>
+
+                    <h:outputLabel value="Endereço: "/>
+                    <p:inputText value="#{mbOrgao.orgao.endereco}"/>
+
+                    <h:outputLabel value="Pessoa contato: "/>
+                    <p:inputText value="#{mbOrgao.orgao.pessoaContato}"/>
+
+                    <h:outputLabel value="Telefone: "/>
+                    <p:inputText value="#{mbOrgao.orgao.telefone}"/>
+                    
+                    <p:column/>
+                    
+                    <p:commandButton value="Gravar" actionListener="#{mbOrgao.addOrgao()}" oncomplete="sucesso(xhr, status, args)" update=":formOrgao"/>
+                </h:panelGrid>
+
+            </h:form>
+            
+            
+            <script type="text/javascript">
+                function sucesso(xhr, status, args) {
+                    if (args.sucesso) {
+                        PF('dlgOrgao').hide();
+
+                    } else {
+                        PF('dlgOrgao').jq.effect("shake", {times: 5}, 100);
+                    }
+                }
+            </script>  
+        </p:dialog>    
+    </h:body>
+</html>
+
