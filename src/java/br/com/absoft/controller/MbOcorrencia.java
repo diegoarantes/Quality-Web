@@ -75,7 +75,8 @@ public class MbOcorrencia implements Serializable {
                 ocorrencia.getIdOcorrencia(),
                 ocorrencia.getTipo(),
                 ocorrencia.getTitulo(),
-                ocorrencia.getDescricao()).start();
+                ocorrencia.getDescricao(),
+                '1').start();
 
     }
 
@@ -106,6 +107,17 @@ public class MbOcorrencia implements Serializable {
     public void aprovar() {
         ocorrencia.setStatus('C');
         dao.atualizar(ocorrencia);
+
+        Pessoa responsavel = responsavelSetor(ocorrencia.getSetor().getIdSetor());
+
+        //Envia o E-mail para o responsável do setor em outra Thread
+        new OcorrrenciaMail(responsavel,
+                ocorrencia.getIdOcorrencia(),
+                ocorrencia.getTipo(),
+                ocorrencia.getTitulo(),
+                ocorrencia.getDescricao(),
+                '2').start();
+
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "A ocorrência foi aprovada!", ""));
     }
@@ -115,6 +127,15 @@ public class MbOcorrencia implements Serializable {
         dao.atualizar(ocorrencia);
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "A ocorrência foi reprovada!", ""));
+    }
+
+    private Pessoa responsavelSetor(int idSetor) {
+        List<Pessoa> pessoas = dao.listaCondicao(Pessoa.class, "setor.idSetor = " + idSetor + " AND responsavelSetor = 'S' ");
+        Pessoa pes = null;
+        for (Pessoa pessoa : pessoas) {
+            pes = pessoa;
+        }
+        return pes;
     }
 
     public MbOcorrencia() {

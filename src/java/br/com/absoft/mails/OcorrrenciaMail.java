@@ -12,20 +12,26 @@ public class OcorrrenciaMail extends Thread {
     char tipo;
     String descricao;
 
-    public OcorrrenciaMail(Pessoa pessoa, Integer nro, char tipo, String titulo, String descricao) {
-        
+    //---------------
+    String texto;
 
-//        javax.persistence.Query query = em.createQuery("from Pessoa p where p.idPessoa = ?");
-//        query.setParameter(1, 10);  //pessoa.getIdPessoa()
-//        Pessoa pes = (Pessoa) query.getSingleResult();
-        //Pessoa pes = (Pessoa) dao.recupera(Pessoa.class, 10);
-        
+    public OcorrrenciaMail(Pessoa pessoa, Integer nro, char tipo, String titulo, String descricao, char tip) {
+
         this.email = pessoa.getEmail();
         this.nome = pessoa.getNome();
         this.numero = nro;
         this.tipo = tipo;
         this.titulo = titulo;
         this.descricao = descricao;
+
+        switch (tip) {
+            case '1':
+                texto = "Foi aberta uma ocorrência você deverá definir se foi aprovada ou não.";
+                break;
+            case '2':
+                texto = "Foi aberta uma ocorrência para o seu setor, você deverá tomar ações <br />para que a mesma seja solucionada.";
+                break;
+        }
 
     }
 
@@ -52,7 +58,7 @@ public class OcorrrenciaMail extends Thread {
         }
         //Monta a Mensagem
         String msg = "Olá " + this.nome + ",<br/> <br/>\n"
-                + "Foi aberta uma ocorrência você deverá definir quem cuidará de cada etapa das tratativas.<br/><br/>\n"
+                + texto + "<br/><br/>\n"
                 + "			<em>Detalhes da Ocorrência: </em><br />\n"
                 + "			<strong>Nº</strong> " + this.numero + "<br />\n"
                 + "			<strong>Tipo: </strong>" + tipoOcorrencia + "<br />\n"
