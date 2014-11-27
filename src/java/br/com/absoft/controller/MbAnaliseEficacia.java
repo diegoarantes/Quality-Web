@@ -59,7 +59,7 @@ public class MbAnaliseEficacia implements Serializable {
             dao.atualizar(ocorrencia); //Atualiza a ocorrência
         } else {
 
-            ocorrencia.setStatus('P'); //Seta o status da ocorrência como Aguardando Plano de Acao Novamente
+            ocorrencia.setStatus('C'); //Seta o status da ocorrência como Aguardando Analise da causa novamente
             dao.atualizar(ocorrencia); //Atualiza a ocorrência
         }
         dao.inserir(analiseEficacia);

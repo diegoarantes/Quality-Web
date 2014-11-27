@@ -80,4 +80,11 @@ analise_da_causa.`IdOcorrencia` = $P{id};]]>
 			</image>
 		</band>
 	</detail>
+	<columnFooter>
+		<band height="3">
+			<line>
+				<reportElement x="0" y="1" width="555" height="1" uuid="ebaa2999-d0bf-4792-97cc-8be7f182711d"/>
+			</line>
+		</band>
+	</columnFooter>
 </jasperReport>

@@ -72,4 +72,11 @@ implementacao.`IdOcorrencia` = $P{id};]]>
 			</staticText>
 		</band>
 	</detail>
+	<columnFooter>
+		<band height="4">
+			<line>
+				<reportElement x="1" y="3" width="555" height="1" uuid="28327cb7-974c-46cc-a90f-1cd6825bcfa6"/>
+			</line>
+		</band>
+	</columnFooter>
 </jasperReport>

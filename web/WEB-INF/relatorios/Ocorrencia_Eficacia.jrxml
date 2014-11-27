@@ -88,4 +88,11 @@ WHERE
 			</line>
 		</band>
 	</detail>
+	<columnFooter>
+		<band height="11">
+			<line>
+				<reportElement x="-1" y="4" width="556" height="1" uuid="ac0ce9d8-4121-42b2-9b1b-8684d4be62fe"/>
+			</line>
+		</band>
+	</columnFooter>
 </jasperReport>

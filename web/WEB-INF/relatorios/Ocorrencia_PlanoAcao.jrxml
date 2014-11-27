@@ -185,4 +185,11 @@ plano_acao.`IdOcorrencia` = $P{id}]]>
 			</staticText>
 		</band>
 	</detail>
+	<columnFooter>
+		<band height="10">
+			<line>
+				<reportElement x="2" y="4" width="569" height="1" uuid="63fc2372-2c6f-45cd-baf6-e65fdbc65f37"/>
+			</line>
+		</band>
+	</columnFooter>
 </jasperReport>

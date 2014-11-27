@@ -82,8 +82,9 @@
                             <f:setPropertyActionListener target="#{mbPessoa.pessoa}" value="#{pessoa}"/>
                         </p:commandButton>
 
-                        <p:commandButton value="Inativar"  icon="ui-icon-closethick" onclick="PF('dlgPes').hide();">
-
+                        <p:commandButton value="Inativar"  icon="ui-icon-closethick"  update=":formtablepessoa">
+                            <f:setPropertyActionListener target="#{mbPessoa.pessoa}" value="#{pessoa}"/>
+                            <f:actionListener binding="#{mbPessoa.inativaPessoa()}"/>
                         </p:commandButton>
 
                     </p:column>

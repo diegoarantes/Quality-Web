@@ -25,7 +25,7 @@
                         <f:setPropertyActionListener value="#{mbOcorrencia.ocorrencia}" target="#{mbRelatorio.ocorrencia}" />
                         <f:actionListener binding="#{mbRelatorio.relatoriOcorrencia()}"/>
                     </p:commandButton>
-                    
+
                 </h:panelGrid>
 
                 <h:panelGrid columns="2">
@@ -104,8 +104,8 @@
                 <p:panel header="Aprovar a ocorrência">
                     <h:panelGrid columns="2">
                         <h:form>
-                            <p:commandButton value="Aprovar" icon="ui-icon-check" actionListener="#{mbOcorrencia.aprovar}"/>
-                            <p:commandButton value="Reprovar" icon="ui-icon-closethick" actionListener="#{mbOcorrencia.reprovar}"/>
+                            <p:commandButton value="Aprovar" icon="ui-icon-check" actionListener="#{mbOcorrencia.aprovar}" oncomplete="window.location ='home.jsf'"/>
+                            <p:commandButton value="Reprovar" icon="ui-icon-closethick" actionListener="#{mbOcorrencia.reprovar}" oncomplete="window.location ='home.jsf'"/>
                         </h:form>
                     </h:panelGrid>
                 </p:panel>
@@ -116,7 +116,7 @@
                         <p:growl/>
                         <p:commandButton value="Nova causa" icon="ui-icon-plus" onclick="PF('dlgCausa').show()" update="@form:dialogoCausa:cPorque"/>
 
-                        <p:dataTable id="tbCausas" var="analCausa" value="#{mbAnaliseDaCausa.analisesDaCausa}" rowKey="#{analCausa.idAnaliseDaCausa}">
+                        <p:dataTable id="tbCausas" var="analCausa" value="#{mbAnaliseDaCausa.analisesDaCausa}" rowKey="#{analCausa.idAnaliseDaCausa}" emptyMessage="Nenhum registro encontrado">
                             <p:column headerText="Causa Raíz" width="30">
                                 <h:graphicImage value="/resources/images/tick.png" rendered="#{mbAnaliseDaCausa.tick(analCausa.causaRaiz)}" />
                             </p:column>
@@ -130,7 +130,7 @@
                                     <f:setPropertyActionListener value="#{analCausa}" target="#{mbAnaliseDaCausa.analise}" />
                                 </p:commandButton>
 
-                                <p:commandButton icon=" ui-icon-flag" title="Definir como causa Raíz" oncomplete="rmt1()" update="@form:dialogoCausa:cPorque">
+                                <p:commandButton icon="ui-icon-flag" title="Definir como causa Raíz" oncomplete="rmt1()" update="@form:dialogoCausa:cPorque">
                                     <f:setPropertyActionListener value="#{analCausa}" target="#{mbAnaliseDaCausa.analise}" />
                                     <p:confirm header="Confirmação" message="Deseja definir como causa raíz ?" icon="ui-icon-alert" /> 
 
@@ -139,7 +139,7 @@
                         </p:dataTable>
 
                         <h:column/>
-                        <p:remoteCommand name="rmt1" update="tbCausas"  actionListener="#{mbAnaliseDaCausa.definirRaiz()}"/>
+                        <p:remoteCommand name="rmt1" actionListener="#{mbAnaliseDaCausa.definirRaiz()}" oncomplete="window.location ='home.jsf'"/>
 
                         <p:dialog header="Inserir causa" widgetVar="dlgCausa" width="300" height="130" id="dialogoCausa">
 
@@ -147,7 +147,7 @@
                                 <h:outputLabel value="Porque?" />
                                 <p:inputTextarea cols="40" rows="3" value="#{mbAnaliseDaCausa.analise.porque}" id="cPorque"/>
                                 <h:column />
-                                <p:commandButton value="Adicionar" icon="ui-icon-plus" actionListener="#{mbAnaliseDaCausa.addAnaliseDaCausa()}" update="@form" onclick="PF('dlgCausa').hide()"/>
+                                <p:commandButton value="Adicionar" icon="ui-icon-plus" actionListener="#{mbAnaliseDaCausa.addAnaliseDaCausa()}" update="@form tbCausas" onclick="PF('dlgCausa').hide()"/>
                             </h:panelGrid>
 
                         </p:dialog>
@@ -164,7 +164,7 @@
                         <p:growl/>
                         <p:commandButton value="Novo Plano de Ação" icon="ui-icon-plus" onclick="PF('dlgPlano').show()" update="@form:dialogoPlano:wPlano"/>
 
-                        <p:dataTable id="tbPlanos" var="planoAcao" value="#{mbPlanoAcao.planosAcao}" rowKey="#{planoAcao.idPlanoAcao}" disabledSelection="true">
+                        <p:dataTable id="tbPlanos" var="planoAcao" value="#{mbPlanoAcao.planosAcao}" rowKey="#{planoAcao.idPlanoAcao}" disabledSelection="true" emptyMessage="Nenhum registro encontrado">
                             <p:column headerText="O que fazer ?">
                                 <h:outputText value="#{planoAcao.oqFazer}"/>
                             </p:column>
@@ -194,7 +194,7 @@
                             </p:column>
 
                             <p:column width="60">
-                                <p:commandButton icon="ui-icon-pencil" title="Alterar" onclick="PF('dlgPlano').show()" update="@form:dialogoPlano:wPlano">
+                                <p:commandButton icon="ui-icon-pencil" title="Alterar" onclick="PF('dlgPlano').show()" update="@form:dialogoPlano:wPlano" >
                                     <f:setPropertyActionListener value="#{planoAcao}" target="#{mbPlanoAcao.planoAcao}" />
                                 </p:commandButton>
                             </p:column>
@@ -236,7 +236,7 @@
                                     <h:outputLabel value="Quanto ?"/> <br/>
                                     <p:inputTextarea cols="40" rows="4" value="#{mbPlanoAcao.planoAcao.quantoCusta}" autoResize="false"/> <br/>
 
-                                    <p:commandButton value="Concluir" icon="ui-icon-check" actionListener="#{mbPlanoAcao.addPlanoAcao()}" update="@form" onclick="PF('dlgPlano').hide()" style="position: absolute; margin-left: 186px; margin-top: 5px;"/>
+                                    <p:commandButton value="Concluir" icon="ui-icon-check" actionListener="#{mbPlanoAcao.addPlanoAcao()}" update="@all" onclick="PF('dlgPlano').hide()" style="position: absolute; margin-left: 186px; margin-top: 5px;" oncomplete="window.location ='home.jsf'"/>
 
 
                                 </p:tab>
@@ -259,7 +259,7 @@
                             <h:outputLabel value="Causa raíz"/>
                             <h:outputLabel value="Ações"/>
 
-                            <p:dataTable var="causaRaiz" value="#{mbAnaliseDaCausa.causaRaiz}">
+                            <p:dataTable var="causaRaiz" value="#{mbAnaliseDaCausa.causaRaiz}" emptyMessage="Nenhum registro encontrado">
                                 <p:column headerText="ID" width="30">
                                     <h:outputText value="#{causaRaiz.idAnaliseDaCausa}"/>
                                 </p:column>
@@ -270,7 +270,7 @@
                             </p:dataTable>
 
 
-                            <p:dataTable id="tbPlanosimp" var="planoAcao" value="#{mbPlanoAcao.planosAcao}" rowKey="#{planoAcao.idPlanoAcao}" selection="#{mbPlanoAcao.planoAcao}" selectionMode="single">
+                            <p:dataTable id="tbPlanosimp" var="planoAcao" value="#{mbPlanoAcao.planosAcao}" rowKey="#{planoAcao.idPlanoAcao}" selection="#{mbPlanoAcao.planoAcao}" selectionMode="single" emptyMessage="Nenhum registro encontrado">
                                 <p:column headerText="ID"  width="30">
                                     <h:outputText value="#{planoAcao.idPlanoAcao}"/>
                                 </p:column>
@@ -282,8 +282,8 @@
 
                             <h:column/>
                             <h:column>
-                                <p:commandButton value="Aprovar" icon="ui-icon-check" actionListener="#{mbPlanoAcao.aprovar}" update="@form"/>  
-                                <p:commandButton value="Reprovar" icon="ui-icon-close"/> 
+                                <p:commandButton value="Aprovar" icon="ui-icon-check" actionListener="#{mbPlanoAcao.aprovar}" oncomplete="window.location ='home.jsf'"/>  
+                                <p:commandButton value="Reprovar" icon="ui-icon-close" oncomplete="window.location ='home.jsf'"/> 
                             </h:column>
 
                         </h:panelGrid>
@@ -306,7 +306,7 @@
                             <p:inputTextarea cols="50" rows="5" value="#{mbImplementacao.implementacao.evidencia}"/>
 
                             <h:column/>
-                            <p:commandButton value="Gravar" actionListener="#{mbImplementacao.addImplementacao}"  update="@form"/>
+                            <p:commandButton value="Gravar" actionListener="#{mbImplementacao.addImplementacao}"  oncomplete="window.location ='home.jsf'"/>
                         </h:panelGrid>
                     </h:form>
                 </p:panel>
@@ -315,9 +315,6 @@
             <p:tab id="tba5" title="Análise de Eficácia" rendered="#{bbTratativas.desAnaliseEficacia}">
                 <p:panel header="Analizar a Eficácia" >
                     <h:form>
-                        <p:fieldset legend="Detalhes da ação" toggleable="true" toggleSpeed="500" collapsed="true">
-
-                        </p:fieldset>
                         <h:panelGrid columns="2">
 
                             <p:column/>
@@ -331,7 +328,7 @@
                             <p:inputTextarea cols="50" rows="5" value="#{mbAnaliseEficacia.analiseEficacia.justificativa}"/>
 
                             <h:column/>
-                            <p:commandButton value="Concluir" action="#{mbAnaliseEficacia.addAnaliseEficacia}" update="@form" ajax="false"/>
+                            <p:commandButton value="Concluir" action="#{mbAnaliseEficacia.addAnaliseEficacia}" oncomplete="window.location ='home.jsf'"/>
                         </h:panelGrid>
                     </h:form>
                 </p:panel>

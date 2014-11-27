@@ -17,8 +17,7 @@ import org.primefaces.context.RequestContext;
 public class MbPessoa implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
-    
+
     @EJB
     DAOGenerico dao;
 
@@ -75,9 +74,12 @@ public class MbPessoa implements Serializable {
         requestContext.addCallbackParam("sucesso", true);
     }
 
-    public void InativaPessoa() {
+    public void inativaPessoa() {
         pessoa.setStatus('I'); //Seta o Status como Inativo
         dao.atualizar(pessoa);
+        pessoa = new Pessoa();
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_WARN, "Usuário inativado !", ""));
     }
 
     public MbPessoa() {

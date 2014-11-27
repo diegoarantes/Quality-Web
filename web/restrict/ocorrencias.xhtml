@@ -111,7 +111,7 @@
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbAnexosOcorrencia.ocorrencia}" />
                         </p:commandButton>
 
-                        <p:commandButton icon="ui-icon-clipboard"  action="tratarocorrencia" title="Tratar" ajax="false">
+                        <p:commandButton icon="ui-icon-clipboard"  action="tratarocorrencia" title="Tratar" ajax="false" disabled="true">
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrencia.ocorrencia}" />
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbAnaliseDaCausa.ocorrencia}" />
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbPlanoAcao.ocorrencia}" />

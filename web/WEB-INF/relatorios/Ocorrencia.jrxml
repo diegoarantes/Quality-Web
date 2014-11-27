@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioGeral" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a565f380-ea37-4a1e-bd3d-c195f34942ea">
-	<property name="ireport.zoom" value="1.464100000000004"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="32"/>
+	<property name="ireport.zoom" value="2.143588810000011"/>
+	<property name="ireport.x" value="31"/>
+	<property name="ireport.y" value="708"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -237,8 +237,8 @@ WHERE
 				<reportElement x="199" y="55" width="154" height="20" uuid="0b6a4399-bbe2-4e26-bf50-4a4a476e069b"/>
 				<textFieldExpression><![CDATA[$F{processo_Processo}]]></textFieldExpression>
 			</textField>
-			<subreport>
-				<reportElement stretchType="RelativeToBandHeight" x="-1" y="278" width="557" height="81" uuid="b6ca09ff-9d5d-4fdd-85da-2bb4366660bb"/>
+			<subreport runToBottom="false">
+				<reportElement positionType="Float" x="1" y="278" width="553" height="80" uuid="b6ca09ff-9d5d-4fdd-85da-2bb4366660bb"/>
 				<subreportParameter name="id">
 					<subreportParameterExpression><![CDATA[$P{id}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -248,41 +248,30 @@ WHERE
 			<line>
 				<reportElement x="1" y="278" width="555" height="1" uuid="053ba4dc-1f4a-43f9-988f-a27c020ce173"/>
 			</line>
-			<line>
-				<reportElement x="1" y="358" width="555" height="1" uuid="77f1aec6-dabe-47c8-956e-f0547a731918"/>
-			</line>
 			<subreport>
-				<reportElement stretchType="RelativeToBandHeight" x="0" y="359" width="555" height="364" uuid="3b8d39ea-29ea-4059-9c3d-5724c181d1ae"/>
+				<reportElement positionType="Float" x="1" y="361" width="553" height="78" uuid="3b8d39ea-29ea-4059-9c3d-5724c181d1ae"/>
 				<subreportParameter name="id">
 					<subreportParameterExpression><![CDATA[$P{id}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA["Ocorrencia_PlanoAcao.jasper"]]></subreportExpression>
 			</subreport>
-		</band>
-		<band height="547">
 			<subreport>
-				<reportElement x="-1" y="3" width="556" height="100" uuid="66ec3422-b4d7-4286-a36e-94f04142334b"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="1" y="442" width="553" height="100" uuid="66ec3422-b4d7-4286-a36e-94f04142334b"/>
 				<subreportParameter name="id">
 					<subreportParameterExpression><![CDATA[$P{id}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA["Ocorrencia_Implementacao.jasper"]]></subreportExpression>
 			</subreport>
-			<line>
-				<reportElement x="0" y="0" width="555" height="1" uuid="247f3420-f4a0-4085-b456-5f0cb7c46adf"/>
-			</line>
 			<subreport>
-				<reportElement x="1" y="107" width="555" height="100" uuid="180af8e9-e0dd-411c-b07d-1745d4c65bee"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="1" y="545" width="553" height="100" uuid="180af8e9-e0dd-411c-b07d-1745d4c65bee"/>
 				<subreportParameter name="id">
 					<subreportParameterExpression><![CDATA[$P{id}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Ocorrencia_Eficacia.jasper"]]></subreportExpression>
 			</subreport>
-			<line>
-				<reportElement x="0" y="104" width="555" height="1" uuid="81932319-8968-4b69-85bb-c55930ba1b42"/>
-			</line>
 		</band>
 	</detail>
 	<pageFooter>
