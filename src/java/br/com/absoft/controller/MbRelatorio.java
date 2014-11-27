@@ -46,6 +46,8 @@ public class MbRelatorio implements Serializable {
     SimpleDateFormat formatador = new SimpleDateFormat("yyyy");
     int ano = Integer.parseInt(formatador.format(data1));
     char tipo = 'N';
+    Integer idTipo;
+
     Ocorrencia ocorrencia = new Ocorrencia();
 
     public void relatorioGeral() throws SQLException, JRException, IOException {
@@ -61,6 +63,17 @@ public class MbRelatorio implements Serializable {
         param.put("ano", ano);
         param.put("tipo", tipo);
         imprimeRelatorio(param, "relatorioAnual.jasper");
+    }
+
+    public void documentosVigentes() throws SQLException, JRException, IOException {
+        HashMap param = new HashMap();
+        param.put("tipo", idTipo);
+        imprimeRelatorio(param, "DocumentosVigentes.jasper");
+    }
+
+    public void documentosObsoletos() throws SQLException, JRException, IOException {
+        HashMap param = new HashMap();
+        imprimeRelatorio(param, "DocumentosObsoletos.jasper");
     }
 
     public void relatoriOcorrencia() throws SQLException, JRException, IOException {
@@ -111,6 +124,14 @@ public class MbRelatorio implements Serializable {
         this.ocorrencia = ocorrencia;
     }
 
+    public Integer getIdTipo() {
+        return idTipo;
+    }
+
+    public void setIdTipo(Integer idTipo) {
+        this.idTipo = idTipo;
+    }
+
     /*
      Recebe os parámetros do tipo HashMap ex: parametros.put("data2", data2);
      Recebe o nome do arquivo do relatorio ex: relatorio.jasper
@@ -155,8 +176,7 @@ public class MbRelatorio implements Serializable {
             outputStream.flush();
 
             outputStream.close();
-            
-            
+
             con.close(); //Fecha a Conexão
 
         }

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+    </h:head>
+    <h:body>
+        <p:dialog header="Relatório de documentos por tipo" widgetVar="dlgRelDocs" width="350" height="100"  maximizable="false" minimizable="true" resizable="false">
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Tipo: "/> 
+                    <p:selectOneMenu effect="fade" value="#{mbRelatorio.idTipo}"
+                                     required="true" requiredMessage="O campo [Tipo] é obrigatório">
+                        <f:selectItem itemLabel="Selecione o tipo do documento." noSelectionOption="true"/>
+                        <f:selectItems value="#{bbTipoDocumento.tipos}" var="tipo" itemValue="#{tipo.idTipoDocumento}" itemLabel="#{tipo.tipoDocumento}"/>
+                    </p:selectOneMenu> 
+                    <p:column/>
+                    <p:commandButton actionListener="#{mbRelatorio.documentosVigentes()}" onclick="form.target = '_blank'" value="Gerar Relatório" ajax="false" update="@form" icon="ui-icon-clipboard"/>  
+                </h:panelGrid>
+
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>
+

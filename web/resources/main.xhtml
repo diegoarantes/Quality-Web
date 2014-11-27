@@ -114,8 +114,8 @@
                                 </p:submenu> 
 
                                 <p:submenu label="Documentos">
-                                    <p:menuitem value="Documentos por tipo" url="#" disabled="true"/> 
-                                    <p:menuitem value="Documentos obsoletos" url="#" disabled="true"/> 
+                                    <p:menuitem value="Documentos por tipo" onclick="PF('dlgRelDocs').show();" /> 
+                                    <p:menuitem value="Documentos obsoletos" onclick="PF('dlgRelDocsOb').show();"/> 
                                 </p:submenu>
 
                             </p:column>
@@ -176,6 +176,8 @@
 
                 <ui:include src="/restrict/dialog/relatoriogeral.xhtml"/>
                 <ui:include src="/restrict/dialog/relatorioanual.xhtml"/>
+                <ui:include src="/restrict/dialog/relatoriodocumentos.xhtml"/>
+                <ui:include src="/restrict/dialog/relatoriodocobsoletos.xhtml"/>
 
 
 
