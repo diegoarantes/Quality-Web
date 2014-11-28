@@ -13,7 +13,7 @@
         <p:fieldset legend="Documentos" id="fildDoc">
             <h:form>
                 <p:growl/>
-                <p:commandButton onclick="PF('dlgDoc').show();" value="Novo documento" update=":formDocumento" icon="ui-icon-plus"/>
+                <p:commandButton onclick="PF('dlgDoc').show();" value="Novo documento" update=":formDocumento" icon="ui-icon-plus" disabled="#{!mbPermissao.permissaoRd}"/>
 
                 <p:dataTable id="tblDoc" var="doc" value="#{mbDocumento.documentos}" emptyMessage="Não há documentos" widgetVar="tabelaDoc">
                     <p:column headerText="ID" width="10">
@@ -42,7 +42,7 @@
                                 <f:selectItem itemLabel="Obsoleto" itemValue="O" />
                             </p:selectOneMenu>
                         </f:facet>
-                        <h:outputText value="#{doc.status}"/>
+                        <h:outputText value="#{mbDocumento.retonaStatus(doc.status)}"/>
                     </p:column>
 
                     <p:column headerText="Setor" width="53" filterBy="setor.setor" filterMatchMode="exact">
@@ -71,12 +71,12 @@
                     <p:column headerText="Ações" width="90">
                         <p:button href="#{doc.caminho}" target="_blank" icon="ui-icon-arrowthick-1-s" value="Ver"/>
 
-                        <p:commandButton value="Revisar" onclick="PF('dlgDocRev').show();" update=":formDocumentoRev">
+                        <p:commandButton value="Revisar" onclick="PF('dlgDocRev').show();" update=":formDocumentoRev" disabled="#{!mbPermissao.permissaoRd}">
                             <f:setPropertyActionListener value="#{doc}" target="#{mbDocumento.documento}"/>
                             <f:actionListener binding="#{mbDocumento.revisar()}"/>
                         </p:commandButton>
 
-                        <p:commandButton value="Excluir" update="tblDoc">
+                        <p:commandButton value="Excluir" update="tblDoc" disabled="#{!mbPermissao.permissaoRd}">
                             <f:setPropertyActionListener value="#{doc}" target="#{mbDocumento.documento}"/>
                             <f:actionListener binding="#{mbDocumento.apagar()}"/>
                         </p:commandButton>

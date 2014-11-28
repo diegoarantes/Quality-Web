@@ -3,14 +3,16 @@
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="./../resources/main.xhtml"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:h="http://java.sun.com/jsf/html">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
 
     <ui:define name="tarefas">
         <ui:include src="dialog/novaauditoria.xhtml"/>
-        
+        <ui:include src="dialog/auditoriaocorrencia.xhtml"/>
+
         <p:fieldset legend="Auditorias" id="fildDoc">
-            <h:form>
-                <p:commandButton onclick="PF('dlgAud').show()" value="Nova auditoria" update=":formAuditoria" icon="ui-icon-plus"/>
+            <h:form id="formAditorias">
+                <p:commandButton onclick="PF('dlgAud').show()" value="Nova auditoria" update=":formAuditoria" icon="ui-icon-plus" disabled="#{!mbPermissao.permissaoRd}"/>
 
                 <p:dataTable id="tblDoc" var="aud" value="#{mbAuditoria.auditorias}" emptyMessage="Não há auditorias registradas">
                     <p:column headerText="Id" width="20">
@@ -18,11 +20,11 @@
                     </p:column>
 
                     <p:column headerText="Tipo" width="20">
-                        <h:outputText value="#{aud.tipo}"/>
+                        <h:outputText value="#{mbAuditoria.retonaTipo(aud.tipo)}"/>
                     </p:column>
 
                     <p:column headerText="Status" width="20">
-                        <h:outputText value="#{aud.status}"/>
+                        <h:outputText value="#{mbAuditoria.retornaStatus(aud.status)}"/>
                     </p:column>
 
                     <p:column headerText="Data início" width="35">
@@ -34,8 +36,12 @@
                     </p:column>
 
                     <p:column headerText="Ações" width="40">
-                        <p:commandButton value="editar"/>
-                        <p:commandButton value="Ver ocorrências"/>
+                        <p:commandButton value="Editar" onclick="PF('dlgAud').show()" update=":formAuditoria" disabled="#{!mbPermissao.permissaoRd}">
+                            <f:setPropertyActionListener value="#{aud}" target="#{mbAuditoria.auditoria}"/>
+                        </p:commandButton>
+                        <p:commandButton value="Ver ocorrências" onclick="PF('dlgAuditoriaOco').show()" update=":formAuditoriaOco" disabled="#{!mbPermissao.permissaoRd}">
+                            <f:setPropertyActionListener value="#{aud}" target="#{mbAuditoria.auditoria}"/>
+                        </p:commandButton>
                     </p:column>
                 </p:dataTable>
 

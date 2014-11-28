@@ -11,7 +11,7 @@
         <p:fieldset legend="Cadastrar auditores" id="fildAud">
             <h:form id="formAuditores">
                 <p:growl/>
-                <p:commandButton onclick="PF('dlgAuditor').show()" value="Novo auditor" update=":formAuditor" icon="ui-icon-plus"/>
+                <p:commandButton onclick="PF('dlgAuditor').show()" value="Novo auditor" update=":formAuditor" icon="ui-icon-plus" disabled="#{!mbPermissao.permissaoRd}"/>
 
                 <p:dataTable id="idTabelaAud" var="auditor" value="#{mbAuditor.auditores}"
                              paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
@@ -66,10 +66,10 @@
                         <f:facet name="header">
                             <h:outputText value="Ações"/>
                         </f:facet>
-                        <p:commandButton value="Editar" onclick="PF('dlgAuditor').show()" update=":formAuditor">
+                        <p:commandButton value="Editar" onclick="PF('dlgAuditor').show()" update=":formAuditor" disabled="#{!mbPermissao.permissaoRd}">
                             <f:setPropertyActionListener value="#{auditor}" target="#{mbAuditor.auditor}"/>
                         </p:commandButton>
-                        <p:commandButton value="Excluir" update="@form" actionListener="#{mbAuditor.excluir()}">
+                        <p:commandButton value="Excluir" update="@form" actionListener="#{mbAuditor.excluir()}" disabled="#{!mbPermissao.permissaoRd}">
                             <f:setPropertyActionListener value="#{auditor}" target="#{mbAuditor.auditor}"/>
                         </p:commandButton>
 

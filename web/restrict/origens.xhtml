@@ -13,7 +13,7 @@
 
             <h:form id="formtablesetOri" prependId="false">
                 <p:growl id="growOrigem"/>
-                <p:commandButton onclick="PF('dlgori').show()" value="Nova Origem" update=":formcadori" icon="ui-icon-plus"/>
+                <p:commandButton onclick="PF('dlgori').show()" value="Nova Origem" update=":formcadori" icon="ui-icon-plus" disabled="#{!mbPermissao.permissaoRd}"/>
 
                 <p:dataTable id="idTabelaOri" var="origem" value="#{mbOrigem.origens}"
                              paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
@@ -34,12 +34,12 @@
                         <f:facet name="header">
                             <h:outputText value="Ações"/>
                         </f:facet>
-                        <p:commandButton value="Editar" icon="ui-icon-pencil"
+                        <p:commandButton value="Editar" icon="ui-icon-pencil" disabled="#{!mbPermissao.permissaoRd}"
                                          process="@this" onclick="PF('dlgori').show();" update=":formcadori">
                             <f:setPropertyActionListener target="#{mbOrigem.origem}"
                                                          value="#{origem}"/>
                         </p:commandButton>
-                        <p:commandButton value="Remover" action="#{mbOrigem.deleteOrigem}"
+                        <p:commandButton value="Remover" action="#{mbOrigem.deleteOrigem}" disabled="#{!mbPermissao.permissaoRd}"
                                          icon="ui-icon-close" update="@form">
                             <f:setPropertyActionListener target="#{mbOrigem.origem}"
                                                          value="#{origem}"/>

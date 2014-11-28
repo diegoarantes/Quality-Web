@@ -12,7 +12,7 @@
              
             <h:form id="formtabletipo" prependId="false">
                 <p:growl id="growTipo"/>
-                <p:commandButton onclick="PF('dlgti').show();" value="Novo tipo" update=":formcadti" icon="ui-icon-plus"/>
+                <p:commandButton onclick="PF('dlgti').show();" value="Novo tipo" update=":formcadti" icon="ui-icon-plus" disabled="#{!mbPermissao.permissaoRd}"/>
 
                 <p:dataTable id="idTabelati" var="tipo" value="#{mbTipoDocumento.tiposDocumento}"
                              paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
@@ -33,12 +33,12 @@
                         <f:facet name="header">
                             <h:outputText value="Ações"/>
                         </f:facet>
-                        <p:commandButton value="Editar" icon="ui-icon-pencil"
+                        <p:commandButton value="Editar" icon="ui-icon-pencil" disabled="#{!mbPermissao.permissaoRd}"
                                          process="@this" onclick="PF('dlgti').show();" update=":formcadti">
                             <f:setPropertyActionListener target="#{mbTipoDocumento.tipoDocumento}"
                                                          value="#{tipo}"/>
                         </p:commandButton>
-                        <p:commandButton value="Remover" action="#{mbTipoDocumento.deleteTipoDocumento}"
+                        <p:commandButton value="Remover" action="#{mbTipoDocumento.deleteTipoDocumento}" disabled="#{!mbPermissao.permissaoRd}"
                                          icon="ui-icon-close" update="@form">
                             <f:setPropertyActionListener target="#{mbTipoDocumento.tipoDocumento}"
                                                          value="#{tipo}"/>

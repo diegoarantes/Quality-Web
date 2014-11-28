@@ -42,7 +42,7 @@
                             </p:column>
                             <p:column/>
 
-                           <h:outputLabel value="Tipo*" for="campo-tipo"/>
+                            <h:outputLabel value="Tipo*" for="campo-tipo"/>
                             <p:selectOneRadio id="campo-tipo" value="#{mbOcorrencia.ocorrencia.tipo}" required="true" requiredMessage="O campo [Tipo] é obrigatório">
                                 <f:selectItem itemLabel="Não-Conformidade" itemValue="N"/> 
                                 <f:selectItem itemLabel="Ação Preventiva" itemValue="A" />
@@ -88,7 +88,7 @@
                                 <f:selectItems value="#{bbProcesso.processos}" var="processo" itemValue="#{processo.idProcesso}" itemLabel="#{processo.processo}"/>
                             </p:selectOneMenu>
 
-                            <p:commandButton  icon="ui-icon-plus" title="Adicionar" style="border: 0px;" onclick="PF('dlgpro').show();" update=":formcadpro1" process="@none"/> 
+                            <p:commandButton  icon="ui-icon-plus" title="Adicionar" style="border: 0px;" onclick="PF('dlgpro').show();" update=":formcadpro1" process="@none" disabled="#{!mbPermissao.permissaoRd}"/> 
 
                             <h:outputLabel value="Origem*" for="campo-origem"/>
                             <p:selectOneMenu id="campo-origem" effect="fade"  value="#{mbOcorrencia.ocorrencia.origem.idOrigem}"
@@ -97,7 +97,7 @@
                                 <f:selectItems value="#{bbOrigem.origens}" var="origem" itemValue="#{origem.idOrigem}" itemLabel="#{origem.origem}"/>
                             </p:selectOneMenu>
 
-                            <p:commandButton  icon="ui-icon-plus" title="Adicionar" style="border: 0px;" onclick="PF('dlgori1').show();" update=":formcadori1" process="@none" />
+                            <p:commandButton  icon="ui-icon-plus" title="Adicionar" style="border: 0px;" onclick="PF('dlgori1').show();" update=":formcadori1" process="@none" disabled="#{!mbPermissao.permissaoRd}" />
 
                             <h:outputLabel value="Aprovador*" for="campo-apontador"/> 
                             <p:selectOneMenu id="campo-apontador" filter="true" filterMatchMode="startsWith" effect="fade" value="#{mbOcorrencia.ocorrencia.pessoa.idPessoa}"

@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+    </h:head>
+    <h:body>
+        <p:dialog widgetVar="dlgAuditoriaOco" closable="true" width="600" height="400" header="Ocorrencia X Auditoria">
+            <h:form id="formAuditoriaOco">
+                <p:growl/>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Ocorrência"/>
+                    <p:selectOneMenu value="#{mbAuditoria.ocorrencia.idOcorrencia}" required="true" requiredMessage="O campo [Ocorrência] é obrigatório">
+                        <f:selectItems value="#{bbOcorrencia.ocorrencias}" var="ocorrencia" itemLabel="#{ocorrencia.idOcorrencia} - #{ocorrencia.titulo}" itemValue="#{ocorrencia.idOcorrencia}"/> 
+                    </p:selectOneMenu>
+
+                    <p:column/>
+                    <p:commandButton value="Vincular" icon="ui-icon-shuffle" actionListener="#{mbAuditoria.vincular()}" update="@form"/>
+                </h:panelGrid>
+
+
+
+
+                <p:dataTable id="tblDocOco" var="oco" value="#{mbAuditoria.ocorrencias}" emptyMessage="Não há ocorrencias vinculadas">
+                    <p:column headerText="Id" width="20">
+                        <h:outputText value="#{oco.idOcorrencia}"/>
+                    </p:column>
+
+                    <p:column headerText="Título" width="100">
+                        <h:outputText value="#{oco.titulo}"/>
+                    </p:column>
+
+                    <p:column headerText="Ações" width="8">
+                        <p:commandButton icon="ui-icon-print" title="Detalhar" onclick="form.target = '_blank'" ajax="false">
+                            <f:setPropertyActionListener value="#{oco}" target="#{mbRelatorio.ocorrencia}" />
+                            <f:actionListener binding="#{mbRelatorio.relatoriOcorrencia()}"/>
+                        </p:commandButton>
+                        
+                        <p:commandButton icon="ui-icon-close" title="Desvincular" actionListener="#{mbAuditoria.desvincular()}" update="@form">
+                            <f:setPropertyActionListener value="#{oco}" target="#{mbAuditoria.ocorrencia}"/>
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+
+            </h:form>
+        </p:dialog>
+    </h:body>
+</html>
+

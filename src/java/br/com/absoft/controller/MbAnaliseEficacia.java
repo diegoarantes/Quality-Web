@@ -46,7 +46,7 @@ public class MbAnaliseEficacia implements Serializable {
             updateAnaliseEficacia();
         }
         analiseEficacia = new AnaliseEficacia();
-        return null;
+        return "home";
     }
 
     private void insertAnaliseEficacia() {

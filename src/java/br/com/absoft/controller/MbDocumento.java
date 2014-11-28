@@ -155,6 +155,20 @@ public class MbDocumento implements Serializable {
 
     }
 
+    public String retonaStatus(char stat) {
+        String status = null;
+        switch (stat) {
+            case 'V':
+                status = "Vigente";
+                break;
+            case 'O':
+                status = "Obsoleto";
+                break;
+        }
+
+        return status;
+    }
+
     public Documento getDocumento() {
         return documento;
     }

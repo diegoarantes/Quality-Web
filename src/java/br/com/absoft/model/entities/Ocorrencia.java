@@ -99,6 +99,7 @@ public class Ocorrencia implements Serializable {
         pessoa = new Pessoa();
         setor = new Setor();
         processo = new Processo();
+ //       auditoria = new Auditoria();
     }
 
     //Getters e Setters

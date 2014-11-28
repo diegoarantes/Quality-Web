@@ -7,6 +7,7 @@ package br.com.absoft.controller;
 
 import br.com.absoft.model.dao.DAOGenerico;
 import br.com.absoft.model.entities.Auditoria;
+import br.com.absoft.model.entities.Ocorrencia;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -14,6 +15,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -32,6 +34,10 @@ public class MbAuditoria implements Serializable {
 
     private List<Auditoria> auditorias;
 
+    private List<Ocorrencia> ocorrencias;
+
+    Ocorrencia ocorrencia = new Ocorrencia();
+
     public MbAuditoria() {
     }
 
@@ -42,6 +48,8 @@ public class MbAuditoria implements Serializable {
             updateAuditoria();
         }
         auditoria = new Auditoria();
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+        requestContext.addCallbackParam("sucesso", true);
     }
 
     public Auditoria getAuditoria() {
@@ -71,6 +79,77 @@ public class MbAuditoria implements Serializable {
         dao.atualizar(auditoria);
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Atualização efetuada com sucesso", ""));
+    }
+
+    public void vincular() {
+        ocorrencia = (Ocorrencia) dao.recupera(Ocorrencia.class, ocorrencia.getIdOcorrencia()); //Recupera a ocorrencia pelo id
+
+        ocorrencia.setAuditoria(auditoria);
+        dao.atualizar(ocorrencia);
+
+        ocorrencia = new Ocorrencia();
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Ocorrência vinculada com sucesso!", ""));
+
+    }
+
+    public void desvincular() {
+        ocorrencia = (Ocorrencia) dao.recupera(Ocorrencia.class, ocorrencia.getIdOcorrencia()); //Recupera a ocorrencia pelo id
+
+        ocorrencia.setAuditoria(null);
+        dao.atualizar(ocorrencia);
+
+        ocorrencia = new Ocorrencia();
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Ocorrência desvinculada com sucesso!", ""));
+    }
+
+    public String retonaTipo(char tip) {
+        String tipo = null;
+
+        switch (tip) {
+            case 'I':
+                tipo = "Interna";
+                break;
+            case 'E':
+                tipo = "Externa";
+                break;
+        }
+        return tipo;
+    }
+
+    public String retornaStatus(char stat) {
+        String status = null;
+
+        switch (stat) {
+            case 'A':
+                status = "Agendada";
+                break;
+            case 'E':
+                status = "Em andamento";
+                break;
+            case 'C':
+                status = "Encerrada";
+                break;
+        }
+
+        return status;
+    }
+
+    public List<Ocorrencia> getOcorrencias() {
+        return dao.listaCondicao(Ocorrencia.class, "auditoria.idAuditoria = " + auditoria.getIdAuditoria());
+    }
+
+    public void setOcorrencias(List<Ocorrencia> ocorrencias) {
+        this.ocorrencias = ocorrencias;
+    }
+
+    public Ocorrencia getOcorrencia() {
+        return ocorrencia;
+    }
+
+    public void setOcorrencia(Ocorrencia ocorrencia) {
+        this.ocorrencia = ocorrencia;
     }
 
 }

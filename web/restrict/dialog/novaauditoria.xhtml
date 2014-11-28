@@ -49,12 +49,23 @@
 
                     <p:column/>
 
-                    <p:commandButton value="Gravar" actionListener="#{mbAuditoria.addAuditoria}" />
+                    <p:commandButton value="Gravar" icon="ui-icon-disk" actionListener="#{mbAuditoria.addAuditoria}" oncomplete="sucesso(xhr, status, args)" update="@form :formAditorias"/>
 
 
                 </h:panelGrid>
 
             </h:form>
+
+            <script type="text/javascript">
+                function sucesso(xhr, status, args) {
+                    if (args.sucesso) {
+                        PF('dlgAud').hide();
+
+                    } else {
+                        PF('dlgAud').jq.effect("shake", {times: 5}, 100);
+                    }
+                }
+            </script>  
 
         </p:dialog>
     </h:body>

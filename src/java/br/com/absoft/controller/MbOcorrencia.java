@@ -104,29 +104,51 @@ public class MbOcorrencia implements Serializable {
         this.opcoes = false;
     }
 
-    public void aprovar() {
+    public String aprovar() {
         ocorrencia.setStatus('C');
         dao.atualizar(ocorrencia);
 
         Pessoa responsavel = responsavelSetor(ocorrencia.getSetor().getIdSetor());
 
-        //Envia o E-mail para o responsável do setor em outra Thread
-        new OcorrrenciaMail(responsavel,
-                ocorrencia.getIdOcorrencia(),
-                ocorrencia.getTipo(),
-                ocorrencia.getTitulo(),
-                ocorrencia.getDescricao(),
-                '2').start();
+        try {//Envia o E-mail para o responsável do setor em outra Thread
+            new OcorrrenciaMail(responsavel,
+                    ocorrencia.getIdOcorrencia(),
+                    ocorrencia.getTipo(),
+                    ocorrencia.getTitulo(),
+                    ocorrencia.getDescricao(),
+                    '2').start();
+        } catch (Exception ex) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN, "Não foi possível enviar o e-mail para o responsável do setor, \npois não tem Responsável cadastrado neste setor!", ""));
+        }
 
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "A ocorrência foi aprovada!", ""));
+        return "home";
     }
 
-    public void reprovar() {
+    public String reprovar() {
         ocorrencia.setStatus('R');
         dao.atualizar(ocorrencia);
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "A ocorrência foi reprovada!", ""));
+        return "home";
+    }
+
+    public String retornaTipo(char tip) {
+        String tipo = null;
+        switch (tip) {
+            case 'N':
+                tipo = "Não-conformidade";
+                break;
+            case 'M':
+                tipo = "Nota de melhoria";
+                break;
+            case 'A':
+                tipo = "Ação preventiva";
+                break;
+        }
+        return tipo;
     }
 
     private Pessoa responsavelSetor(int idSetor) {

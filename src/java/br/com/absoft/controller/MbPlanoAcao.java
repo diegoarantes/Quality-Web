@@ -45,9 +45,10 @@ public class MbPlanoAcao implements Serializable {
             insertPlanoAcao();
         } else {
             updatePlanoAcao();
+            return null;
         }
         planoAcao = new PlanoAcao();
-        return null;
+        return "home";
     }
 
     private void insertPlanoAcao() {
@@ -76,16 +77,29 @@ public class MbPlanoAcao implements Serializable {
         }
     }
 
-    public void aprovar() {
+    public String aprovar() {
         planoAcao.setImplementado(true);
         dao.atualizar(planoAcao);
-        
+
         ocorrencia.setStatus('I'); //Seta o status da ocorrência como Aguardando Implementação
         dao.atualizar(ocorrencia); //Atualiza a ocorrência
 
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO, "Validação realizada com sucesso!", ""));
+        return "home";
 
+    }
+
+    public String reprovar() {
+        planoAcao.setImplementado(false);
+        dao.atualizar(planoAcao);
+
+        ocorrencia.setStatus('P'); //Seta o status da ocorrência como Aguardando Plano de ação
+        dao.atualizar(ocorrencia); //Atualiza a ocorrência
+
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Validação realizada com sucesso!", ""));
+        return "home";
     }
 
     public void retornaPlanoAprovado() {

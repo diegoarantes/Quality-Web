@@ -40,11 +40,11 @@
                         <h:outputText value="#{ocorrencia.idOcorrencia}"/>
                     </p:column>
 
-                    <p:column width="50">
+                    <p:column width="100">
                         <f:facet name="header">
                             <h:outputText value="Tipo"/>
                         </f:facet>
-                        <h:outputText value="#{ocorrencia.tipo}"/>
+                        <h:outputText value="#{mbOcorrencia.retornaTipo(ocorrencia.tipo)}"/>
                     </p:column>
 
                     <p:column width="50">
@@ -102,7 +102,7 @@
                             <f:actionListener binding="#{mbRelatorio.relatoriOcorrencia()}"/>
                         </p:commandButton>
 
-                        <p:commandButton id="btEdit" icon="ui-icon-pencil" action="#{mbOcorrencia.editOcorrencia}" title="Revisar" ajax="false">
+                        <p:commandButton id="btEdit" icon="ui-icon-pencil" action="#{mbOcorrencia.editOcorrencia}" title="Revisar" ajax="false" disabled="#{!mbPermissao.permissaoRd}">
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrencia.ocorrencia}" /> 
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrenciaFilha.ocorrenciaPai}" />
                         </p:commandButton>
@@ -111,7 +111,7 @@
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbAnexosOcorrencia.ocorrencia}" />
                         </p:commandButton>
 
-                        <p:commandButton icon="ui-icon-clipboard"  action="tratarocorrencia" title="Tratar" ajax="false" disabled="true">
+                        <p:commandButton icon="ui-icon-clipboard"  action="tratarocorrencia" title="Tratar" ajax="false" rendered="false">
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbOcorrencia.ocorrencia}" />
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbAnaliseDaCausa.ocorrencia}" />
                             <f:setPropertyActionListener value="#{ocorrencia}" target="#{mbPlanoAcao.ocorrencia}" />

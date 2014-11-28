@@ -11,7 +11,7 @@
         <p:fieldset legend="Cadastrar Orgãos" id="fildAOrg">
             <h:form id="formOrgao">
                 <p:growl/>
-                <p:commandButton onclick="PF('dlgOrgao').show()" value="Novo orgão" update=":formOrgaoCertificador" icon="ui-icon-plus"/>
+                <p:commandButton onclick="PF('dlgOrgao').show()" value="Novo orgão" update=":formOrgaoCertificador" icon="ui-icon-plus" disabled="#{!mbPermissao.permissaoRd}"/>
 
                 <p:dataTable id="idTabelaOrgao" var="orgao" value="#{mbOrgao.orgaos}"
                              paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
@@ -30,7 +30,7 @@
                         <f:facet name="header">
                             <h:outputText value="Norma"/>
                         </f:facet>
-                        <h:outputText value="#{orgao.nome}"/>
+                        <h:outputText value="#{orgao.normaAuditada}"/>
                     </p:column>
 
                     <p:column>
@@ -58,11 +58,11 @@
                         <f:facet name="header">
                             <h:outputText value="Ações"/>
                         </f:facet>
-                        <p:commandButton value="Editar" onclick="PF('dlgOrgao').show()" update=":formOrgaoCertificador">
+                        <p:commandButton value="Editar" onclick="PF('dlgOrgao').show()" update=":formOrgaoCertificador" disabled="#{!mbPermissao.permissaoRd}">
                             <f:setPropertyActionListener value="#{orgao}" target="#{mbOrgao.orgao}"/>
                         </p:commandButton>
 
-                        <p:commandButton value="Excluir" actionListener="#{mbOrgao.deleteOrgao()}" update="@form">
+                        <p:commandButton value="Excluir" actionListener="#{mbOrgao.deleteOrgao()}" update="@form" disabled="#{!mbPermissao.permissaoRd}">
                             <f:setPropertyActionListener value="#{orgao}" target="#{mbOrgao.orgao}"/>
                         </p:commandButton>
 

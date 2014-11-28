@@ -104,8 +104,8 @@
                 <p:panel header="Aprovar a ocorrência">
                     <h:panelGrid columns="2">
                         <h:form>
-                            <p:commandButton value="Aprovar" icon="ui-icon-check" actionListener="#{mbOcorrencia.aprovar}" oncomplete="window.location ='home.jsf'"/>
-                            <p:commandButton value="Reprovar" icon="ui-icon-closethick" actionListener="#{mbOcorrencia.reprovar}" oncomplete="window.location ='home.jsf'"/>
+                            <p:commandButton value="Aprovar" icon="ui-icon-check"  action="#{mbOcorrencia.aprovar}" ajax="false" update="@form"/>
+                            <p:commandButton value="Reprovar" icon="ui-icon-closethick" action="#{mbOcorrencia.reprovar}" ajax="false" update="@form"/>
                         </h:form>
                     </h:panelGrid>
                 </p:panel>
@@ -130,7 +130,7 @@
                                     <f:setPropertyActionListener value="#{analCausa}" target="#{mbAnaliseDaCausa.analise}" />
                                 </p:commandButton>
 
-                                <p:commandButton icon="ui-icon-flag" title="Definir como causa Raíz" oncomplete="rmt1()" update="@form:dialogoCausa:cPorque">
+                                <p:commandButton icon="ui-icon-flag" title="Definir como causa Raíz"  action="#{mbAnaliseDaCausa.definirRaiz()}" ajax="true" update="@form" >
                                     <f:setPropertyActionListener value="#{analCausa}" target="#{mbAnaliseDaCausa.analise}" />
                                     <p:confirm header="Confirmação" message="Deseja definir como causa raíz ?" icon="ui-icon-alert" /> 
 
@@ -139,7 +139,6 @@
                         </p:dataTable>
 
                         <h:column/>
-                        <p:remoteCommand name="rmt1" actionListener="#{mbAnaliseDaCausa.definirRaiz()}" oncomplete="window.location ='home.jsf'"/>
 
                         <p:dialog header="Inserir causa" widgetVar="dlgCausa" width="300" height="130" id="dialogoCausa">
 
@@ -236,7 +235,7 @@
                                     <h:outputLabel value="Quanto ?"/> <br/>
                                     <p:inputTextarea cols="40" rows="4" value="#{mbPlanoAcao.planoAcao.quantoCusta}" autoResize="false"/> <br/>
 
-                                    <p:commandButton value="Concluir" icon="ui-icon-check" actionListener="#{mbPlanoAcao.addPlanoAcao()}" update="@all" onclick="PF('dlgPlano').hide()" style="position: absolute; margin-left: 186px; margin-top: 5px;" oncomplete="window.location ='home.jsf'"/>
+                                    <p:commandButton value="Concluir" icon="ui-icon-check" action="#{mbPlanoAcao.addPlanoAcao()}" update="@form" onclick="PF('dlgPlano').hide()" style="position: absolute; margin-left: 186px; margin-top: 5px;"/>
 
 
                                 </p:tab>
@@ -282,8 +281,8 @@
 
                             <h:column/>
                             <h:column>
-                                <p:commandButton value="Aprovar" icon="ui-icon-check" actionListener="#{mbPlanoAcao.aprovar}" oncomplete="window.location ='home.jsf'"/>  
-                                <p:commandButton value="Reprovar" icon="ui-icon-close" oncomplete="window.location ='home.jsf'"/> 
+                                <p:commandButton value="Aprovar" icon="ui-icon-check" action="#{mbPlanoAcao.aprovar}" update="@form"/>  
+                                <p:commandButton value="Reprovar" icon="ui-icon-close" action="#{mbPlanoAcao.reprovar}" update="@form"/> 
                             </h:column>
 
                         </h:panelGrid>
@@ -306,7 +305,7 @@
                             <p:inputTextarea cols="50" rows="5" value="#{mbImplementacao.implementacao.evidencia}"/>
 
                             <h:column/>
-                            <p:commandButton value="Gravar" actionListener="#{mbImplementacao.addImplementacao}"  oncomplete="window.location ='home.jsf'"/>
+                            <p:commandButton value="Gravar" action="#{mbImplementacao.addImplementacao}"  update="@form"/>
                         </h:panelGrid>
                     </h:form>
                 </p:panel>
@@ -328,7 +327,7 @@
                             <p:inputTextarea cols="50" rows="5" value="#{mbAnaliseEficacia.analiseEficacia.justificativa}"/>
 
                             <h:column/>
-                            <p:commandButton value="Concluir" action="#{mbAnaliseEficacia.addAnaliseEficacia}" oncomplete="window.location ='home.jsf'"/>
+                            <p:commandButton value="Concluir" action="#{mbAnaliseEficacia.addAnaliseEficacia}" update="@form"/>
                         </h:panelGrid>
                     </h:form>
                 </p:panel>

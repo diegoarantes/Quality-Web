@@ -13,7 +13,7 @@
 
             <h:form id="formtablepessoa" prependId="false"> 
                 <p:growl id="growPessoas" />
-                <p:commandButton value="Nova Pessoa" onclick="PF('dlgPes').show();" icon="ui-icon-plus" update=":formtablesetPes"/>
+                <p:commandButton value="Nova Pessoa" onclick="PF('dlgPes').show();" icon="ui-icon-plus" update=":formtablesetPes" disabled="#{!mbPermissao.permissaoAdmin}"/>
 
                 <p:dataTable id="idTabelaPessoa" var="pessoa" value="#{mbPessoa.pessoas}"
                              paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
@@ -74,15 +74,15 @@
 
 
 
-                    <p:column>
+                    <p:column width="200">
                         <f:facet name="header">
                             <h:outputText value="Ações"/>
                         </f:facet>
-                        <p:commandButton process="@this" onclick="PF('dlgPes').show();" value="Editar" icon="ui-icon-pencil" update=":formtablesetPes">
+                        <p:commandButton process="@this" onclick="PF('dlgPes').show();" value="Editar" icon="ui-icon-pencil" update=":formtablesetPes" disabled="#{!mbPermissao.permissaoAdmin}">
                             <f:setPropertyActionListener target="#{mbPessoa.pessoa}" value="#{pessoa}"/>
                         </p:commandButton>
 
-                        <p:commandButton value="Inativar"  icon="ui-icon-closethick"  update=":formtablepessoa">
+                        <p:commandButton value="Inativar"  icon="ui-icon-closethick"  update=":formtablepessoa" disabled="#{!mbPermissao.permissaoAdmin}">
                             <f:setPropertyActionListener target="#{mbPessoa.pessoa}" value="#{pessoa}"/>
                             <f:actionListener binding="#{mbPessoa.inativaPessoa()}"/>
                         </p:commandButton>

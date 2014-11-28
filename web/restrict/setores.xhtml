@@ -12,7 +12,7 @@
              
             <h:form id="formtablesetse" prependId="false">
                 <p:growl id="growSetor"/>
-                <p:commandButton onclick="PF('dlgse').show();" value="Novo setor" update=":formcadse" icon="ui-icon-plus"/>
+                <p:commandButton onclick="PF('dlgse').show();" value="Novo setor" update=":formcadse" icon="ui-icon-plus" disabled="#{!mbPermissao.permissaoRd}"/>
 
                 <p:dataTable id="idTabelase" var="setor" value="#{mbSetor.setores}"
                              paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
@@ -33,13 +33,13 @@
                         <f:facet name="header">
                             <h:outputText value="Ações"/>
                         </f:facet>
-                        <p:commandButton value="Editar" icon="ui-icon-pencil"
+                        <p:commandButton value="Editar" icon="ui-icon-pencil" disabled="#{!mbPermissao.permissaoRd}"
                                          process="@this" onclick="PF('dlgse').show();" update=":formcadse">
                             <f:setPropertyActionListener target="#{mbSetor.setor}"
                                                          value="#{setor}"/>
                         </p:commandButton>
                         <p:commandButton value="Remover" action="#{mbSetor.deleteSetor}"
-                                         icon="ui-icon-close" update="@form">
+                                         icon="ui-icon-close" update="@form" disabled="#{!mbPermissao.permissaoRd}">
                             <f:setPropertyActionListener target="#{mbSetor.setor}"
                                                          value="#{setor}"/>
                             <p:confirm header="Confirmação" message="Deseja realmente apagar este registro ?" icon="ui-icon-alert" /> 

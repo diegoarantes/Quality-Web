@@ -14,6 +14,7 @@
 
             <p:panel header="Minhas pendências" toggleable="true" collapsed="false">
                 <h:form>
+                    <p:growl/>
                     <p:dataTable emptyMessage="Não há aprovaçãoes pendentes." rendered="true" value="#{mbPendencias.listaAprovacao}" var="ocorrencia">
                         <f:facet name="header">
                             Aprovações

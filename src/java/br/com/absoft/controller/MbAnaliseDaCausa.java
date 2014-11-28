@@ -64,7 +64,7 @@ public class MbAnaliseDaCausa implements Serializable {
         }
     }
 
-    public void definirRaiz() {
+    public String definirRaiz() {
         /**
          * Seta verifica se tem causa raíz e marca com 'N'
          */
@@ -81,6 +81,10 @@ public class MbAnaliseDaCausa implements Serializable {
 
         ocorrencia.setStatus('P'); //Seta o status da ocorrência como Aguardando Plano de Acao
         dao.atualizar(ocorrencia); //Atualiza a ocorrência
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "A causa raíz foi definida!", ""));
+
+        return "home";
     }
 
     public MbAnaliseDaCausa() {
@@ -125,7 +129,7 @@ public class MbAnaliseDaCausa implements Serializable {
         if (ocorrencia != null) {
             causas = dao.listaCondicao(AnaliseDaCausa.class, "ocorrencia.idOcorrencia = " + ocorrencia.getIdOcorrencia() + " and causaRaiz = 'S'");
         }
-        for(AnaliseDaCausa causa : causas){
+        for (AnaliseDaCausa causa : causas) {
             causaRaiz = causa;
         }
         return causaRaiz;

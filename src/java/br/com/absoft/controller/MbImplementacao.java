@@ -47,7 +47,7 @@ public class MbImplementacao implements Serializable {
             updateImplementacao();
         }
         implementacao = new Implementacao();
-        return null;
+        return "home";
     }
 
     private void insertImplementacao() {
