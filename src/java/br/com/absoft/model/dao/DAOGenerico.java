@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.absoft.model.dao;
 
 import java.sql.Connection;
@@ -13,8 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import org.hibernate.Session;
-import org.hibernate.engine.spi.SessionFactoryImplementor;
-import org.hibernate.service.jdbc.connections.spi.ConnectionProvider;
+import org.hibernate.internal.SessionFactoryImpl;
 
 /**
  *
@@ -27,7 +21,7 @@ public class DAOGenerico {
     private EntityManager em;
 
     public List lista(Class classe) {
-        Query q = em.createQuery("from " + classe.getSimpleName());
+         Query q = em.createQuery("from " + classe.getSimpleName());
         return q.getResultList();
     }
 
@@ -59,9 +53,11 @@ public class DAOGenerico {
 
     public Connection getConnection() throws SQLException {
         Session session = (Session) em.getDelegate();
-        SessionFactoryImplementor sfi = (SessionFactoryImplementor) session.getSessionFactory();
-        ConnectionProvider cp = sfi.getConnectionProvider();
-        return cp.getConnection();
+        SessionFactoryImpl sessionFactoryImpl = (SessionFactoryImpl) session.getSessionFactory();
+        //Session session = (Session) em.getDelegate();
+        //SessionFactoryImplementor sfi = (SessionFactoryImplementor) session.getSessionFactory();
+//        ConnectionProvider cp = sfi.getConnectionProvider();
+        return sessionFactoryImpl.getConnectionProvider().getConnection();//cp.getConnection();
 
     }
 
