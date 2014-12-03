@@ -9,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import org.hibernate.Session;
 import org.hibernate.internal.SessionFactoryImpl;
-
+ 
 /**
  *
  * @author Diego Arantes
