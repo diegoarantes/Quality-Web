@@ -28,50 +28,49 @@
 
         </style>
     </h:head>
-    <h:body onload="dialog.login.j_username.focus()">
+    <h:body onload="dialog.login.username.focus()">
 
 
-           <p:dialog header=""
-                      id="dialog"  
-                      modal="false"
-                      minWidth="400"
-                      width="400"
-                      closable="true"
-                      position="center"
-                      widgetVar="modalLogin"
-                      showEffect="slide" 
-                      draggable="false"
-                      resizable="false"
-                      visible="true" onHide="window.self.location.href = 'http://www.absoft.com.br'">
+        <p:dialog header=""
+                  id="dialog"  
+                  modal="false"
+                  minWidth="400"
+                  width="400"
+                  closable="true"
+                  position="center"
+                  widgetVar="modalLogin"
+                  showEffect="slide" 
+                  draggable="false"
+                  resizable="false"
+                  visible="true" onHide="window.self.location.href = 'http://www.absoft.com.br'">
 
 
-                <form action="j_spring_security_check" method="post" id="login">
-                    <p:growl id="msg" rendered="#{param.erro}" >#{msgs.erroLogin()}</p:growl>
-                    <h:panelGrid columns="2" cellpadding="2"  style="border: 1px;">
+            <h:form id="login">
+                <p:growl/>
+                <h:panelGrid columns="2" cellpadding="2"  style="border: 1px;">
 
-                        <p:column>
-                            <img src="#{facesContext.externalContext.requestContextPath}/resources/images/login.png"/>
-                        </p:column>
+                    <p:column>
+                        <img src="#{facesContext.externalContext.requestContextPath}/resources/images/login.png"/>
+                    </p:column>
 
-                        <p:panel>
-                            <h:panelGrid columns="2" cellpadding="3">
-                                <h:outputLabel for="j_username" value="Usuário: " /> 
-                                <p:inputText id="j_username" required="true" size="20" onkeyup="this.value = this.value.toUpperCase()" autocomplete="off"/>
+                    <p:panel>
+                        <h:panelGrid columns="2" cellpadding="3">
+                            <h:outputLabel for="username" value="Usuário: " /> 
+                            <p:inputText id="username" required="true" size="20" onkeyup="this.value = this.value.toUpperCase()" value="#{mbLogin.usuario}"  autocomplete="off"/>
 
-                                <h:outputLabel for="j_password" value="Senha: " />
-                                <p:password id="j_password" required="true" size="20" autocomplete="off"/>
+                            <h:outputLabel for="password" value="Senha: "  />
+                            <p:password id="password" required="true" size="20" autocomplete="off" value="#{mbLogin.senha}"/>
 
-                                <p:column/>
-                                <p:column>                             
-                                    <p:commandButton value="Acessar" onclick="form.submit()" icon="ui-icon-check" style="font-size: 12px"/>
-                                    <!--  <p:commandLink value="Esqueceu a Senha ?" style="font-size: 11px"/>-->
-                                </p:column>
-                            </h:panelGrid>
-                        </p:panel>
+                            <p:column/>
+                            <p:column>                             
+                                <p:commandButton value="Acessar" action="#{mbLogin.efetuarLogin()}" update="@form" icon="ui-icon-check" style="font-size: 12px" ajax="false"/>
+                            </p:column>
+                        </h:panelGrid>
+                    </p:panel>
 
-                    </h:panelGrid>
-                </form>
-                <br/>
-            </p:dialog>  
+                </h:panelGrid>
+            </h:form>
+            <br/>
+        </p:dialog>  
     </h:body>
 </html>

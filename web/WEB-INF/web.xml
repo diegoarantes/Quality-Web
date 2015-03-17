@@ -17,13 +17,6 @@
         </session-timeout>
     </session-config>
     
-    <!-- Endereço dos arquivos de configuração do Spring --> 
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>
-            /WEB-INF/spring-security.xml
-        </param-value>
-    </context-param> 
 
     <!-- Configurações do tema do PrimeFaces -->
     <context-param>  
@@ -31,20 +24,17 @@
         <param-value>quality</param-value>  
     </context-param>         
     
-    <!-- Filtros do Spring  -->
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
+
+    <!-- Configurações Login -->
     <filter>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>com.absoft.filters.LoginFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>springSecurityFilterChain</filter-name>
-        <url-pattern>/*</url-pattern>
-        <dispatcher>FORWARD</dispatcher>
-        <dispatcher>REQUEST</dispatcher>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/restrict/*</url-pattern>
     </filter-mapping>
+
 
     <!-- Configurações do JavaServer Faces -->    
     <context-param>

@@ -2,7 +2,6 @@ package br.com.absoft.controller;
 
 import br.com.absoft.model.dao.DAOGenerico;
 import br.com.absoft.model.entities.Ocorrencia;
-import br.com.absoft.suport.BbUsuarioLogado;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
@@ -30,32 +29,32 @@ public class MbPendencias implements Serializable {
     private List<Ocorrencia> listaEficacia;
 
     public List<Ocorrencia> getListaAprovacao() {
-        listaAprovacao = dao.listaCondicao(Ocorrencia.class, "pessoa.idPessoa = " + BbUsuarioLogado.user.getIdPessoa() + " AND status = 'A' ");
+        listaAprovacao = dao.listaCondicao(Ocorrencia.class, "pessoa.idPessoa = " + new MbLogin().usuarioLogado().getIdPessoa() + " AND status = 'A' ");
         return listaAprovacao;
     }
 
     public List<Ocorrencia> getListaAnalise() {
-        listaAnalise = dao.listaCondicao(Ocorrencia.class, "setor.idSetor = " + BbUsuarioLogado.user.getSetor().getIdSetor() + " AND status = 'C' ");
+        listaAnalise = dao.listaCondicao(Ocorrencia.class, "setor.idSetor = " + new MbLogin().usuarioLogado().getSetor().getIdSetor() + " AND status = 'C' ");
         return listaAnalise;
     }
 
     public List<Ocorrencia> getListaPlano() {
-        listaPlano = dao.listaCondicao(Ocorrencia.class, "setor.idSetor = " + BbUsuarioLogado.user.getSetor().getIdSetor() + " AND status = 'P' ");
+        listaPlano = dao.listaCondicao(Ocorrencia.class, "setor.idSetor = " + new MbLogin().usuarioLogado().getSetor().getIdSetor() + " AND status = 'P' ");
         return listaPlano;
     }
 
     public List<Ocorrencia> getListaValidacao() {
-        listaValidacao = dao.listaCondicao(Ocorrencia.class, "setor.idSetor = " + BbUsuarioLogado.user.getSetor().getIdSetor() + " AND status = 'V' ");
+        listaValidacao = dao.listaCondicao(Ocorrencia.class, "setor.idSetor = " + new MbLogin().usuarioLogado().getSetor().getIdSetor() + " AND status = 'V' ");
         return listaValidacao;
     }
 
     public List<Ocorrencia> getListaImplementacao() {
-        listaImplementacao = dao.listaCondicao(Ocorrencia.class, "setor.idSetor = " + BbUsuarioLogado.user.getSetor().getIdSetor() + " AND status = 'I' ");
+        listaImplementacao = dao.listaCondicao(Ocorrencia.class, "setor.idSetor = " + new MbLogin().usuarioLogado().getSetor().getIdSetor() + " AND status = 'I' ");
         return listaImplementacao;
     }
 
     public List<Ocorrencia> getListaEficacia() {
-        listaEficacia = dao.listaCondicao(Ocorrencia.class, "setor.idSetor = " + BbUsuarioLogado.user.getSetor().getIdSetor() + " AND status = 'E' ");
+        listaEficacia = dao.listaCondicao(Ocorrencia.class, "setor.idSetor = " + new MbLogin().usuarioLogado().getSetor().getIdSetor() + " AND status = 'E' ");
         return listaEficacia;
     }
 

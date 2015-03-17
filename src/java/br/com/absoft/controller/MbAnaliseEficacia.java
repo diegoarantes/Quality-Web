@@ -3,7 +3,6 @@ package br.com.absoft.controller;
 import br.com.absoft.model.dao.DAOGenerico;
 import br.com.absoft.model.entities.AnaliseEficacia;
 import br.com.absoft.model.entities.Ocorrencia;
-import br.com.absoft.suport.BbUsuarioLogado;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -39,7 +38,7 @@ public class MbAnaliseEficacia implements Serializable {
     public String addAnaliseEficacia() {
         if (analiseEficacia.getIdAnaliseEficacia() == null) {
             analiseEficacia.setOcorrencia(ocorrencia);
-            analiseEficacia.setPessoa(BbUsuarioLogado.user);
+            analiseEficacia.setPessoa(new MbLogin().usuarioLogado());
             analiseEficacia.setDataCadastro(new Date());
             insertAnaliseEficacia();
         } else {

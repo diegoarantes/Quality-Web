@@ -2,7 +2,6 @@ package br.com.absoft.controller;
 
 import br.com.absoft.model.dao.DAOGenerico;
 import br.com.absoft.model.entities.Documento;
-import br.com.absoft.suport.BbUsuarioLogado;
 import br.com.absoft.util.StringUtil;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -10,7 +9,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -57,7 +55,7 @@ public class MbDocumento implements Serializable {
         //---------------------
         documento.setCaminho(" ");
 
-        documento.setUsuario(BbUsuarioLogado.user.getUsuario());
+        documento.setUsuario(new MbLogin().usuarioLogado().getUsuario());
 
         documento.setStatus('V');
 

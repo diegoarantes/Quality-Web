@@ -5,7 +5,6 @@
  */
 package br.com.absoft.controller;
 
-import br.com.absoft.suport.BbUsuarioLogado;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -24,10 +23,10 @@ public class MbPermissao implements Serializable {
     private boolean permissaoRd;
 
     public MbPermissao() {
-        if (BbUsuarioLogado.user.getPermissao().equals("ROLE_ADMIN")) {
+        if (new MbLogin().usuarioLogado().getPermissao().equals("ROLE_ADMIN")) {
             permissaoAdmin = true;
             permissaoRd = true;
-        } else if (BbUsuarioLogado.user.getPermissao().equals("ROLE_GER")) {
+        } else if (new MbLogin().usuarioLogado().getPermissao().equals("ROLE_GER")) {
             permissaoRd = true;
             permissaoAdmin = false;
         } else {

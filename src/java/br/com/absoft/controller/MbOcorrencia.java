@@ -4,7 +4,6 @@ import br.com.absoft.mails.OcorrrenciaMail;
 import br.com.absoft.model.dao.DAOGenerico;
 import br.com.absoft.model.entities.Ocorrencia;
 import br.com.absoft.model.entities.Pessoa;
-import br.com.absoft.suport.BbUsuarioLogado;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -58,7 +57,7 @@ public class MbOcorrencia implements Serializable {
         ocorrencia.setRevisao(0); //Seta {0} como Sem Revisão
         ocorrencia.setStatus('A'); // Seta o Status como A - Aguardando aprovação
 
-        ocorrencia.setUsuario(BbUsuarioLogado.user.getUsuario()); //Pega o Usuario logado
+        ocorrencia.setUsuario(new MbLogin().usuarioLogado().getUsuario()); //Pega o Usuario logado
 
         //Grava a Ocorrencia 
         dao.inserir(ocorrencia);

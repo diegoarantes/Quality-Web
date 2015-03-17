@@ -3,7 +3,6 @@ package br.com.absoft.controller;
 import br.com.absoft.model.dao.DAOGenerico;
 import br.com.absoft.model.entities.Ocorrencia;
 import br.com.absoft.model.entities.PlanoAcao;
-import br.com.absoft.suport.BbUsuarioLogado;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -41,7 +40,7 @@ public class MbPlanoAcao implements Serializable {
             planoAcao.setDataCadastro(new Date());
             planoAcao.setOcorrencia(ocorrencia);
             planoAcao.setImplementado(false);
-            planoAcao.setPessoa(BbUsuarioLogado.user);
+            planoAcao.setPessoa(new MbLogin().usuarioLogado());
             insertPlanoAcao();
         } else {
             updatePlanoAcao();

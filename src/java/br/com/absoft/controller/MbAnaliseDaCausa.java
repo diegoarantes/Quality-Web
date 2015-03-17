@@ -3,7 +3,6 @@ package br.com.absoft.controller;
 import br.com.absoft.model.dao.DAOGenerico;
 import br.com.absoft.model.entities.AnaliseDaCausa;
 import br.com.absoft.model.entities.Ocorrencia;
-import br.com.absoft.suport.BbUsuarioLogado;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -33,7 +32,7 @@ public class MbAnaliseDaCausa implements Serializable {
 
         if (analise.getIdAnaliseDaCausa() == null) {
             analise.setOcorrencia(ocorrencia);
-            analise.setPessoa(BbUsuarioLogado.user);
+            analise.setPessoa(new MbLogin().usuarioLogado());
             insertAnaliseDaCausa();
         } else {
             updateAnaliseDaCausa();

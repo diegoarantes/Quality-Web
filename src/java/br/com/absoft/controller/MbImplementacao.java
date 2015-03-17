@@ -4,7 +4,6 @@ import br.com.absoft.model.dao.DAOGenerico;
 import br.com.absoft.model.entities.Implementacao;
 import br.com.absoft.model.entities.Ocorrencia;
 import br.com.absoft.model.entities.PlanoAcao;
-import br.com.absoft.suport.BbUsuarioLogado;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -54,7 +53,7 @@ public class MbImplementacao implements Serializable {
         implementacao.setOcorrencia(ocorrencia);
         implementacao.setPlanoAcao(acao);
         implementacao.setDataCadastro(new Date());
-        implementacao.setPessoa(BbUsuarioLogado.user);
+        implementacao.setPessoa(new MbLogin().usuarioLogado());
         dao.inserir(implementacao);
 
         ocorrencia.setStatus('E'); //Seta o status da ocorrência como Aguardando Análise da Eficácia

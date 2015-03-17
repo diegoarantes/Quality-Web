@@ -144,8 +144,8 @@
                         </p:submenu>  
 
                         <f:facet name="options"> 
-                            <h:outputText value="SEJA BEM VINDO(A) #{bbUsuarioLogado.procuraPessoa().getNome()} !   "/>
-                            <p:commandButton type="button" value="Sair" icon="ui-icon-extlink" onclick="location.href = '#{facesContext.externalContext.requestContextPath}/j_spring_security_logout'"/>  
+                            <h:outputText value="SEJA BEM VINDO(A) #{mbLogin.usuarioLogado().nome} !   "/>
+                            <p:commandButton value="Sair" icon="ui-icon-extlink" action="#{mbLogin.efetuarLogout()}" ajax="false"/>  
                         </f:facet>  
 
 
