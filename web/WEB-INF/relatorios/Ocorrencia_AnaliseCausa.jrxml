@@ -76,7 +76,7 @@ analise_da_causa.`IdOcorrencia` = $P{id};]]>
 				<reportElement x="207" y="-1" width="27" height="19" uuid="8cc03426-f531-44df-b963-8514229d906f">
 					<printWhenExpression><![CDATA[Boolean.valueOf($F{analise_da_causa_CausaRaiz}.equals('S'))]]></printWhenExpression>
 				</reportElement>
-				<imageExpression><![CDATA["/../../home/diego/NetBeansProjects/quality-web/web/resources/images/tick.png"]]></imageExpression>
+				<imageExpression><![CDATA["tick.png"]]></imageExpression>
 			</image>
 		</band>
 	</detail>

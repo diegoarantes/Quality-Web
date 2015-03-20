@@ -164,7 +164,7 @@ plano_acao.`IdOcorrencia` = $P{id}]]>
 				<reportElement x="526" y="8" width="30" height="30" uuid="6b6fc4ff-6537-4a59-bac3-e1cb196e2ba0">
 					<printWhenExpression><![CDATA[$F{plano_acao_Implementado}]]></printWhenExpression>
 				</reportElement>
-				<imageExpression><![CDATA["/home/diego/NetBeansProjects/quality-web/web/resources/images/tick.png"]]></imageExpression>
+				<imageExpression><![CDATA["tick.png"]]></imageExpression>
 			</image>
 			<line>
 				<reportElement x="0" y="342" width="572" height="1" uuid="b5058aa6-f1aa-47d7-ac70-314dfc91ef97"/>
