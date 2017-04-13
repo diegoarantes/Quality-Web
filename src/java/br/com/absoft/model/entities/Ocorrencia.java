@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import org.hibernate.annotations.ForeignKey;
 
 @Entity
 @Table(name = "ocorrencia")
@@ -63,32 +62,26 @@ public class Ocorrencia implements Serializable {
 
     //Relacionamentos
     @ManyToOne(optional = false) // Muitos para 1
-    @ForeignKey(name = "OcorrenciaEmpresa")
     @JoinColumn(name = "IdEmpresa", referencedColumnName = "IdEmpresa")
     private Empresa empresa;
 
     @ManyToOne(optional = false) //Muitos para 1
-    @ForeignKey(name = "OcorrenciaOrigem")
     @JoinColumn(name = "IdOrigem", referencedColumnName = "IdOrigem")
     private Origem origem;
 
     @ManyToOne(optional = false) //Muitos para 1
-    @ForeignKey(name = "OcorrenciaPessoa")
     @JoinColumn(name = "IdPessoa", referencedColumnName = "IdPessoa")
     private Pessoa pessoa;
 
     @ManyToOne(optional = false) //Muitos para 1
-    @ForeignKey(name = "OcorrenciaSetor")
     @JoinColumn(name = "IdSetor", referencedColumnName = "IdSetor")
     private Setor setor;
 
     @ManyToOne(optional = false) //Muitos para 1
-    @ForeignKey(name = "OcorrenciaProcesso")
     @JoinColumn(name = "IdProcesso", referencedColumnName = "IdProcesso")
     private Processo processo;
 
     @ManyToOne(optional = true)
-    @ForeignKey(name = "OcorrenciaAuditoria")
     @JoinColumn(name = "IdAuditoria")
     private Auditoria auditoria;
 

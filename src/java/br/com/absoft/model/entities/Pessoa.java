@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import org.hibernate.annotations.ForeignKey;
 
 @Entity
 @Table(name = "pessoa")
@@ -48,7 +47,6 @@ public class Pessoa implements Serializable {
 
     //Relacionamentos    
     @ManyToOne(optional = false) //Muitos para 1
-    @ForeignKey(name = "PessoaSetor")
     @JoinColumn(name = "IdSetor", referencedColumnName = "IdSetor")
     private Setor setor;
 

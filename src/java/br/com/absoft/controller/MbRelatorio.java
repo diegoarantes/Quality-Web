@@ -16,9 +16,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +32,7 @@ import net.sf.jasperreports.engine.export.JRPdfExporter;
  *
  * @author diego
  */
-@ManagedBean
+@Named
 @RequestScoped
 public class MbRelatorio implements Serializable {
 

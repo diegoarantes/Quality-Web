@@ -5,14 +5,15 @@ import br.com.absoft.model.entities.Ocorrencia;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+
 
 /**
  *
  * @author diego
  */
-@ManagedBean
+@Named
 @SessionScoped
 public class MbPendencias implements Serializable {
 

@@ -10,8 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
-import org.hibernate.annotations.ForeignKey;
-
 /**
  *
  * @author diego
@@ -51,7 +49,6 @@ public class Auditor implements Serializable {
     private String email;
 
     @ManyToOne
-    @ForeignKey(name = "AuditorOrgao")
     @JoinColumn(name = "IdOrgaoCertificador")
     private OrgaoCertificador orgaoCertificador;
 

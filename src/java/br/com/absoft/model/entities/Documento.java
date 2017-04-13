@@ -10,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
-import org.hibernate.annotations.ForeignKey;
 
 /**
  *
@@ -50,17 +49,14 @@ public class Documento implements Serializable {
     private String observacoes;
 
     @ManyToOne
-    @ForeignKey(name = "DocumentoTipo")
     @JoinColumn(name = "IdTipoDocumento", referencedColumnName = "IdTipoDocumento")
     private TipoDocumento tipoDocumento;
 
     @ManyToOne
-    @ForeignKey(name = "DocumentoSetor")
     @JoinColumn(name = "IdSetor", referencedColumnName = "IdSetor")
     private Setor setor;
 
     @ManyToOne
-    @ForeignKey(name = "DocumentoPessoa")
     @JoinColumn(name = "IdPessoa", referencedColumnName = "IdPessoa")
     private Pessoa pessoa;
 

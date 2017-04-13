@@ -7,15 +7,15 @@ package br.com.absoft.suport;
 
 import br.com.absoft.model.entities.Ocorrencia;
 import java.io.Serializable;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author diego
  */
+@Named
 @SessionScoped
-@ManagedBean
 public class BbTratativas implements Serializable {
 
     private static final long serialVersionUID = 1L;

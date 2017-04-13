@@ -5,10 +5,11 @@ import br.com.absoft.model.entities.Origem;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 
-@ManagedBean
+
+@Named
 @RequestScoped
 public class BbOrigem implements Serializable {
 

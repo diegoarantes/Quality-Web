@@ -9,7 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import org.hibernate.annotations.ForeignKey;
 
 @Entity
 @Table(name = "ocorrencia_ocorrencia", uniqueConstraints = {
@@ -25,12 +24,10 @@ public class OcorrenciaOcorrencia implements Serializable {
     private Integer id;
 
     @ManyToOne(optional = true)
-    @ForeignKey(name = "OcorrenciaOcorrencia")
     @JoinColumn(name = "IdOcorrencia", referencedColumnName = "IdOcorrencia")
     private Ocorrencia ocorrencia;
 
     @ManyToOne(optional = true)
-    @ForeignKey(name = "OcorrenciaOcorrenciaFilha")
     @JoinColumn(name = "IdOcorrenciaFilha", referencedColumnName = "IdOcorrencia")
     private Ocorrencia ocorrenciaFilha;
 

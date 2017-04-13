@@ -13,8 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import org.hibernate.annotations.ForeignKey;
-
 /**
  *
  * @author diego
@@ -34,7 +32,6 @@ public class ArquivosAuditoria implements Serializable {
     private String caminho;
 
     @ManyToOne(optional = false)//1 para Muitos
-    @ForeignKey(name = "ArquivosAuditoria")
     @JoinColumn(name = "IdAuditoria")
     private Auditoria auditoria;
 

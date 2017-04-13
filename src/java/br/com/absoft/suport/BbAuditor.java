@@ -10,8 +10,8 @@ import br.com.absoft.model.entities.Auditor;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 
 /**
  *
@@ -19,7 +19,7 @@ import javax.faces.bean.RequestScoped;
  *
  */
 
-@ManagedBean
+@Named
 @RequestScoped
 public class BbAuditor implements Serializable {
     

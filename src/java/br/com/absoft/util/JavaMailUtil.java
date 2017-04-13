@@ -17,10 +17,10 @@ public class JavaMailUtil {
     /**
      * Configurações de conexão
      */
-    private String smtp = "smtp.gmail.com";//"absoft.com.br";
-    private String porta = "465";
-    private boolean seguro = true;
-    private String email = "absoft.quality@gmail.com";//"quality@absoft.com.br";
+    private String smtp = "186.233.231.147";//"smtp.gmail.com";
+    private String porta = "587"; //465
+    private boolean seguro = false; // true
+    private String email = "quality@incopostes.com";//"absoft.quality@gmail.com";
     private String senha = "system.1231";//"system.1231";
 
     /**
@@ -60,22 +60,23 @@ public class JavaMailUtil {
         props.put("mail.smtp.host", smtp);
         props.put("mail.smtp.socketFactory.port", porta); //25
         props.put("mail.smtp.socketFactory.fallback", "false");
-        props.put("mail.smtp.starttls.enable", "true");
+
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.port", porta); //25
 
         if (seguro) {
+            props.put("mail.smtp.starttls.enable", "true");
             props.put("mail.smtp.socketFactory.class",
                     "javax.net.ssl.SSLSocketFactory"); //SSL Factory Class   
         }
 
         session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
-                    @Override
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(email, senha);
-                    }
-                });
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(email, senha);
+            }
+        });
 
         /**
          * Ativa Debug para sessão
@@ -95,18 +96,18 @@ public class JavaMailUtil {
                 + "<center>\n"
                 + "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n"
                 + "<tbody style=\"background:#FFFFFF;\">\n"
-                + "<tr><td><img style=\"display:block; border:0;\" alt=\"ABSoft - Tecnologia\" title=\"ABSoft - Tecnologia\" src=\"http://www.absoft.com.br/sys/mail/top.png\"></td></tr>\n"
+                + "\n"
                 + "<tr><td><p style=\"padding: 10px; color: #606060;font-family: Helvetica;font-size: 15px;\">";
 
         String footer = "</p></td></tr>\n"
-                + "<tr><td><img style=\"display:block; border:0;\" alt=\"\" title=\"\" src=\"http://www.absoft.com.br/sys/mail/button.png\"></td></tr>\n"
+                + "\n"
                 + "</tbody>\n"
                 + "</table>\n"
                 + "</center>\n"
                 + "</body>\n"
                 + "</html>";
 
-        String Mensagem = header + msg + footer;
+        String Mensagem = msg;
 
         return Mensagem;
     }

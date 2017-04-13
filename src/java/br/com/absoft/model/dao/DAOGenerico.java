@@ -3,12 +3,12 @@ package br.com.absoft.model.dao;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import org.hibernate.Session;
-import org.hibernate.internal.SessionFactoryImpl;
+import javax.sql.DataSource;
 
 /**
  *
@@ -20,8 +20,11 @@ public class DAOGenerico {
     @PersistenceContext(unitName = "Quality-WebPU")
     private EntityManager em;
 
+    @Resource(lookup = "java:/jboss/datasources/Quality")
+    DataSource datasource;
+
     public List lista(Class classe) {
-         Query q = em.createQuery("from " + classe.getSimpleName());
+        Query q = em.createQuery("from " + classe.getSimpleName());
         return q.getResultList();
     }
 
@@ -52,13 +55,7 @@ public class DAOGenerico {
     }
 
     public Connection getConnection() throws SQLException {
-        Session session = (Session) em.getDelegate();
-        SessionFactoryImpl sessionFactoryImpl = (SessionFactoryImpl) session.getSessionFactory();
-        //Session session = (Session) em.getDelegate();
-        //SessionFactoryImplementor sfi = (SessionFactoryImplementor) session.getSessionFactory();
-//        ConnectionProvider cp = sfi.getConnectionProvider();
-        return sessionFactoryImpl.getConnectionProvider().getConnection();//cp.getConnection();
-
+        return datasource.getConnection();
     }
 
 }

@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import org.hibernate.annotations.ForeignKey;
 
 @Entity
 @Table(name = "plano_acao")
@@ -53,12 +52,10 @@ public class PlanoAcao implements Serializable {
     private boolean implementado;
 
     @ManyToOne
-    @ForeignKey(name = "PlanoAcaoPessoa")
     @JoinColumn(name = "IdPessoa")
     private Pessoa pessoa;
 
     @ManyToOne(optional = true) // Muitos para 1
-    @ForeignKey(name = "PlanoAcaoOcorrencia")
     @JoinColumn(name = "IdOcorrencia", referencedColumnName = "IdOcorrencia")
     private Ocorrencia ocorrencia;
 

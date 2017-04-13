@@ -11,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import org.hibernate.annotations.ForeignKey;
 
 @Entity
 @Table(name = "analise_eficacia")
@@ -36,13 +35,11 @@ public class AnaliseEficacia implements Serializable {
 
     //Relacionamentos
     @ManyToOne(optional = false) // Muitos Para 1
-    @ForeignKey(name = "AnaliseDaEficaciaPessoa")
     @JoinColumn(name = "IdPessoa", referencedColumnName = "IdPessoa")
     private Pessoa pessoa;
 
     //Relacionamentos
     @ManyToOne(optional = false) // Muitos Para 1
-    @ForeignKey(name = "AnaliseDaEficaciaOcorrencia")
     @JoinColumn(name = "IdOcorrencia", referencedColumnName = "IdOcorrencia")
     private Ocorrencia ocorrencia;
 

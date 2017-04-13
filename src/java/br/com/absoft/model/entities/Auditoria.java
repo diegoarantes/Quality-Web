@@ -10,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
-import org.hibernate.annotations.ForeignKey;
 
 /**
  *
@@ -45,7 +44,6 @@ public class Auditoria implements Serializable {
     private String evidencias;
 
     @ManyToOne(optional = false)
-    @ForeignKey(name = "AuditoriaAuditor")
     @JoinColumn(name = "IdAuditor")
     private Auditor auditor;
 

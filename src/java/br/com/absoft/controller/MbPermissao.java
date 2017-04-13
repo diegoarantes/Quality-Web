@@ -6,14 +6,14 @@
 package br.com.absoft.controller;
 
 import java.io.Serializable;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author diego
  */
-@ManagedBean
+@Named
 @RequestScoped
 public class MbPermissao implements Serializable {
 

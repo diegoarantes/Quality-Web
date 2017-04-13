@@ -4,6 +4,7 @@ import br.com.absoft.converters.ConverterSHA1;
 import br.com.absoft.model.dao.DAOGenerico;
 import br.com.absoft.model.entities.Pessoa;
 import br.com.absoft.util.Mensagem;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpSession;
  */
 @Named(value = "mbLogin")
 @RequestScoped
-public class MbLogin {
+public class MbLogin implements Serializable{
 
     @EJB
     DAOGenerico dao;

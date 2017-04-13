@@ -69,7 +69,7 @@ public class OcorrrenciaMail extends Thread {
                 + "			<strong>ABSoft </strong>- <span style=\"color:#0066cc;\"><strong>Quality</strong></span>";
 
         //Dispara o E-mail
-        new JavaMailUtil().enviaEmail(this.email, "QUALITY: Ocorrencia Nr. " + this.numero, msg);
+        new JavaMailUtil().enviaEmail(this.email, "ABSoft - Quality: Ocorrencia Nr. " + this.numero, msg);
 
     }
 
