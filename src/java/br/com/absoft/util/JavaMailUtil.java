@@ -60,6 +60,7 @@ public class JavaMailUtil {
         props.put("mail.smtp.host", smtp);
         props.put("mail.smtp.socketFactory.port", porta); //25
         props.put("mail.smtp.socketFactory.fallback", "false");
+        props.put("mail.smtp.localhost", "incopostes.com.br");
 
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.port", porta); //25
